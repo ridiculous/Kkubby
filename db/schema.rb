@@ -16,16 +16,19 @@ ActiveRecord::Schema.define(version: 2019_10_05_044548) do
   enable_extension "plpgsql"
 
   create_table "products", force: :cascade do |t|
-    t.string "name"
     t.string "brand"
-    t.string "image_url"
+    t.string "name"
     t.string "category"
+    t.string "product_type"
+    t.string "image_url"
+    t.string "raw_price"
     t.decimal "price"
     t.date "published_at"
     t.datetime "last_refreshed_at"
     t.string "sourced_from"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand", "name"], name: "index_products_on_brand_and_name", unique: true
   end
 
 end
