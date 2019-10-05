@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_044548) do
+ActiveRecord::Schema.define(version: 2019_10_05_054130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "catalogs", force: :cascade do |t|
+    t.string "name"
+    t.string "website"
+    t.string "image_url"
+    t.integer "product_count"
+    t.datetime "last_updated_at"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
+    t.integer "catalog_id"
     t.string "brand"
     t.string "name"
     t.string "category"
@@ -29,6 +41,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_044548) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["brand", "name"], name: "index_products_on_brand_and_name", unique: true
+    t.index ["catalog_id"], name: "index_products_on_catalog_id"
   end
 
 end
