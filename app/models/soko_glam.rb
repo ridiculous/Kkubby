@@ -29,11 +29,12 @@ class SokoGlam
   end
 
   def create_products(agent, type, key, category = key)
+    cat = category.underscore.humanize.titlecase
     url = "https://sokoglam.com/collections/#{key}"
     puts "Collecting products from ... #{url}"
     page = agent.get(url)
     page.css(".products .product-grid-item.mix").each do |element|
-      product = Product.new(catalog_id: @catalog.id, product_type: type, category: category.underscore.humanize.titlecase, sourced_from: page.uri.to_s)
+      product = Product.new(catalog_id: @catalog.id, product_type: type, category: cat, sourced_from: page.uri.to_s)
       product.published_at = element.attr('data-published-date')
       product.image_url = element.css('.product__image a > img').first.attr('src')
       product.name = element.attr('data-name')
