@@ -1,0 +1,116 @@
+@import 'theme';
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $body-color;
+  font-family: $standard-font;
+  font-size: $font-size;
+  line-height: $font-size + 2;
+  color: $font-color;
+  min-width: 935px;
+}
+
+p, ol, ul, td {
+  font-family: $font-family3;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+ul li {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, li {
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5 {
+  letter-spacing: 1px;
+}
+
+h1 {
+  line-height: 35px;
+}
+
+h2 {
+  margin: 40px 0;
+  line-height: 25px;
+}
+
+h3,
+h4,
+h5 {
+  font-size: 18px;
+  margin: 10px 0;
+  line-height: 20px;
+}
+
+h5 {
+  margin: 25px 0;
+}
+
+textarea,
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=number] {
+  padding: 5px;
+  font-size: 16px;
+  @include rounded(3px);
+}
+
+input[type=email],
+input[type=text] {
+  vertical-align: middle;
+}
+
+input[type=email]:invalid {
+  border: 1px solid $red;
+  outline: none;
+}
+
+input[type=text],
+input[type=number] {
+  vertical-align: middle;
+}
+
+input[type=number] {
+  &:invalid {
+    border: 1px solid $red;
+    outline: none;
+  }
+}
+
+table {
+  width: 100%;
+  border: 0;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 5px 0;
+  margin: 0;
+  text-align: left;
+}
+
+td {
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+th {
+  font-size: 16px;
+  border-bottom: 1px solid #DDD;
+}
+
+pre {
+  font-size: 16px;
+  line-height: 20px;
+  background: #FFF;
+}

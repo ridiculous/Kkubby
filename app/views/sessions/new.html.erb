@@ -1,0 +1,26 @@
+<div style="width:200px;margin: 0 auto">
+  <h2>Log in to Kkubby</h2>
+  <%= form_tag(process_login_path, method: :post) do %>
+    <%= hidden_field_tag :back_to, params[:back_to] %>
+    <div class="pb10">
+      <%= label_tag(:username, 'Username', class: 'medium-major') %>
+      <div class="pt5">
+        <%= text_field_tag(:username, params[:username], class: 'text-field bordered rounded') %>
+      </div>
+    </div>
+    <div class="pb10">
+      <%= label_tag(:password, 'Password', class: 'medium-major') %>
+      <div class="pt5">
+        <%= password_field_tag(:password, '', class: 'text-field bordered rounded') %>
+      </div>
+    </div>
+    <div class="field pt5">
+      <%= submit_tag('Log in', class: 'btn-blue') %>
+      <%= check_box_tag(:remember_me) %> <%= label_tag(:remember_me) %>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('username').focus();
+</script>

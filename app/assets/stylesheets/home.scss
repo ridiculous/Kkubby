@@ -1,0 +1,76 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'theme';
+
+.box-type-alert {
+  color: #B45F04;
+  background: #F5ECCE;
+}
+
+.box-type-calm {
+  color: #5F3203;
+  background: #FCF9EF;
+}
+
+.box-type-notice {
+  color: $success;
+  background: $white;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.x-small {
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.small {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.normal {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.medium-minor {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.medium {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.medium-major {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.large-minor {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.large {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.huge {
+  font-size: 25px;
+  line-height: 2;
+}
+
+.bold {
+  font-weight: bold;
+}

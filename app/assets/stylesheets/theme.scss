@@ -1,0 +1,29 @@
+// Colors
+$body-color: #e6ecf0;
+$primary-color: #FFF;
+$secondary-color: #333;
+$section-color: #FAFAFA;
+$font-color: #333;
+$menu-color: #494949;
+$red: #ee2c3a;
+$black: #242424;
+$blue: #223d85;
+$green: #468844;
+$success: #088A08;
+$white: #FAFAFA;
+$dark-gray: #5f5f5f;
+$orange: #C56123;
+
+// Sizes
+$font-size: 13px;
+
+// Fonts
+$standard-font: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$primary-font: "Georgia", "Times New Roman", Helvetica, Arial, sans-serif;
+$font-family3: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+
+@mixin rounded($roundness) {
+  -moz-border-radius: $roundness;
+  -webkit-border-radius: $roundness;
+  border-radius: $roundness;
+}
