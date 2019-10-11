@@ -8,12 +8,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: $body-color;
   font-family: $standard-font;
   font-size: $font-size;
   line-height: $font-size + 2;
   color: $font-color;
-  min-width: 935px;
+  background: $body-color;
+  background-size: 100%;
+  background: linear-gradient(to right, $body-color, $body-color-light);
 }
 
 p, ol, ul, td {

@@ -3,9 +3,29 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'theme';
 
+.top-bar {
+  padding: 20px;
+}
+
+.top-bar-content {
+  height: 80px;
+  background: image-url('logo.svg') left no-repeat;
+
+  .hamburger {
+    float: right;
+    padding-top: 10px;
+    div {
+      width: 33px;
+      height: 4px;
+      background-color: #F7F7F7;
+      margin: 6px 0;
+    }
+  }
+}
+
 .box-type-alert {
-  color: #B45F04;
-  background: #F5ECCE;
+  color: $body-color;
+  background: #EEE;
 }
 
 .box-type-calm {
