@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
-  validates :brand, :category, :product_type, presence: true
+  validates :brand, :category, :product_type, :image_url,
+            presence: true
   validates :name, presence: true, uniqueness: { scope: :brand }
   before_create :set_price
 

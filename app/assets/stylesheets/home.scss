@@ -3,6 +3,31 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'theme';
 
+table.shelves {
+  border-spacing: 20px 20px;
+
+  td {
+    padding: 20px;
+    border: 2px solid #F7F7F7;
+    border-radius: 3px;
+
+    img {
+      border-radius: 5px;
+    }
+
+    .shelf-name {
+      position: relative;
+      top: -33px;
+      margin-bottom: -20px; // offset for padding
+      span {
+        background: $body-color;
+        padding: 2px 3px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
 .top-bar {
   padding: 20px;
 }
@@ -14,6 +39,7 @@
   .hamburger {
     float: right;
     padding-top: 10px;
+
     div {
       width: 33px;
       height: 4px;

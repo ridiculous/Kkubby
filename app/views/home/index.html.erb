@@ -1,1 +1,16 @@
-Welcome
+<% if @shelves.any? %>
+  <table class="shelves">
+    <% @shelves.each do |shelf| %>
+      <tr>
+        <td>
+          <div class="shelf-name"><span><%= shelf.name %></span></div>
+          <% shelf.products.each do |product| %>
+            <%= image_tag(product.image_url, size: '100x100', title: product.name) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No shelves created yet. Want to add one now?</p>
+<% end %>
