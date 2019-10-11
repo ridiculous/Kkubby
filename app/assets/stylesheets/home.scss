@@ -23,19 +23,10 @@
   }
 }
 
-.box-type-alert {
+// Maybe differentiate these later
+.box-type-alert, .box-type-notice, .box-type-calm {
   color: $body-color;
   background: #EEE;
-}
-
-.box-type-calm {
-  color: #5F3203;
-  background: #FCF9EF;
-}
-
-.box-type-notice {
-  color: $success;
-  background: $white;
 }
 
 .fl {
