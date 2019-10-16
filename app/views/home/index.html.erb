@@ -5,11 +5,17 @@
         <td>
           <div class="shelf-name"><span><%= shelf.name %></span></div>
           <% shelf.products.each do |product| %>
-            <%= image_tag(product.image_url, size: '100x100', title: product.name) %>
+            <%= image_tag(product.image_url, size: '150x150', title: product.name, class: 'product-img shelf-item') %>
           <% end %>
+          <button type="button" class="add-product shelf-item">+</button>
         </td>
       </tr>
     <% end %>
+    <tr>
+      <td class="add-new-shelf">
+        Add New Shelf
+      </td>
+    </tr>
   </table>
 <% else %>
   <p>No shelves created yet. Want to add one now?</p>

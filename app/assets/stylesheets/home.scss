@@ -10,9 +10,31 @@ table.shelves {
     padding: 20px;
     border: 2px solid #F7F7F7;
     border-radius: 3px;
+    position: relative;
 
-    img {
+    .product-img {
       border-radius: 5px;
+      height: 50%;
+      max-height: 200px;
+    }
+
+    .shelf-item {
+      float: left;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    .add-product {
+      font-size: 20px;
+      border-radius: 50%;
+      background: #F7F7F7;
+      color: $body-color;
+      border: none;
+      position: absolute;
+      top: -17px;
+      right: -19px;
+      padding: 3px 10px 6px 10px;
+      cursor: pointer;
     }
 
     .shelf-name {
@@ -25,6 +47,12 @@ table.shelves {
         border-radius: 5px;
       }
     }
+  }
+
+  .add-new-shelf {
+    cursor: pointer;
+    text-align: center;
+    vertical-align: center;
   }
 }
 
