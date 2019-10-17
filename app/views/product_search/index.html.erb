@@ -1,0 +1,28 @@
+<div class="page-content">
+  <p>Search for products to add to <strong><%= @shelf.name %></strong></p>
+  <%= form_tag product_search_path(shelf_id: @shelf.id), method: 'get' do %>
+    <%= hidden_field_tag :shelf_id, @shelf.id %>
+    <div class="form-content">
+      <%= text_field_tag :query, params[:query], class: 'text-input' %>
+      <%= submit_tag 'Search' %>
+    </div>
+  <% end %>
+  <% if @products.any? %>
+    <table class="product-list">
+      <tr>
+        <th style="width: 160px"></th>
+        <th></th>
+      </tr>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= link_to image_tag(product.image_url, size: '150x150', title: product.name, class: 'product-img'), shelf_products_path(@shelf, id: product, query: params[:query]), method: 'post' %></td>
+          <td><%= link_to "#{product.name} | #{product.category}", shelf_products_path(@shelf, id: product, query: params[:query]), method: 'post' %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  document.getElementById('query').focus();
+</script>

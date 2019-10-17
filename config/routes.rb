@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new', as: 'signin'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   post 'login', to: 'sessions#create', as: 'process_login'
+  get 'search', to: 'product_search#index', as: 'product_search'
+  resources :shelves do
+    resources :products, only: :create, controller: 'shelf_products'
+  end
   root 'home#index'
 end

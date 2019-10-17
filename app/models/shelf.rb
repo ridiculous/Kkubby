@@ -1,5 +1,7 @@
 class Shelf < ApplicationRecord
   belongs_to :user
+  has_many :shelf_products
+  has_many :products, through: :shelf_products
   validates :user_id, :name, presence: true
 
   def self.create_defaults(user)
@@ -9,9 +11,5 @@ class Shelf < ApplicationRecord
     user.shelves.create! name: 'Masks', order_index: 3
     user.shelves.create! name: 'Serum / Ampoule', order_index: 4
     user.shelves.create! name: 'Moisturizers', order_index: 5
-  end
-
-  def products
-    Product.where('category = :name OR product_type = :name', name: name).order('random()').limit(rand(3) + 1)
   end
 end

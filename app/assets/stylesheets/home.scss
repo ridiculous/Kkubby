@@ -3,6 +3,37 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'theme';
 
+.page-content {
+  padding: 20px;
+}
+
+.form-content {
+  input[type=text] {
+    margin-right: 5px;
+    margin-bottom: 10px;
+    width: 250px;
+  }
+}
+
+.product-img {
+  border-radius: 5px;
+  height: 50%;
+  max-height: 200px;
+}
+
+// simulate the clickable logo
+.home-link-box {
+  width: 270px;
+  height: 80px;
+  float: left;
+}
+
+#close-alert {
+  height: 26px;
+  font-size: 14px;
+  color: $body-color;
+}
+
 table.shelves {
   border-spacing: 20px 20px;
 
@@ -12,12 +43,6 @@ table.shelves {
     border-radius: 3px;
     position: relative;
 
-    .product-img {
-      border-radius: 5px;
-      height: 50%;
-      max-height: 200px;
-    }
-
     .add-product {
       font-size: 20px;
       border-radius: 50%;
@@ -26,9 +51,9 @@ table.shelves {
       border: none;
       position: absolute;
       top: -17px;
-      right: -19px;
-      padding: 3px 10px 6px 10px;
-      cursor: pointer;
+      right: -17px;
+      text-decoration: none;
+      padding: 0 9px 3px 9px;
     }
 
     .shelf-name {

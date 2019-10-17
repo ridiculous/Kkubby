@@ -88,6 +88,24 @@ input[type=number] {
   }
 }
 
+input[type=text] {
+  font-size: 20px;
+  border-radius: 5px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #F7F7F7;
+  color: #F7F7F7;
+}
+
+input[type=submit] {
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 5px 8px 7px 8px;
+  color: $body-color;
+  background-color: #F7F7F7;
+  cursor: pointer;
+}
+
 table {
   width: 100%;
   border: 0;
@@ -107,11 +125,19 @@ td {
 
 th {
   font-size: 16px;
-  border-bottom: 1px solid #DDD;
 }
 
 pre {
   font-size: 16px;
   line-height: 20px;
   background: #FFF;
+}
+
+a {
+  text-decoration: none;
+  color: #F7F7F7;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

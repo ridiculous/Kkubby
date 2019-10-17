@@ -5,9 +5,9 @@
         <td>
           <div class="shelf-name"><span><%= shelf.name %></span></div>
           <% shelf.products.each do |product| %>
-            <%= image_tag(product.image_url, size: '150x150', title: product.name, class: 'product-img shelf-item') %>
+            <%= image_tag(product.image_url, size: '150x150', title: product.name, class: 'product-img') %>
           <% end %>
-          <button type="button" class="add-product shelf-item">+</button>
+          <%= link_to "+", product_search_path(shelf_id: shelf.id), class: 'add-product' %>
         </td>
       </tr>
     <% end %>
