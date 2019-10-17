@@ -1,5 +1,5 @@
 <div class="page-content">
-  <p>Search for products to add to <strong><%= @shelf.name %></strong></p>
+  <p>Search for <strong><%= @shelf.name %></strong></p>
   <%= form_tag product_search_path(shelf_id: @shelf.id), method: 'get' do %>
     <%= hidden_field_tag :shelf_id, @shelf.id %>
     <div class="form-content">
