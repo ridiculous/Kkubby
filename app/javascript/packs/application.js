@@ -16,14 +16,35 @@ require("turbolinks").start()
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 document.addEventListener('turbolinks:load', function () {
-  // document.getElementById('close-alert').addEventListener('click', function () {
-  //   this.parentElement.style.display = 'none';
-  // })
+  var newShelf = document.querySelector('.add-new-shelf')
+    , shelfNames = document.querySelectorAll('.shelf-name > span')
+    , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]');
 
-  document.querySelector('.add-new-shelf').addEventListener('click', function () {
-    document.querySelector('.add-new-shelf-text').style.display = 'none';
-    document.querySelector('.add-new-shelf-form').style.display = 'block';
-    this.classList.remove('add-new-shelf');
-    document.getElementById('shelf_name').focus();
-  })
+  if (newShelf) {
+    newShelf.addEventListener('click', function () {
+      document.querySelector('.add-new-shelf-text').style.display = 'none';
+      document.querySelector('.add-new-shelf-form').style.display = 'block';
+      this.classList.remove('add-new-shelf');
+      document.getElementById('shelf_name').focus();
+    });
+  }
+
+  if (shelfNames) {
+    shelfNames.forEach(function (element) {
+      element.addEventListener('click', function () {
+        this.style.display = 'none';
+        this.nextElementSibling.style.display = 'block';
+        this.nextElementSibling.querySelector('input[type=text]').focus();
+      });
+    });
+  }
+
+  if (shelfNameInputs) {
+    shelfNameInputs.forEach(function (element) {
+      element.addEventListener('blur', function () {
+        this.parentElement.style.display = 'none';
+        this.parentElement.previousElementSibling.style.display = 'initial';
+      });
+    });
+  }
 });
