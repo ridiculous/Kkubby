@@ -3,12 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'theme';
 
+.login-form {
+  width: 200px;
+  margin: 0 auto;
+}
+
 .page-content {
   padding: 20px;
 }
 
 .form-content {
-  input[type=text] {
+  input[type=text],
+  input[type=password] {
     margin-right: 5px;
     margin-bottom: 10px;
     width: 250px;

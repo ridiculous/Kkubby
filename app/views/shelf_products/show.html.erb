@@ -9,10 +9,11 @@
           <%= @product.name %> | <%= @product.product_type %>
         </p>
         <p>
-          Sourced from <%= link_to @product.catalog.name, @product.sourced_from, target: '_blank' %>
-        </p>
-        <p>
           <%= link_to "Remove from shelf", shelf_product_path(@shelf, id: @product), method: 'delete', class: 'btn' %>
+          <%= link_to "View product details", @product.product_url, target: '_blank', class: 'btn' %>
+        </p>
+        <p class="small">
+          Sourced from the <%= link_to @product.catalog.name, @product.sourced_from, target: '_blank' %> catalog
         </p>
       </div>
     </td>
