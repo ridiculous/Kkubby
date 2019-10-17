@@ -60,7 +60,7 @@ input[type=text],
 input[type=email],
 input[type=password],
 input[type=number] {
-  padding: 5px;
+  padding: 5px 0;
   font-size: 20px;
   border-radius: 0 0 5px 5px;
   background: none;
@@ -95,10 +95,12 @@ input[type=number] {
 input[type=submit] {
   font-size: 18px;
   border-radius: 5px;
-  padding: 5px 8px 7px 8px;
+  padding: 5px 8px;
   color: $body-color;
   background-color: #F7F7F7;
   cursor: pointer;
+  outline: none;
+  border: 1px solid $body-color;
 }
 
 table {

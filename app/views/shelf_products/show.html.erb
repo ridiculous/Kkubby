@@ -9,7 +9,7 @@
       <div class="fl">
         <p><strong><%= @product.brand %></strong></p>
         <p>
-          <%= @product.name %> | <%= @product.product_type %>
+          <%= @product.name %>
         </p>
         <p>
           <%= link_to "Remove from shelf", shelf_product_path(@shelf, id: @product), method: 'delete', class: 'btn' %>
