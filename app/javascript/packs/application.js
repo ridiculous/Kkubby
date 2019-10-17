@@ -25,7 +25,7 @@ document.addEventListener('turbolinks:load', function () {
       document.querySelector('.add-new-shelf-text').style.display = 'none';
       document.querySelector('.add-new-shelf-form').style.display = 'block';
       this.classList.remove('add-new-shelf');
-      document.getElementById('shelf_name').focus();
+      document.getElementById('new_shelf_name').focus();
     });
   }
 
