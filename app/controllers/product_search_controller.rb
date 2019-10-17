@@ -8,7 +8,7 @@ class ProductSearchController < ApplicationController
 
   def load_products
     if params[:query].present?
-      @products = Product.where('name ilike :q OR category ilike :q', q: "%#{params[:query]}%").limit(40).order(:name).to_a
+      @products = Product.where('name ilike :q OR product_type ilike :q OR brand ilike :q', q: "%#{params[:query]}%").limit(40).order(:name).to_a
     else
       []
     end

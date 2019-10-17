@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create', as: 'process_login'
   get 'search', to: 'product_search#index', as: 'product_search'
   resources :shelves do
-    resources :products, only: :create, controller: 'shelf_products'
+    resources :products, controller: 'shelf_products'
   end
   root 'home#index'
 end

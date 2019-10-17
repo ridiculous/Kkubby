@@ -15,10 +15,24 @@
   }
 }
 
+.product-list {
+  td {
+    min-height: 150px;
+  }
+}
+
 .product-img {
   border-radius: 5px;
-  height: 50%;
+  height: initial;
   max-height: 200px;
+  min-height: 100px;
+  display: inline-block;
+}
+
+.original-product-img {
+  border-radius: 5px;
+  height: initial;
+  margin: 0 10px 10px 0;
 }
 
 // simulate the clickable logo
@@ -100,6 +114,17 @@ table.shelves {
 .box-type-alert, .box-type-notice, .box-type-calm {
   color: $body-color;
   background: #EEE;
+}
+
+.btn {
+  border: 1px solid #F7F7F7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .fl {

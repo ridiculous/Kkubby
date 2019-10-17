@@ -16,7 +16,12 @@
       <% @products.each do |product| %>
         <tr>
           <td><%= link_to image_tag(product.image_url, size: '150x150', title: product.name, class: 'product-img'), shelf_products_path(@shelf, id: product, query: params[:query]), method: 'post' %></td>
-          <td><%= link_to "#{product.name} | #{product.category}", shelf_products_path(@shelf, id: product, query: params[:query]), method: 'post' %></td>
+          <td>
+            <%= link_to shelf_products_path(@shelf, id: product, query: params[:query]), method: 'post' do %>
+              <p><strong><%= product.brand %></strong></p>
+              <%= "#{product.name} | #{product.product_type}" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </table>
