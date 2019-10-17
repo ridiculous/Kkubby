@@ -23,7 +23,7 @@ module FlashHelper
 
   def flash_box(the_type, the_prefix)
     content_tag(:div, class: "box-type-#{the_type} medium-major") do
-      concat('<button type="button" class="fr" id="close-alert">&times;</button>'.html_safe)
+      # concat('<button type="button" class="fr" id="close-alert">&times;</button>'.html_safe)
       concat(flash_messages.push("<b>#{the_prefix}</b>").reverse.join(' ').html_safe)
     end
   end
