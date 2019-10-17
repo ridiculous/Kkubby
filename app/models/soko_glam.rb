@@ -40,6 +40,7 @@ class SokoGlam
       product.name = element.attr('data-name')
       product.brand = element.css('.product__vendor').first.text
       product.raw_price = element.css('.ProductPrice').first.text
+      product.product_url = "https://sokoglam.com#{element.css('.product-grid-item__link').attr('href')}"
       product.save || puts(product.errors.full_messages.join(', '))
     end
   end

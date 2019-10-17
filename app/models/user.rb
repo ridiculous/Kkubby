@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :email, format: { with: EMAIL_PATTERN, allow_blank: true }
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   before_validation :squeeze_username
+  after_create ->(user) { Shelf.create_defaults(user) }
 
   def squeeze_username
     self.username &&= username.gsub(/\s+/, '')

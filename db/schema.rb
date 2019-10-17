@@ -32,12 +32,14 @@ ActiveRecord::Schema.define(version: 2019_10_17_015027) do
     t.string "name"
     t.string "category"
     t.string "product_type"
-    t.string "image_url"
     t.string "raw_price"
     t.decimal "price"
     t.date "published_at"
     t.datetime "last_refreshed_at"
-    t.string "sourced_from"
+    t.string "image_size"
+    t.string "image_url", limit: 500
+    t.string "sourced_from", limit: 500
+    t.string "product_url", limit: 500
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["brand", "name"], name: "index_products_on_brand_and_name", unique: true
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(version: 2019_10_17_015027) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
     t.string "username"
     t.string "email"
     t.string "password_digest"
@@ -71,5 +74,7 @@ ActiveRecord::Schema.define(version: 2019_10_17_015027) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "shelf_products", "products"
+  add_foreign_key "shelf_products", "shelves"
   add_foreign_key "shelves", "users"
 end

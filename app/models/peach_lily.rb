@@ -31,6 +31,7 @@ class PeachLily
       product.name = element.css('.product-title').text
       product.brand = element.css('.product-vendor').text
       product.raw_price = element.css('.price .product-price').text
+      product.product_url = "https://www.peachandlily.com#{element.css('a.image-inner-wrap').attr('href')}"
       product.save || puts(product.errors.full_messages.join(', '))
     end
   end
