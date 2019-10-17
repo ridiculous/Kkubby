@@ -39,6 +39,7 @@
   border-radius: 5px;
   height: initial;
   margin: 0 10px 10px 0;
+  max-width: 100%;
 }
 
 // simulate the clickable logo
@@ -60,7 +61,7 @@ table.shelves {
   td {
     padding: 20px;
     border: 2px solid #F7F7F7;
-    border-radius: 3px;
+    border-radius: 10px;
     position: relative;
 
     .add-product {
@@ -129,6 +130,8 @@ table.shelves {
   padding: 5px 10px;
   border-radius: 5px;
   text-decoration: none;
+  display: inline-block;
+  margin-bottom: 10px;
 
   &:hover {
     text-decoration: none;
