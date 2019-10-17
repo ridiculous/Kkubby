@@ -15,7 +15,13 @@
     <% end %>
     <tr>
       <td class="add-new-shelf">
-        Add New Shelf
+        <div class="add-new-shelf-text">Add New Shelf</div>
+        <div class="add-new-shelf-form form-content" style="display:none;">
+          <%= form_for Shelf.new do |f| %>
+            <%= f.text_field :name, placeholder: "Enter a name" %>
+            <%= f.submit %>
+          <% end %>
+        </div>
       </td>
     </tr>
   </table>

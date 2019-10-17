@@ -19,4 +19,11 @@ document.addEventListener('turbolinks:load', function () {
   // document.getElementById('close-alert').addEventListener('click', function () {
   //   this.parentElement.style.display = 'none';
   // })
+
+  document.querySelector('.add-new-shelf').addEventListener('click', function () {
+    document.querySelector('.add-new-shelf-text').style.display = 'none';
+    document.querySelector('.add-new-shelf-form').style.display = 'block';
+    this.classList.remove('add-new-shelf');
+    document.getElementById('shelf_name').focus();
+  })
 });
