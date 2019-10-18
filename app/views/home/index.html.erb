@@ -5,7 +5,7 @@
         <td>
           <%= content_tag :div, class: "shelf-name", id: shelf.name.parameterize do %>
             <span><%= shelf.name %></span>
-            <%= form_for(shelf) { |f| f.text_field :name } %>
+            <%= form_for(shelf) { |f| f.text_field :name_with_index } %>
           <% end %>
           <% shelf.products.each do |product| %>
             <%= link_to shelf_product_path(shelf, product) do %>

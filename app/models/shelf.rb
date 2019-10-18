@@ -7,17 +7,30 @@ class Shelf < ApplicationRecord
   before_validation :default_order_index
 
   def self.create_defaults(user)
-    user.shelves.create! name: 'Cleansers', order_index: 0
-    user.shelves.create! name: 'Toners', order_index: 1
-    user.shelves.create! name: 'Essences', order_index: 2
-    user.shelves.create! name: 'Masks', order_index: 3
-    user.shelves.create! name: 'Serum / Ampoule', order_index: 4
-    user.shelves.create! name: 'Moisturizers', order_index: 5
+    user.shelves.create! name: 'Cleansers', order_index: 5
+    user.shelves.create! name: 'Toners', order_index: 10
+    user.shelves.create! name: 'Essences', order_index: 15
+    user.shelves.create! name: 'Masks', order_index: 20
+    user.shelves.create! name: 'Serum / Ampoule', order_index: 25
+    user.shelves.create! name: 'Moisturizers', order_index: 30
+  end
+
+  def name_with_index
+    "#{order_index} - #{name}"
+  end
+
+  def name_with_index=(val)
+    if val.to_s.match(/\A(-?\d+)\s*-(.*)/)
+      self.order_index = $1
+      self.name = $2.strip
+    else
+      self.name = nil
+    end
   end
 
   private
 
   def default_order_index
-    self.order_index ||= user.shelves.maximum('order_index').to_i + 1
+    self.order_index ||= user.shelves.maximum('order_index').to_i + 5
   end
 end

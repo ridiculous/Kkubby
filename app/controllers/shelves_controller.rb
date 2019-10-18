@@ -10,12 +10,12 @@ class ShelvesController < ApplicationController
 
   def update
     shelf = current_user.shelves.find(params[:id])
-    shelf.name = params.require(:shelf).fetch(:name)
+    shelf.name_with_index = params.require(:shelf).fetch(:name_with_index)
     if shelf.name?
       if shelf.save
-        redirect_to root_path, notice: "Shelf name updated"
+        redirect_to root_path(anchor: shelf.name.parameterize), notice: "Shelf name updated"
       else
-        redirect_to root_path, alert: shelf.errors.full_messages.first
+        redirect_to root_path(anchor: shelf.name.parameterize), alert: shelf.errors.full_messages.first
       end
     elsif shelf.destroy
       redirect_to root_path, notice: "#{shelf.name_was} shelf was removed"
