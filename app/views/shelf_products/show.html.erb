@@ -3,7 +3,7 @@
     <td>
       <div class="shelf-name">
         <span><%= @shelf.name %></span>
-        <%= form_for(@shelf) { |f| f.text_field :name } %>
+        <%= form_for(@shelf) { |f| f.text_field :name_with_index } %>
       </div>
       <%= image_tag(@product.image_url, title: @product.name, class: 'original-product-img fl') %>
       <div class="fl">
