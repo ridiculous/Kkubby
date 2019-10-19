@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :catalog
-  validates :brand, :category, :product_type, :image_url,
-            presence: true
+  validates :brand, :image_url, presence: true
   validates :name, presence: true, uniqueness: { scope: :brand }
   before_create :set_price
 
