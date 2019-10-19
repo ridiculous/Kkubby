@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_015027) do
+ActiveRecord::Schema.define(version: 2019_10_19_053252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,9 @@ ActiveRecord::Schema.define(version: 2019_10_17_015027) do
     t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "notes"
+    t.boolean "wishlist"
+    t.integer "order_index", default: 0
     t.index ["shelf_id", "product_id"], name: "index_shelf_products_on_shelf_id_and_product_id", unique: true
   end
 

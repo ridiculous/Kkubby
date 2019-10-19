@@ -13,8 +13,20 @@
         </p>
         <p>
           <%= link_to "Remove from shelf", shelf_product_path(@shelf, id: @product), method: 'delete', class: 'btn' %>
+          <% if @shelf_product.wishlist? %>
+            <%= link_to "Remove from wishlist", shelf_product_path(@shelf, id: @product, shelf_product: { wishlist: 0 }), method: 'put', class: 'btn' %>
+          <% else %>
+            <%= link_to "Add to wishlist", shelf_product_path(@shelf, id: @product, shelf_product: { wishlist: 1 }), method: 'put', class: 'btn' %>
+          <% end %>
           <%= link_to "View product details", @product.product_url, target: '_blank', class: 'btn' %>
         </p>
+        <div class="form-content">
+          <%= form_for @shelf_product, url: shelf_product_path(@shelf, id: @product), method: 'patch' do |f| %>
+            <p>Notes</p>
+            <%= f.text_area :notes %>
+            <%= f.submit "Save notes" %>
+          <% end %>
+        </div>
         <p class="small">
           Sourced from the <%= link_to @product.catalog.name, @product.sourced_from, target: '_blank' %> catalog
         </p>
