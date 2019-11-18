@@ -2,6 +2,12 @@ class PeachLily
   def initialize
     @catalog = Catalog.where(name: 'Peach & Lily').first_or_create!
     @visited = {}
+    @url = "https://www.peachandlily.com".freeze
+  end
+
+  def test(path)
+    agent = Mechanize.new
+    page = agent.get(@url)
   end
 
   def call
@@ -27,7 +33,7 @@ class PeachLily
   end
 
   def scrape_all_other_products(agent)
-    page = agent.get("https://www.peachandlily.com")
+    page = agent.get(@url)
     page.css('.main-nav__list .sub-nav__link').each do |link|
       if link.attr('href').start_with?('/collections')
         create_products(agent, link.text.strip.titleize, link.attr('href').split('/').last)
@@ -53,7 +59,7 @@ class PeachLily
       product = Product.new(catalog_id: @catalog.id, product_type: type, category: cat, sourced_from: element.document.url)
       product.image_url = element.css('.imgcont a > img').attr('src').to_s
       product.name = element.css('.product-title').text.strip
-      product.brand = element.css('.product-vendor').text.strip.titleize
+      product.brand = element.css('.product-vendor').text.strip.titleize.presence || type
       product.raw_price = element.css('.price .product-price').text.strip
       product.product_url = "https://www.peachandlily.com#{element.css('a.image-inner-wrap').attr('href')}"
       product.save || puts(product.errors.full_messages.join(', '))
