@@ -3,7 +3,7 @@
     <td>
       <div class="shelf-name">
         <span><%= @shelf.name %></span>
-        <%= form_for(@shelf) { |f| f.text_field :name_with_index } %>
+        <%= form_for([@user, @shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
       </div>
       <%= image_tag(@product.image_url, title: @product.name, class: 'original-product-img fl') %>
       <div class="fl">
@@ -12,21 +12,25 @@
           <%= @product.name %>
         </p>
         <p>
-          <%= link_to "Remove from shelf", shelf_product_path(@shelf, id: @product), method: 'delete', class: 'btn' %>
-          <% if @shelf_product.wishlist? %>
-            <%= link_to "Remove from wishlist", shelf_product_path(@shelf, id: @product, shelf_product: { wishlist: 0 }), method: 'put', class: 'btn' %>
-          <% else %>
-            <%= link_to "Add to wishlist", shelf_product_path(@shelf, id: @product, shelf_product: { wishlist: 1 }), method: 'put', class: 'btn' %>
+          <% if current_user %>
+            <%= link_to "Remove from shelf", user_shelf_product_path(@user, @shelf, id: @product), method: 'delete', class: 'btn' %>
+            <% if @shelf_product.wishlist? %>
+                <%= link_to "Remove from wishlist", user_shelf_product_path(@user, @shelf, id: @product, shelf_product: { wishlist: 0 }), method: 'put', class: 'btn' %>
+            <% else %>
+                <%= link_to "Add to wishlist", user_shelf_product_path(@user, @shelf, id: @product, shelf_product: { wishlist: 1 }), method: 'put', class: 'btn' %>
+            <% end %>
           <% end %>
           <%= link_to "View product details", @product.product_url, target: '_blank', class: 'btn' %>
         </p>
-        <div class="form-content">
-          <%= form_for @shelf_product, url: shelf_product_path(@shelf, id: @product), method: 'patch' do |f| %>
-            <p>Notes</p>
-            <%= f.text_area :notes %>
-            <%= f.submit "Save notes" %>
-          <% end %>
-        </div>
+        <% if current_user %>
+          <div class="form-content">
+            <%= form_for @shelf_product, url: user_shelf_product_path(@user, @shelf, id: @product), method: 'patch' do |f| %>
+              <p>Notes</p>
+              <%= f.text_area :notes %>
+              <%= f.submit "Save notes" %>
+            <% end %>
+          </div>
+        <% end %>
         <p class="small">
           Sourced from the <%= link_to @product.catalog.name, @product.sourced_from, target: '_blank' %> catalog
         </p>

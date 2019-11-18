@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user
+  helper_method :current_user, :home_path
 
   # rescue from missing template to check if it's a legitimate error or something unrecognized, at which point we try to render html
   rescue_from ActionView::MissingTemplate do |ex|
@@ -50,5 +50,18 @@ class ApplicationController < ActionController::Base
 
   def error_response(record)
     request.flash[:alert] = record.errors.full_messages.first
+  end
+
+  def user_from_params
+    if params[:username].present?
+      @user = User.find_by(username: params[:username])
+    else
+      @user = current_user
+    end
+    @user || redirect_to(login_path, alert: 'User not found')
+  end
+
+  def home_path(opts = {})
+    user_home_path(@user || current_user, opts)
   end
 end

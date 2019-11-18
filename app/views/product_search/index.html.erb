@@ -15,9 +15,9 @@
       </tr>
       <% @products.each do |product| %>
         <tr>
-          <td><%= link_to image_tag(product.image_url, size: '150x150', title: product.name, class: 'product-search-img'), shelf_products_path(@shelf, id: product, query: params[:query]), method: 'post' %></td>
+          <td><%= link_to image_tag(product.image_url, size: '150x150', title: product.name, class: 'product-search-img'), user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' %></td>
           <td>
-            <%= link_to shelf_products_path(@shelf, id: product, query: params[:query]), method: 'post' do %>
+            <%= link_to user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' do %>
               <p><strong><%= product.brand %></strong></p>
               <%= product.name %>
               <p class="small"><%= product.product_type %></p>

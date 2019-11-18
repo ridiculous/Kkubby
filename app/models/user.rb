@@ -8,8 +8,13 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   before_validation :squeeze_username
   after_create ->(user) { Shelf.create_defaults(user) }
+  # @todo restrict username to not conflict with system routes (login, logout, etc)
 
   def squeeze_username
     self.username &&= username.gsub(/\s+/, '')
+  end
+
+  def to_param
+    username
   end
 end

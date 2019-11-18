@@ -1,4 +1,6 @@
 class ProductSearchController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @shelf = current_user.shelves.find(params[:shelf_id])
     @products = load_products
