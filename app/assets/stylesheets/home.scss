@@ -132,6 +132,15 @@ table.shelves {
   padding: 20px;
 }
 
+.top-bar-username {
+  position: absolute;
+  left: 119px;
+  top: 10px;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-family: Asul, "Times New Roman", Times, serif;
+}
+
 .top-bar-content {
   height: 80px;
   background: image-url('logo.svg') left no-repeat;
