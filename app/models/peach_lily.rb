@@ -88,7 +88,12 @@ class PeachLily
     else
       @visited[url] = 1
       puts "Loading ... #{url}"
-      agent.get(url)
+      begin
+        agent.get(url)
+      rescue Mechanize::ResponseCodeError => e
+        puts "ERROR: #{e.class}: #{e.message}"
+        puts "Skipping"
+      end
     end
   end
 end
