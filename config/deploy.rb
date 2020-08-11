@@ -148,7 +148,7 @@ task :logs do
   command %[tail -f #{fetch(:shared_path)}/log/production.log]
 end
 
-task :c do
+task :c => :remote_environment do
   invoke :console
 end
 

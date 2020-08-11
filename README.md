@@ -11,4 +11,5 @@ Setup the server with nodejs and npm (sudo apt-get install nodejs yarn npm && np
 Setup server with nvm to install correct node JS version (https://phoenixnap.com/kb/update-node-js-version)
 Setup SSL with letsencrypt (https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx)
 Add the example nginx conf (.nginx.conf.example)
-
+Remember to add config to shared/config/database.yml and shared/config/master.key
+Remember to add rails env production in bashrc
