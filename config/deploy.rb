@@ -34,9 +34,10 @@ set :node_version, 'stable'
 # `mina deploy` or `mina rake`.
 task :remote_environment do
   # For those using RVM, use this to load an RVM version@gemset.
+  command 'source ~/.bash_profile'
   invoke :'rvm:use', '2.7.0@default'
   invoke :'nvm:load'
-  command 'source ~/.bashrc'
+  command %[echo "-----> Finished loading $RAILS_ENV environment"]
 end
 
 task environment: :remote_environment
