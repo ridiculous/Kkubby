@@ -15,14 +15,13 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
-# MYSQL
 #development:
-#  adapter: postgresql
-#  encoding: unicode
-#  database: kkubby_development
-#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#  username: ryanbuckley
-#  password:
+  adapter: postgresql
+  encoding: unicode
+  database: kkubby_production
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password:
 #
 #test:
 #  adapter: postgresql
