@@ -32,7 +32,7 @@ set :whenever_name, -> { "kkubby_production" }
 # `mina deploy` or `mina rake`.
 task :remote_environment do
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use', '2.6.3@default'
+  invoke :'rvm:use', '2.7.0@default'
   command 'source ~/.bash_profile'
 end
 
