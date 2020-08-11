@@ -18,7 +18,8 @@ set :shared_files, fetch(:shared_files, []).push('config/database.yml')
 # set :force_asset_precompile, true
 
 # For single-user RVM
-set :rvm_path, "$HOME/.rvm/scripts/rvm"
+set :rvm_path, "/usr/share/rvm/bin/rvm"
+set :rvm_use_path, "/usr/share/rvm/bin/rvm"
 
 set :puma_config, -> { "#{fetch(:current_path)}/config/puma-prod.rb" }
 set :pumactl_socket, -> { "#{fetch(:shared_path)}/sockets/pumactl.sock" }
@@ -32,8 +33,8 @@ set :whenever_name, -> { "kkubby_production" }
 # `mina deploy` or `mina rake`.
 task :remote_environment do
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use', '2.7.0@default'
-  command 'source ~/.bash_profile'
+  # invoke :'rvm:use', '2.7.0@default'
+  # command 'source ~/.bashrc'
 end
 
 task environment: :remote_environment
