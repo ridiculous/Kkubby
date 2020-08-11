@@ -1,24 +1,10 @@
-# README
+# Kkubby
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App for managing beauty products as shelves, with the ability to share the link to view it.
 
-Things you may want to cover:
 
-* Ruby version
+# Installation
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Setup the server with nginx (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)
+Setup the server with RVM (https://github.com/rvm/ubuntu_rvm)
+Setup SSL with letsencrypt
