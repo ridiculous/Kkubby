@@ -18,7 +18,8 @@ require("turbolinks").start()
 document.addEventListener('turbolinks:load', function () {
   var newShelf = document.querySelector('.add-new-shelf')
     , shelfNames = document.querySelectorAll('.shelf-name > span')
-    , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]');
+    , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]')
+    , productImages = document.querySelectorAll('.product-img');
 
   if (newShelf) {
     newShelf.addEventListener('click', function () {
@@ -45,6 +46,15 @@ document.addEventListener('turbolinks:load', function () {
         this.parentElement.style.display = 'none';
         this.parentElement.previousElementSibling.style.display = 'initial';
       });
+    });
+  }
+
+  if (productImages) {
+    productImages.forEach(function (element) {
+      console.log('adding event listener')
+      element.addEventListener('touchstart', function (event) {
+        console.log(event.type)
+      })
     });
   }
 });
