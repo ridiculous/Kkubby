@@ -37,7 +37,7 @@ task :remote_environment do
   command 'source ~/.bash_profile'
   invoke :'rvm:use', '2.7.0@default'
   invoke :'nvm:load'
-  command %[echo "-----> Finished loading $RAILS_ENV environment"]
+  command %[echo "-----> Loaded $RAILS_ENV environment"]
 end
 
 task environment: :remote_environment
