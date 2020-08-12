@@ -8,20 +8,8 @@ class Product < ApplicationRecord
   before_create :set_price
   after_create :upload_image
 
-  def self.sync_jobs
-    before = Rails.application.config.active_job[:queue_adapter]
-    Rails.application.config.active_job[:queue_adapter] = :inline
-    yield
-  ensure
-    Rails.application.config.active_job[:queue_adapter] = before
-  end
-
   def self.upload_all
-    sync_jobs do
-      find_each do |product|
-        product.upload_image
-      end
-    end
+    find_each &:upload_image
   end
 
   def upload_image
