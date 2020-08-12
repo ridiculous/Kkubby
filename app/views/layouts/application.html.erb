@@ -7,8 +7,7 @@
   <title>Kkubby</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 <body>
 <div class="top-bar">
@@ -36,5 +35,6 @@
 </div>
 <%= flash_message_helper %>
 <div><%= yield %></div>
+<%= javascript_pack_tag 'application' %>
 </body>
 </html>
