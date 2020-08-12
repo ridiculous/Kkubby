@@ -1,9 +1,10 @@
 require 'open-uri'
 class Product < ApplicationRecord
   belongs_to :catalog
+  has_many :shelf_products, dependent: :destroy
+  has_one_attached :image
   validates :brand, :image_url, presence: true
   validates :name, presence: true, uniqueness: { scope: :brand }
-  has_one_attached :image
   before_create :set_price
   after_create :upload_image
 

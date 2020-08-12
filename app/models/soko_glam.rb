@@ -36,12 +36,23 @@ class SokoGlam
     page.css(".products .product-grid-item.mix").each do |element|
       product = Product.new(catalog_id: @catalog.id, product_type: type, category: cat, sourced_from: page.uri.to_s)
       product.published_at = element.attr('data-published-date')
-      product.image_url = element.css('.product__image a > img').first.attr('src')
+      product.image_url = element.css('.product__image a > img').first.attr('data-srcset')
       product.name = element.attr('data-name')
       product.brand = element.css('.product__vendor').first.text
       product.raw_price = element.css('.ProductPrice').first.text
       product.product_url = "https://sokoglam.com#{element.css('.product-grid-item__link').attr('href')}"
       product.save || puts(product.errors.full_messages.join(', '))
     end
+  end
+
+  def getone(key)
+    el = nil
+    Mechanize.start do |agent|
+      url = "https://sokoglam.com/collections/#{key}"
+      puts "Collecting products from ... #{url}"
+      page = agent.get(url)
+      el = page.css(".products .product-grid-item.mix").first
+    end
+    el
   end
 end
