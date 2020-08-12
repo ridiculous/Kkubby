@@ -13,7 +13,7 @@ set :repository, 'git@github.com:ridiculous/kkubby.git'
 set :branch, 'master'
 set :rails, lambda { 'bin/rails' }
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'pids', 'sockets')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'pids', 'sockets', 'storage')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/master.key')
 # set :force_asset_precompile, true
 
@@ -48,6 +48,8 @@ task :setup do
   invoke :'nvm:install'
   command %[mkdir -p "#{fetch(:shared_path)}/log"]
   command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/log"]
+  command %[mkdir -p "#{fetch(:shared_path)}/storage"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/storage"]
 
   command %[mkdir -p "#{fetch(:shared_path)}/pids"]
   command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/pids"]
