@@ -23,7 +23,7 @@ server {
         add_header Cache-Control public;
     }
 
-    location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
+    location ~* \.(css|js)$ {
         expires 365d;
         gzip_static on;
     }
