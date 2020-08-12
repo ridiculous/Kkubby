@@ -9,7 +9,7 @@
           <% end %>
           <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
             <%= link_to user_shelf_product_path(@user, shelf, sp.product) do %>
-              <%= image_tag(sp.image_url, size: '150x150', title: sp.name, class: "product-img #{'wishlist' if sp.wishlist?}", id: sp.name.parameterize) %>
+              <%= image_tag(sp.image_for_display, title: sp.name, class: "product-img #{'wishlist' if sp.wishlist?}", id: sp.name.parameterize) %>
             <% end %>
           <% end %>
           <% if current_user %>

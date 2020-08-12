@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  if Rails.env.production?
+    default_url_options protocol: :https, host: 'kkubby.com'
+  else
+    default_url_options protocol: :http, host: 'localhost:3000'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'login', to: 'sessions#new', as: 'login'
   get 'signin', to: 'sessions#new', as: 'signin'

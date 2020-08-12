@@ -6,11 +6,13 @@ require_relative 'config/application'
 Rails.application.load_tasks
 
 task build_that_shit: :environment do
-  time = Benchmark.realtime do
-    t = []
-    t << Thread.new { SokoGlam.new.call }
-    t << Thread.new { PeachLily.new.call }
-    t.map(&:join)
+  Product.sync_jobs do
+    time = Benchmark.realtime do
+      t = []
+      t << Thread.new { SokoGlam.new.call }
+      t << Thread.new { PeachLily.new.call }
+      t.map(&:join)
+    end
+    puts "Done in #{time.round(4)}s"
   end
-  puts "Done in #{time.round(4)}s"
 end

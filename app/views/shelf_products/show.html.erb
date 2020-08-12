@@ -5,7 +5,7 @@
         <span><%= @shelf.name %></span>
         <%= form_for([@user, @shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
       </div>
-      <%= image_tag(@product.image_url, title: @product.name, class: 'original-product-img fl') %>
+      <%= image_tag(@product.image_for_display, title: @product.name, class: 'original-product-img fl') %>
       <div class="fl">
         <p><strong><%= @product.brand %></strong></p>
         <p>
