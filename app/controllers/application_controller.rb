@@ -63,6 +63,10 @@ class ApplicationController < ActionController::Base
   end
 
   def home_path(opts = {})
-    user_home_path(@user || current_user, opts)
+    if @user || current_user
+      user_home_path(@user || current_user, opts)
+    else
+      root_path(opts)
+    end
   end
 end

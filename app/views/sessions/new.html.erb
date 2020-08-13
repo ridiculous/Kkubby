@@ -1,6 +1,5 @@
 <div class="page-content">
   <div class="login-form form-content">
-    <h2>Log in to Kkubby</h2>
     <%= form_tag(process_login_path, method: :post) do %>
       <%= hidden_field_tag :back_to, params[:back_to] %>
       <div>
@@ -16,7 +15,7 @@
         </div>
       </div>
       <div>
-        <%= submit_tag('Log in', class: 'btn') %>
+        <%= submit_tag('Login', class: 'btn', name: '') %>
         <%= check_box_tag(:remember_me) %> <%= label_tag(:remember_me, nil, style: 'display:inline-block') %>
       </div>
     <% end %>

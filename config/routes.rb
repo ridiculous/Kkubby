@@ -15,6 +15,6 @@ Rails.application.routes.draw do
       resources :products, controller: 'shelf_products'
     end
   end
-  get '/(:username)', to: 'home#index', as: 'user_home'
+  get '/:username', to: 'home#show', as: 'user_home'
   root 'home#index'
 end

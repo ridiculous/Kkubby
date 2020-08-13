@@ -1,37 +1,8 @@
-<% if @shelves.any? %>
-  <table class="shelves">
-    <% @shelves.each do |shelf| %>
-      <tr>
-        <td>
-          <%= content_tag :div, class: "shelf-name", id: shelf.name.parameterize do %>
-            <span><%= shelf.name %></span>
-            <%= form_for([@user, shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
-          <% end %>
-          <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
-            <%= link_to user_shelf_product_path(@user, shelf, sp.product) do %>
-              <%= image_tag(sp.image_for_display, title: sp.name, class: "product-img #{'wishlist' if sp.wishlist?}", id: sp.name.parameterize) %>
-            <% end %>
-          <% end %>
-          <% if current_user %>
-            <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name.split(/\b/).first.singularize), class: 'add-product' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-    <% if current_user %>
-      <tr>
-        <td class="add-new-shelf">
-          <div class="add-new-shelf-text">Add New Shelf</div>
-          <div class="add-new-shelf-form form-content" style="display:none;">
-            <%= form_for [@user, Shelf.new] do |f| %>
-              <%= f.text_field :name, placeholder: "Enter a name", id: 'new_shelf_name' %>
-              <%= f.submit %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-<% else %>
-  <p>No shelves created yet. Want to add one now?</p>
-<% end %>
+<div class="page-content">
+  <div class="box">
+    <p>
+      Welcome to Kkubby! A place to organize your K-Beauty products and share them with your friends. Feel free to signup and
+      try it out!
+    </p>
+  </div>
+</div>

@@ -7,6 +7,15 @@
   padding: 20px;
 }
 
+.box {
+  padding: 10px;
+  background-color: darken($body-color, 0.2);
+  border-radius: 5px;
+}
+.shade {
+  box-shadow: -4px 2px 8px #333333;
+}
+
 .form-content {
   input[type=text],
   input[type=password],
