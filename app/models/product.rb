@@ -1,4 +1,3 @@
-require 'open-uri'
 class Product < ApplicationRecord
   belongs_to :catalog
   has_many :shelf_products, dependent: :destroy
@@ -7,6 +6,18 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :brand }
   before_create :set_price
   after_create :upload_image
+
+  def self.types
+    pluck('DISTINCT(product_type)') + pluck('DISTINCT(brand)')
+  end
+
+  def self.spellcheck(name)
+    return false if name.blank?
+    result = DidYouMean::SpellChecker.new(dictionary: types).correct(name).first
+    if result.present?
+      result unless result.casecmp?(name)
+    end
+  end
 
   def self.upload_all
     find_each &:upload_image

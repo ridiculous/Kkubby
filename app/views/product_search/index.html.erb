@@ -26,8 +26,8 @@
         </tr>
       <% end %>
     </table>
-  <% else %>
-    <p>Nothing found</p>
+  <% elsif params[:query].present? %>
+    <p>Nothing found. <%= suggested_product(params[:query]) %></p>
   <% end %>
 </div>
 
