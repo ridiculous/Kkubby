@@ -1,5 +1,6 @@
 class ProductSearchController < ApplicationController
   before_action :authenticate_user
+  before_action :user_from_params
 
   # @todo Paginate results
   def index
