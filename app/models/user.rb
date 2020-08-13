@@ -14,6 +14,10 @@ class User < ApplicationRecord
     self.username &&= username.gsub(/\s+/, '')
   end
 
+  def display_username
+    username.strip.humanize
+  end
+
   def to_param
     username
   end

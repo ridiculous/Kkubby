@@ -11,9 +11,9 @@ module FlashHelper
     if flash_messages.first.is_a?(Array)
       flash_messages.first.shift
     elsif flash_type == 'notice'
-      'Success!'
+      'Excellent.'
     else
-      'Hold up!'
+      'Oops.'
     end
   end
 

@@ -3,12 +3,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(username: params[:username]).try(:authenticate, params[:password])
-    if user
+    user = (params[:username].present? && params[:password].present?) && User.where(username: params[:username].strip).first
+    if user&.authenticate(params[:password].strip)
       sign_in_user(user)
-      redirect_to(back_to || home_path, notice: "Welcome #{user.username}".strip)
+      redirect_to(back_to || home_path, notice: "Welcome back, #{user.display_username}.")
     else
-      request.flash[:alert] = 'Wrong username or password'
+      request.flash[:alert] = "Username and password don't match any records"
       render :new
     end
   end
