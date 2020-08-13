@@ -1,8 +1,8 @@
 <% if @shelves.any? %>
-  <table class="shelves">
+  <table class="shelves noselect">
     <% @shelves.each do |shelf| %>
       <tr>
-        <td>
+        <td class="box shade">
           <%= content_tag :div, class: "shelf-name", id: shelf.name.parameterize do %>
             <span><%= shelf.name %></span>
             <%= form_for([@user, shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>

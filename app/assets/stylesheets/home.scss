@@ -83,8 +83,6 @@ table.shelves {
 
   td {
     padding: 15px 10px 10px 10px;
-    border: 2px solid #F7F7F7;
-    border-radius: 10px;
     position: relative;
 
     .add-product {
@@ -102,11 +100,11 @@ table.shelves {
 
     .shelf-name {
       position: relative;
-      top: -27px;
+      top: -17px;
       margin-bottom: -15px; // offset for padding
 
       span {
-        background: $body-color;
+        //background: $body-color;
         padding: 2px 3px;
         border-radius: 5px;
         font-size: 14px;
@@ -243,4 +241,14 @@ table.shelves {
 
 .bold {
   font-weight: bold;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
