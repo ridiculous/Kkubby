@@ -1,4 +1,7 @@
 module FlashHelper
+  SUCCESS_MESSAGES = ["Excellent", "Success", "Nice job", "Sweet", "Very nice"].freeze
+  FAIL_MESSAGES = ["Hold up", "Oops", "Uh-uh", "Whoops", "Nope"].freeze
+
   def flash_messages
     @flash_messages ||= request.flash.discard.collect { |_, msg| msg }
   end
@@ -11,9 +14,9 @@ module FlashHelper
     if flash_messages.first.is_a?(Array)
       flash_messages.first.shift
     elsif flash_type == 'notice'
-      'Excellent.'
+      "#{SUCCESS_MESSAGES.sample}."
     else
-      'Oops.'
+      "#{FAIL_MESSAGES.sample}."
     end
   end
 
