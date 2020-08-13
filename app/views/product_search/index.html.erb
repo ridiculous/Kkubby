@@ -1,10 +1,10 @@
 <div class="page-content">
-  <p>Search for <strong><%= @shelf.name %></strong></p>
+  <p>Add a product to <strong><%= @shelf.name %></strong> by searching for the name, brand, or type</p>
   <%= form_tag product_search_path(shelf_id: @shelf.id), method: 'get' do %>
     <%= hidden_field_tag :shelf_id, @shelf.id %>
     <div class="form-content">
       <%= text_field_tag :query, params[:query], class: 'text-input' %>
-      <%= submit_tag 'Search' %>
+      <%= submit_tag 'Search', name: "" %>
     </div>
   <% end %>
   <% if @products.any? %>
@@ -26,6 +26,8 @@
         </tr>
       <% end %>
     </table>
+  <% else %>
+    <p>Nothing found</p>
   <% end %>
 </div>
 
