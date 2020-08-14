@@ -20,11 +20,13 @@
       <div class="home-link-box"></div>
     <% end %>
     <div class="hamburger">
-      <% if current_user %>
-        <%= link_to 'Logout', logout_path %>
-      <% else %>
-        <%= link_to 'Login', login_path %>
-      <% end %>
+      <p>
+        <% if current_user %>
+          <%= link_to 'Logout', logout_path %>
+        <% else %>
+          <%= link_to 'Login', login_path %>
+        <% end %>
+      </p>
     </div>
     <!--    Smashed on smaller iphone, disable for now-->
     <!--    <div class="hamburger">-->

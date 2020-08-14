@@ -13,7 +13,7 @@
   border-radius: 5px;
 }
 .shade {
-  box-shadow: -4px 2px 8px #333333;
+  box-shadow: -4px 3px 10px #333333;
 }
 
 .form-content {
@@ -88,8 +88,6 @@ table.shelves {
     .add-product {
       font-size: 20px;
       border-radius: 50%;
-      background: #F7F7F7;
-      color: $body-color;
       border: none;
       position: absolute;
       top: -17px;
@@ -174,15 +172,30 @@ table.shelves {
 }
 
 .btn {
-  border: 1px solid #F7F7F7;
-  padding: 5px 10px;
+  font-size: 18px;
   border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 5px 8px;
+  color: $body-color;
+  -webkit-appearance: none;
+  background-color: #F7F7F7;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid $body-color;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
   text-decoration: none;
   display: inline-block;
   margin-bottom: 10px;
+  vertical-align: middle;
+  -moz-transition: background-color .3s;
+  -o-transition: background-color .3s;
+  transition: background-color .3s;
 
   &:hover {
     text-decoration: none;
+  }
+  &.wide {
+    width: 100%
   }
 }
 

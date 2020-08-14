@@ -1,6 +1,6 @@
 <table class="shelves">
   <tr>
-    <td>
+    <td class="box shade">
       <div class="shelf-name">
         <span><%= @shelf.name %></span>
         <%= form_for([@user, @shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
@@ -27,7 +27,7 @@
             <%= form_for @shelf_product, url: user_shelf_product_path(@user, @shelf, id: @product), method: 'patch' do |f| %>
               <p>Notes</p>
               <%= f.text_area :notes %>
-              <%= f.submit "Save notes" %>
+              <%= f.submit "Save notes", class: 'btn wide' %>
             <% end %>
           </div>
         <% end %>

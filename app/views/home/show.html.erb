@@ -13,7 +13,7 @@
             <% end %>
           <% end %>
           <% if current_user %>
-            <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name.split(/\b/).first.singularize), class: 'add-product' %>
+            <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name.split(/\b/).first.singularize), class: 'add-product btn' %>
           <% end %>
         </td>
       </tr>
@@ -25,7 +25,7 @@
           <div class="add-new-shelf-form form-content" style="display:none;">
             <%= form_for [@user, Shelf.new] do |f| %>
               <%= f.text_field :name, placeholder: "Enter a name", id: 'new_shelf_name' %>
-              <%= f.submit %>
+              <%= f.submit "Create Shelf", name: "", class: "btn wide" %>
             <% end %>
           </div>
         </td>

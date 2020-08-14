@@ -4,7 +4,7 @@
     <%= hidden_field_tag :shelf_id, @shelf.id %>
     <div class="form-content">
       <%= text_field_tag :query, params[:query], class: 'text-input' %>
-      <%= submit_tag 'Search', name: "" %>
+      <%= submit_tag 'Search', name: "", class: "btn wide" %>
     </div>
   <% end %>
   <% if @products.any? %>
