@@ -28,9 +28,13 @@ class Product < ApplicationRecord
     image.attach(filename: image_url.split('/').last.split('?').first, io: URI.open("https:#{image_url}"))
   end
 
-  def image_for_display
+  def image_for_display(size: nil)
     if image.attached?
-      image
+      if size
+        image.variant(resize_to_limit: size).processed
+      else
+        image
+      end
     else
       image_url
     end

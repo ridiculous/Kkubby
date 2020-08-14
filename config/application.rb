@@ -16,5 +16,6 @@ module Kkubby
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.version = '0.1.0'.freeze
+    config.active_storage.variant_processor = :mini_magick
   end
 end

@@ -46,12 +46,30 @@ document.addEventListener('turbolinks:load', function () {
     });
   }
 
+  function TouchHandler() {
+    let startX, startY, isMoving;
+
+    this.touchStart = function (event) {
+      event.preventDefault();
+      console.log(event.type);
+      startX = startX ? startX : event.targetTouches[0].pageX;
+      startY = startY ? startY : event.targetTouches[0].pageY;
+    }
+
+    this.touchMove = function (event) {
+      event.preventDefault();
+      console.log('moving');
+      curX = event.targetTouches[0].pageX - startX;
+      curY = event.targetTouches[0].pageY - startY;
+      event.targetTouches[0].target.style.webkitTransform = 'translate(' + curX + 'px, ' + curY + 'px)';
+    }
+  }
+
   if (productImages) {
     productImages.forEach(function (element) {
-      console.log('adding event listener')
-      element.addEventListener('touchstart', function (event) {
-        console.log(event.type)
-      }, {passive: true})
+      let handler = new TouchHandler();
+      element.addEventListener('touchstart', handler.touchStart, {passive: true});
+      element.addEventListener('touchmove', handler.touchMove, {passive: true});
     });
   }
 });

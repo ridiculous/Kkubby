@@ -22,9 +22,9 @@
     <div class="hamburger">
       <p>
         <% if current_user %>
-          <%= link_to 'Logout', logout_path %>
+          <%= link_to 'Logout', logout_path, class: 'bold-link' %>
         <% else %>
-          <%= link_to 'Login', login_path %>
+          <%= link_to 'Login', login_path, class: 'bold-link' %>
         <% end %>
       </p>
     </div>
@@ -41,7 +41,7 @@
 <div class="footer">
   <div class="divider"></div>
   <p>Kkubby Inc &copy; 2020</p>
-  <p>Contact us <%= link_to "@mykkubby", "#" %></p>
+  <p>Contact us <%= link_to "@mykkubby", "#", class: 'bold-link' %></p>
   <p class="code-text">v<%= Rails.application.config.version %></p>
 </div>
 </body>

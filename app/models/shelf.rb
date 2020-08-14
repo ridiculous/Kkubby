@@ -11,7 +11,7 @@ class Shelf < ApplicationRecord
     user.shelves.create! name: 'Toners', order_index: 10
     user.shelves.create! name: 'Essences', order_index: 15
     user.shelves.create! name: 'Masks', order_index: 20
-    user.shelves.create! name: 'Serum / Ampoule', order_index: 25
+    user.shelves.create! name: 'Serums / Ampoules', order_index: 25
     user.shelves.create! name: 'Moisturizers', order_index: 30
   end
 

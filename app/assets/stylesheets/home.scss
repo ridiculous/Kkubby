@@ -41,9 +41,6 @@
 
 .product-img {
   border-radius: 5px;
-  height: initial;
-  width: 49%;
-  max-width: 250px;
   display: inline-block;
 
   &.wishlist {
@@ -87,14 +84,14 @@ table.shelves {
     position: relative;
 
     .add-product {
-      font-size: 20px;
+      font-size: 25px;
       border-radius: 50%;
       border: none;
       position: absolute;
       top: -17px;
       right: -17px;
       text-decoration: none;
-      padding: 0 9px 3px 9px;
+      padding: 0 9px 1px 10px;
     }
 
     .shelf-name {
@@ -106,7 +103,7 @@ table.shelves {
         //background: $body-color;
         padding: 2px 3px;
         border-radius: 5px;
-        font-size: 14px;
+        font-size: 24px;
       }
 
       form {
@@ -116,7 +113,7 @@ table.shelves {
       input[type=text] {
         background: $body-color;
         border: none;
-        font-size: 14px;
+        font-size: 24px;
         padding-left: 3px;
         padding-top: 2px;
         border-radius: 5px;
@@ -144,7 +141,7 @@ table.shelves {
   top: 14px;
   font-size: 18px;
   text-transform: capitalize;
-  font-family: Asul, "Times New Roman", Times, serif;
+  font-family: $standard-font;
 }
 
 .top-bar-content {
@@ -294,4 +291,9 @@ table.shelves {
   a {
     font-style: italic;
   }
+}
+
+.bold-link {
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }

@@ -18,7 +18,7 @@ body {
 }
 
 p, ol, ul, td, span, input, textarea {
-  font-family: $font-family3;
+  font-family: $standard-font;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -130,10 +130,4 @@ a {
 
 ::placeholder {
   color: rgba(247, 247, 247, 0.50);
-}
-
-p > a {
-  font-weight: bold;
-  //font-style: italic;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
