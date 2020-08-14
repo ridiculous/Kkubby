@@ -6,9 +6,9 @@ class User < ApplicationRecord
   before_create -> { generate_token(:auth_token) }
   validates :email, format: { with: EMAIL_PATTERN, allow_blank: true }
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates :username, exclusion: { in: %w[login signin logout search shelves products users admin], message: "has already been taken" }
   before_validation :squeeze_username
   after_create ->(user) { Shelf.create_defaults(user) }
-  # @todo restrict username to not conflict with system routes (login, logout, etc)
 
   def squeeze_username
     self.username &&= username.gsub(/\s+/, '')
