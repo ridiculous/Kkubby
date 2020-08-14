@@ -12,6 +12,7 @@
   background-color: darken($body-color, 0.2);
   border-radius: 5px;
 }
+
 .shade {
   box-shadow: -4px 3px 10px #333333;
 }
@@ -182,7 +183,7 @@ table.shelves {
   cursor: pointer;
   outline: none;
   border: 1px solid $body-color;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
   text-decoration: none;
   display: inline-block;
   margin-bottom: 10px;
@@ -194,6 +195,7 @@ table.shelves {
   &:hover {
     text-decoration: none;
   }
+
   &.wide {
     width: 100%
   }
@@ -262,8 +264,8 @@ table.shelves {
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .display-text {
@@ -286,4 +288,10 @@ table.shelves {
 
 .code-text {
   font-family: monospace;
+}
+
+.suggested-product {
+  a {
+    font-style: italic;
+  }
 }

@@ -27,7 +27,7 @@
       <% end %>
     </table>
   <% elsif params[:query].present? %>
-    <p>Nothing found. <%= suggested_product(params[:query]) %></p>
+    <p>Nothing found. <span class="suggested-product"><%= suggested_product(params[:query]) %></span></p>
   <% end %>
 </div>
 
