@@ -14,7 +14,7 @@
 }
 
 .shade {
-  box-shadow: -4px 3px 10px #333333;
+  box-shadow: 1px 1px 5px #8C494E;
 }
 
 .form-content {
@@ -85,7 +85,6 @@ table.shelves {
 
     .add-product {
       font-size: 25px;
-      border-radius: 50%;
       border: none;
       position: absolute;
       top: -17px;
@@ -150,7 +149,14 @@ table.shelves {
 
   .hamburger {
     float: right;
-    padding-top: 10px;
+    // padding-top: 10px;
+    border-radius: 50%;
+
+    img {
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid #8C494E;
+    }
 
     div {
       width: 33px;
@@ -195,6 +201,11 @@ table.shelves {
 
   &.wide {
     width: 100%
+  }
+
+  &.round {
+    border-radius: 50%;
+    padding: 0px 10px;
   }
 }
 
