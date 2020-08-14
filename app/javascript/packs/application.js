@@ -67,9 +67,9 @@ document.addEventListener('turbolinks:load', function () {
 
   if (productImages) {
     productImages.forEach(function (element) {
-      let handler = new TouchHandler();
-      element.addEventListener('touchstart', handler.touchStart, {passive: true});
-      element.addEventListener('touchmove', handler.touchMove, {passive: true});
+      // let handler = new TouchHandler();
+      // element.addEventListener('touchstart', handler.touchStart, {passive: true});
+      // element.addEventListener('touchmove', handler.touchMove, {passive: true});
     });
   }
 });
