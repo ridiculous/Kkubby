@@ -21,6 +21,21 @@
   box-shadow: 1px 1px 4px #8C494E;
 }
 
+.touch-start {
+  overflow: hidden !important;
+  -webkit-overflow-scrolling: unset;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  pointer-events: none;
+}
+
+.moving-target {
+}
+
 .form-content {
   input[type=text],
   input[type=password],
@@ -39,7 +54,13 @@
 
 .product-list {
   td {
-    min-height: 150px;
+    min-height: 200px;
+  }
+}
+
+.draggable-products {
+  li {
+    display: inline-block;
   }
 }
 

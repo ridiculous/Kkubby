@@ -46,30 +46,92 @@ document.addEventListener('turbolinks:load', function () {
     });
   }
 
+  let zIndex = 1000;
+  let moveTimer = 0;
+
+  document.addEventListener('scroll', function () {
+    clearTimeout(moveTimer);
+  });
+
   function TouchHandler() {
-    let startX, startY, isMoving;
+    let self = this;
+    let startX, startY;
+    let isMoving, currentTarget, index = 0;
 
     this.touchStart = function (event) {
       event.preventDefault();
+      console.log(event.type, zIndex);
+      moveTimer = setTimeout(function () {
+        console.log("Touch activated")
+        startX = startX ? startX : event.targetTouches[0].pageX;
+        startY = startY ? startY : event.targetTouches[0].pageY;
+        currentTarget = event.targetTouches[0].target;
+        currentTarget.classList.add('moving-target');
+        currentTarget.style.zIndex = (zIndex++).toString();
+        currentTarget.classList.add('icon-shade');
+        document.body.classList.add('touch-start');
+        currentTarget.addEventListener('touchmove', self.touchMove, {passive: true});
+      }, 300);
+    };
+
+    this.touchEnd = function (event) {
+      event.preventDefault();
+      clearTimeout(moveTimer);
       console.log(event.type);
-      startX = startX ? startX : event.targetTouches[0].pageX;
-      startY = startY ? startY : event.targetTouches[0].pageY;
-    }
+      document.body.classList.remove('touch-start');
+      if (currentTarget) {
+        currentTarget.classList.remove('moving-target');
+        currentTarget.classList.remove('icon-shade');
+        currentTarget.removeEventListener('touchmove', self.touchMove, {passive: true});
+        if (true) {
+          debugger;
+          // Check if we have moved over an image to the left, by checking half of the image width
+          currentTarget.style.transform = '';
+          // currentTarget.parentElement.parentElement.querySelectorAll('a > img')
+          // document.elementFromPoint(event.pageX+currentTarget.width/2, event.pageY)
+          // var first = currentTarget.parentElement.parentElement.childNodes[3].childNodes[1]
+          // currentTarget.parentElement.parentElement.childNodes[3].replaceChild(currentTarget, first)
+        }
+      }
+    };
 
     this.touchMove = function (event) {
       event.preventDefault();
       console.log('moving');
       curX = event.targetTouches[0].pageX - startX;
       curY = event.targetTouches[0].pageY - startY;
-      event.targetTouches[0].target.style.webkitTransform = 'translate(' + curX + 'px, ' + curY + 'px)';
+      event.targetTouches[0].target.style.transform = 'translate(' + curX + 'px, ' + curY + 'px)';
+    }
+
+    this.touchCancel = function (event) {
+      console.log(event.type);
+      clearTimeout(moveTimer);
+      document.body.classList.remove('touch-start');
+      if (currentTarget) {
+        console.log("Removing stuff from currentTarget")
+        currentTarget.classList.remove('moving-target');
+        currentTarget.classList.remove('icon-shade');
+        currentTarget.removeEventListener('touchmove', self.touchMove, {passive: true});
+      }
+    };
+
+    this.touchForce = function (event) {
+      console.log(event.type);
+    };
+
+    this.gesture = function (event) {
+      console.log(event.type);
     }
   }
 
   if (productImages) {
     productImages.forEach(function (element) {
-      // let handler = new TouchHandler();
-      // element.addEventListener('touchstart', handler.touchStart, {passive: true});
-      // element.addEventListener('touchmove', handler.touchMove, {passive: true});
+      let handler = new TouchHandler();
+      element.addEventListener('touchstart', handler.touchStart, {passive: true});
+      element.addEventListener('touchend', handler.touchEnd, {passive: true});
+      element.addEventListener('touchcancel', handler.touchCancel);
+      element.addEventListener('touchforcechange', handler.touchForce);
+      element.addEventListener('gesturechange', handler.gesture);
     });
   }
 });

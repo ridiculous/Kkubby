@@ -1,5 +1,5 @@
 <% if @shelves.any? %>
-  <table class="shelves noselect">
+  <table class="shelves">
     <% @shelves.each do |shelf| %>
       <tr>
         <td class="box shade">
@@ -7,11 +7,15 @@
             <span><%= shelf.name %></span>
             <%= form_for([@user, shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
           <% end %>
-          <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
-            <%= link_to user_shelf_product_path(@user, shelf, sp.product) do %>
-              <%= image_tag(sp.product.image_for_display(size: [nil, 250]), height: 250, title: sp.name, class: "product-img #{'wishlist' if sp.wishlist?}", id: sp.name.parameterize) %>
+          <ul class="draggable-products">
+            <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
+              <li>
+                <%= link_to user_shelf_product_path(@user, shelf, sp.product) do %>
+                  <%= image_tag(sp.product.image_for_display(size: [nil, 250]), height: 250, title: sp.name, class: "product-img #{'wishlist' if sp.wishlist?}", id: sp.name.parameterize) %>
+                <% end %>
+              </li>
             <% end %>
-          <% end %>
+          </ul>
           <% if current_user %>
             <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name.split(/\b/).first.singularize), class: 'add-product btn round' %>
           <% end %>
@@ -21,7 +25,7 @@
     <% if current_user %>
       <tr>
         <td class="add-new-shelf">
-          <div class="add-new-shelf-text"><p><a href="javascript:;", class="bold-link">Add New Shelf</a></p></div>
+          <div class="add-new-shelf-text"><p><a href="javascript:;" , class="bold-link">Add New Shelf</a></p></div>
           <div class="add-new-shelf-form form-content" style="display:none;">
             <%= form_for [@user, Shelf.new] do |f| %>
               <%= f.text_field :name, placeholder: "Enter a name", id: 'new_shelf_name' %>
