@@ -16,7 +16,7 @@ document.addEventListener('turbolinks:load', function () {
   var newShelf = document.querySelector('.add-new-shelf')
     , shelfNames = document.querySelectorAll('.shelf-name > span')
     , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]')
-    , productImages = document.querySelectorAll('.product-img');
+    , productImages = document.querySelectorAll('.draggable .product-img');
 
   if (newShelf) {
     newShelf.addEventListener('click', function () {
@@ -156,12 +156,10 @@ document.addEventListener('turbolinks:load', function () {
     };
   }
 
-  if (productImages) {
-    productImages.forEach(function (element) {
-      let handler = new TouchHandler();
-      element.addEventListener('touchstart', handler.touchStart, {passive: true});
-      element.addEventListener('touchend', handler.touchEnd, {passive: true});
-      element.addEventListener('touchcancel', handler.touchCancel);
-    });
-  }
+  productImages.forEach(function (element) {
+    let handler = new TouchHandler();
+    element.addEventListener('touchstart', handler.touchStart, {passive: true});
+    element.addEventListener('touchend', handler.touchEnd, {passive: true});
+    element.addEventListener('touchcancel', handler.touchCancel);
+  });
 });

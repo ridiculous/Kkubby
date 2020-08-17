@@ -14,7 +14,7 @@
 }
 
 .shade {
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .icon-shade {
@@ -23,23 +23,11 @@
 
 .touch-start {
   overflow: hidden !important;
+
   img {
     pointer-events: none;
   }
 }
-
-.image-indicator {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 10px;
-  width: 10px;
-  z-index: 100000000;
-  display: none;
-}
-
-#leftIcon { background: red }
-#rightIcon { background: blue }
 
 .form-content {
   input[type=text],
@@ -63,9 +51,10 @@
   }
 }
 
-.draggable-products {
+.products {
   margin: 0;
   padding: 0;
+
   li {
     float: left;
     padding: 2px;
@@ -74,6 +63,8 @@
 
 .product-img {
   border-radius: 5px;
+  position: relative;
+  z-index: 1000;
 
   &.wishlist {
     opacity: 0.6;
@@ -123,6 +114,7 @@ table.shelves {
       right: -17px;
       text-decoration: none;
       padding: 0 9px 1px 10px;
+      z-index: 100;
     }
 
     .shelf-name {

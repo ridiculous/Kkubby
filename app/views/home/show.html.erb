@@ -5,9 +5,9 @@
         <td class="box shade">
           <%= content_tag :div, class: "shelf-name", id: shelf.name.parameterize do %>
             <span><%= shelf.name %></span>
-            <%= form_for([@user, shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
+            <%= form_for([@user, shelf]) { |f| f.text_field :name_with_index, readonly: !can_edit? } %>
           <% end %>
-          <ul class="draggable-products">
+          <%= content_tag(:ul, class: "products #{'draggable' if can_edit?}") do %>
             <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
               <li>
                 <%= link_to user_shelf_product_path(@user, shelf, sp.product) do %>
@@ -15,14 +15,14 @@
                 <% end %>
               </li>
             <% end %>
-          </ul>
-          <% if current_user %>
+          <% end %>
+          <% if can_edit? %>
             <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name.split(/\b/).first.singularize), class: 'add-product btn round' %>
           <% end %>
         </td>
       </tr>
     <% end %>
-    <% if current_user %>
+    <% if can_edit? %>
       <tr>
         <td class="add-new-shelf">
           <div class="add-new-shelf-text"><p><a href="javascript:;" , class="bold-link">Add New Shelf</a></p></div>
