@@ -11,6 +11,8 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
+<div id="leftIcon" class="image-indicator"></div>
+<div id="rightIcon" class="image-indicator"></div>
 <div class="top-bar">
   <% if @user %>
     <div class="top-bar-username"><%= @user.username %>'s</div>
