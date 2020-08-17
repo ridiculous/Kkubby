@@ -64,10 +64,14 @@
 .product-img {
   border-radius: 5px;
   position: relative;
-  z-index: 1000;
+  z-index: 999;
 
   &.wishlist {
     opacity: 0.6;
+  }
+
+  &.nearby-target {
+    box-shadow: 0 0 0 3px white;
   }
 }
 
@@ -97,6 +101,14 @@
   height: 26px;
   font-size: 14px;
   color: $body-color;
+}
+
+.image-tracker {
+  position: absolute;
+  top: 0;
+  z-index: 100000;
+  height: 10px;
+  width: 10px;
 }
 
 table.shelves {
