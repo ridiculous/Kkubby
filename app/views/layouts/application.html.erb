@@ -11,8 +11,6 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-<div id="leftIcon" class="image-indicator"></div>
-<div id="rightIcon" class="image-indicator"></div>
 <div class="top-bar">
   <% if @user %>
     <div class="top-bar-username"><%= @user.username %>'s</div>
@@ -37,7 +35,7 @@
   </div>
 </div>
 <%= flash_message_helper %>
-<div class="page-body"><%= yield %></div>
+<div class="page-body" id="page-body"><%= yield %></div>
 <div class="footer">
   <div class="divider"></div>
   <p>Kkubby Inc &copy; 2020</p>
