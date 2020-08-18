@@ -104,8 +104,8 @@ export function Draggable() {
       event.preventDefault();
       log(event.type);
       window.moveTimer = setTimeout(function () {
-        startX = startX ? startX : event.targetTouches[0].pageX;
-        startY = startY ? startY : event.targetTouches[0].pageY;
+        startX = startX ? startX : event.targetTouches[0].clientX;
+        startY = startY ? startY : event.targetTouches[0].clientY;
         currentTarget = event.targetTouches[0].target;
         initSiblings(event.targetTouches[0]);
         currentTarget.style.zIndex = (window.zIndex++).toString();
@@ -131,8 +131,8 @@ export function Draggable() {
     this.touchMove = function (event) {
       event.preventDefault();
       log(event.type);
-      let curX = event.targetTouches[0].pageX - startX;
-      let curY = event.targetTouches[0].pageY - startY;
+      let curX = event.targetTouches[0].clientX - startX;
+      let curY = event.targetTouches[0].clientY - startY;
       document.body.classList.remove('touch-start');
       Object.assign(newSiblings, nearbyProducts(event.targetTouches[0], curX, curY));
       document.body.classList.add('touch-start');
