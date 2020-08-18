@@ -7,6 +7,11 @@ export function Draggable() {
     let startX, startY, currentTarget;
     let siblings = {};
     let newSiblings = {};
+    let logging = false;
+
+    function log(msg) {
+      if (logging) console.log(msg)
+    }
 
     function nearbyProducts(touchEvent, offsetX, offsetY) {
       let imageOffsetLeft = offsetX + currentTarget.offsetLeft + currentTarget.offsetParent.offsetLeft + currentTarget.offsetParent.offsetParent.offsetLeft;
@@ -15,11 +20,11 @@ export function Draggable() {
       let padding = 10;
       let element = document.elementFromPoint(imageOffsetRight + padding, pageY);
       let leftElement = document.elementFromPoint(imageOffsetLeft - padding, pageY);
-      let result = {left: null, right: null};
+      let result = { left: null, right: null };
       let eligibleProduct = function (el) {
-        return el && el.classList.contains('product-img') && currentTarget.id !== el.id && currentTarget.parentElement.parentElement.parentElement === el.parentElement.parentElement.parentElement
+        return el && el.classList.contains('product-img') && currentTarget.id !== el.id && currentTarget.parentElement.parentElement === el.parentElement.parentElement
       };
-      currentTarget.parentElement.parentElement.parentElement.querySelectorAll('.product-img').forEach(function (element) {
+      currentTarget.parentElement.parentElement.querySelectorAll('.product-img').forEach(function (element) {
         element.classList.remove('nearby-target')
       });
       if (eligibleProduct(element)) {
@@ -42,9 +47,9 @@ export function Draggable() {
     };
 
     function insertTarget(element, handler) {
-      let currentItem = currentTarget.parentElement.parentElement;
-      let sibling = element.parentElement.parentElement;
-      let list = currentTarget.parentElement.parentElement.parentElement;
+      let currentItem = currentTarget.parentElement;
+      let sibling = element.parentElement;
+      let list = currentTarget.parentElement.parentElement;
       list.removeChild(currentItem);
       handler(list, currentItem, sibling);
       startX = null;
@@ -69,6 +74,7 @@ export function Draggable() {
 
     this.touchStart = function (event) {
       event.preventDefault();
+      log(event.type);
       window.moveTimer = setTimeout(function () {
         startX = startX ? startX : event.targetTouches[0].pageX;
         startY = startY ? startY : event.targetTouches[0].pageY;
@@ -77,45 +83,48 @@ export function Draggable() {
         currentTarget.style.zIndex = (window.zIndex++).toString();
         currentTarget.classList.add('icon-shade');
         document.body.classList.add('touch-start');
-        currentTarget.addEventListener('touchmove', self.touchMove, {passive: true});
+        currentTarget.addEventListener('touchmove', self.touchMove, { passive: true });
       }, 300);
     };
 
     this.touchEnd = function (event) {
       event.preventDefault();
+      log(event.type);
       clearTimeout(window.moveTimer);
       document.body.classList.remove('touch-start');
-      if (currentTarget) {
-        currentTarget.classList.remove('icon-shade');
-        currentTarget.removeEventListener('touchmove', self.touchMove);
-        currentTarget.style.transform = '';
-        document.querySelectorAll('.nearby-target').forEach(function (element) {
-          element.classList.remove('nearby-target')
-        });
-        if (newSiblings.left) {
-          if (!siblings.left || newSiblings.left.id !== siblings.left.id) {
-            insertTarget(newSiblings.left, function (list, item, sibling) {
-              if (sibling.nextElementSibling) {
-                list.insertBefore(item, sibling.nextElementSibling);
-              } else {
-                list.appendChild(item);
-              }
-            });
-          }
-        } else if (newSiblings.right) {
-          if (!siblings.right || newSiblings.right.id !== siblings.right.id) {
-            insertTarget(newSiblings.right, function (list, item, sibling) {
-              if (sibling) {
-                list.insertBefore(item, sibling);
-              }
-            });
-          }
+      if (!currentTarget) {
+        return true;
+      }
+      currentTarget.classList.remove('icon-shade');
+      currentTarget.removeEventListener('touchmove', self.touchMove);
+      currentTarget.style.transform = '';
+      document.querySelectorAll('.nearby-target').forEach(function (element) {
+        element.classList.remove('nearby-target')
+      });
+      if (newSiblings.left) {
+        if (!siblings.left || newSiblings.left.id !== siblings.left.id) {
+          insertTarget(newSiblings.left, function (list, item, sibling) {
+            if (sibling.nextElementSibling) {
+              list.insertBefore(item, sibling.nextElementSibling);
+            } else {
+              list.appendChild(item);
+            }
+          });
+        }
+      } else if (newSiblings.right) {
+        if (!siblings.right || newSiblings.right.id !== siblings.right.id) {
+          insertTarget(newSiblings.right, function (list, item, sibling) {
+            if (sibling) {
+              list.insertBefore(item, sibling);
+            }
+          });
         }
       }
     };
 
     this.touchMove = function (event) {
       event.preventDefault();
+      log(event.type);
       let curX = event.targetTouches[0].pageX - startX;
       let curY = event.targetTouches[0].pageY - startY;
       document.body.classList.remove('touch-start');
@@ -124,8 +133,9 @@ export function Draggable() {
       event.targetTouches[0].target.style.transform = 'translate(' + curX + 'px, ' + curY + 'px)';
     };
 
-    this.touchCancel = function () {
+    this.touchCancel = function (event) {
       clearTimeout(window.moveTimer);
+      log(event.type);
       document.body.classList.remove('touch-start');
       if (currentTarget) {
         currentTarget.classList.remove('icon-shade');

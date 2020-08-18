@@ -7,12 +7,10 @@
             <span><%= shelf.name %></span>
             <%= form_for([@user, shelf]) { |f| f.text_field :name_with_index, readonly: !can_edit? } %>
           <% end %>
-          <%= content_tag(:ul, class: "products #{'draggable' if can_edit?}", id: shelf.id) do %>
+          <%= content_tag(:ul, class: "products", id: shelf.id) do %>
             <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
-              <%= content_tag(:li, id: sp.id) do %>
-                <%= link_to user_shelf_product_path(@user, shelf, sp.product) do %>
-                  <%= image_tag(sp.product.image_for_display(size: [nil, 250]), height: 250, title: sp.name, class: "product-img #{'wishlist' if sp.wishlist?}", id: sp.name.parameterize) %>
-                <% end %>
+              <%= content_tag(:li, id: sp.id, data: { href: user_shelf_product_path(@user, shelf, sp.product) }) do %>
+                <%= image_tag(sp.product.image_for_display(size: [nil, 250]), height: 250, title: sp.name, class: "product-img #{'wishlist' if sp.wishlist?} #{'draggable' if can_edit?}", id: sp.name.parameterize) %>
               <% end %>
             <% end %>
           <% end %>

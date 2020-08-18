@@ -65,13 +65,14 @@
   border-radius: 5px;
   position: relative;
   z-index: 999;
+  cursor: pointer;
 
   &.wishlist {
     opacity: 0.6;
   }
 
   &.nearby-target {
-    box-shadow: 0 0 0 3px white;
+    box-shadow: 0 0 3px 3px #FFF;
   }
 }
 

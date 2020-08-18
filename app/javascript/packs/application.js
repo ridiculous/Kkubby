@@ -6,7 +6,7 @@
 require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
-import { Draggable } from './draggable'
+import {Draggable} from './draggable'
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -18,7 +18,7 @@ document.addEventListener('turbolinks:load', function () {
   let newShelf = document.querySelector('.add-new-shelf')
     , shelfNames = document.querySelectorAll('.shelf-name > span')
     , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]')
-    , productImages = document.querySelectorAll('.draggable .product-img')
+    , productImages = document.querySelectorAll('.product-img')
     , draggable = new Draggable;
 
   if (newShelf) {
@@ -49,11 +49,24 @@ document.addEventListener('turbolinks:load', function () {
     });
   }
 
+  function visitProductPage(event) {
+    console.log(event.type)
+    let url = event.target.parentElement.getAttribute('data-href');
+    if (typeof Turbolinks === 'object') {
+      Turbolinks.visit(url)
+    } else {
+      window.location = url
+    }
+  }
+
   productImages.forEach(function (element) {
-    let handler = new draggable.TouchHandler;
-    element.addEventListener('touchstart', handler.touchStart, {passive: true});
-    element.addEventListener('touchend', handler.touchEnd, {passive: true});
-    element.addEventListener('touchcancel', handler.touchCancel);
+    element.addEventListener('click', visitProductPage);
+    if (element.classList.contains('draggable')) {
+      let handler = new draggable.TouchHandler;
+      element.addEventListener('touchstart', handler.touchStart, { passive: true });
+      element.addEventListener('touchend', handler.touchEnd, { passive: true });
+      element.addEventListener('touchcancel', handler.touchCancel);
+    }
   });
 
   document.addEventListener('scroll', function () {
