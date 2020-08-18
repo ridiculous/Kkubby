@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActionController::InvalidAuthenticityToken do |_ex|
-    redirect_to root_url, alert: "Oops, the request could not be verified. Please try again."
+    redirect_to root_url, alert: "Request could not be verified. Please try again."
   end
 
   protected

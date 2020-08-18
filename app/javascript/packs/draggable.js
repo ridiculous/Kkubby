@@ -49,7 +49,22 @@ export function Draggable() {
       handler(list, currentItem, sibling);
       startX = null;
       startY = null;
-      // persist change to server
+      persistChange(list);
+    }
+
+    function persistChange(list) {
+      let xhr = new XMLHttpRequest();
+      let items = [];
+      list.querySelectorAll('li').forEach(function (li) {
+        items.push(li.id)
+      });
+      xhr.open('PUT', '/update_product_order', true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(JSON.stringify({
+        shelf_id: list.id,
+        products: items,
+        authenticity_token: document.head.querySelector('meta[name="csrf-token"]').content
+      }));
     }
 
     this.touchStart = function (event) {

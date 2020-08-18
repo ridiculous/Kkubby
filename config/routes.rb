@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   post 'login', to: 'sessions#create', as: 'process_login'
   get 'search', to: 'product_search#index', as: 'product_search'
+  put 'update_product_order', to: 'product_order#update', as: 'update_product_order'
   scope path: ':username', as: 'user' do
     resources :shelves do
       resources :products, controller: 'shelf_products'
