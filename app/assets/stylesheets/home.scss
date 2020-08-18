@@ -91,13 +91,6 @@
   max-width: 100%;
 }
 
-// simulate the clickable logo
-.home-link-box {
-  width: 270px;
-  height: 80px;
-  float: left;
-}
-
 #close-alert {
   height: 26px;
   font-size: 14px;
@@ -172,27 +165,26 @@ table.shelves {
 }
 
 .top-bar-username {
-  position: absolute;
-  left: 119px;
-  top: 14px;
   font-size: 18px;
   text-transform: capitalize;
-  font-family: $standard-font;
+  padding-left: 2px;
 }
 
 .top-bar-content {
-  height: 80px;
-  background: image-url('logo.svg') left no-repeat;
+  a:active {
+    text-shadow: none !important;
+
+    img {
+      filter: none;
+    }
+  }
 
   .hamburger {
     float: right;
-    // padding-top: 10px;
-    border-radius: 50%;
 
     img {
-      height: 50px;
-      border-radius: 50%;
-      border: 1px solid #8C494E;
+      filter: drop-shadow(0px 2px 3px #8C494E);
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
 
     div {
@@ -252,6 +244,10 @@ table.shelves {
 
 .fr {
   float: right;
+}
+
+.clear {
+  clear: both;
 }
 
 .x-small {

@@ -12,18 +12,20 @@
 </head>
 <body>
 <div class="top-bar">
-  <% if @user %>
-    <div class="top-bar-username"><%= @user.username %>'s</div>
-  <% end %>
   <div class="top-bar-content">
-    <%= link_to home_path do %>
-      <div class="home-link-box"></div>
+    <%= link_to home_path, class: 'bold-link', ontouchstart: '' do %>
+      <div class="fl">
+        <% if @user %>
+          <div class="top-bar-username"><%= @user.username %>'s</div>
+        <% end %>
+        <h1>Kkubby</h1>
+      </div>
     <% end %>
     <div class="hamburger">
       <% if current_user %>
-        <%= link_to image_tag('young-executive-woman-profile-icon.jpg', class: 'icon-shade', height: 50, width: 40), logout_path, class: '' %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, ontouchstart: ''), logout_path, class: '', ontouchstart: '' %>
       <% else %>
-        <%= link_to image_tag('blacknwhite-exec-woman-icon.jpg', height: 50, width: 40), login_path, class: '' %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, ontouchstart: 'function(){}'), login_path, class: '', ontouchstart: 'function(){}' %>
       <% end %>
     </div>
     <!--    Smashed on smaller iphone, disable for now-->
@@ -32,7 +34,9 @@
     <!--      <div></div>-->
     <!--      <div></div>-->
     <!--    </div>-->
+
   </div>
+  <div class="clear"></div>
 </div>
 <%= flash_message_helper %>
 <div class="page-body" id="page-body"><%= yield %></div>
