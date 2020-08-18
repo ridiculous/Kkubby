@@ -63,9 +63,16 @@ document.addEventListener('turbolinks:load', function () {
     element.addEventListener('click', visitProductPage);
     if (element.classList.contains('draggable')) {
       let handler = new draggable.TouchHandler;
+      // Mobile
       element.addEventListener('touchstart', handler.touchStart, { passive: true });
       element.addEventListener('touchend', handler.touchEnd, { passive: true });
       element.addEventListener('touchcancel', handler.touchCancel);
+      // Desktop
+      element.addEventListener('mousedown', handler.mouseDown);
+      // Disable default browser behavior
+      element.ondragstart = function() {
+        return false;
+      };
     }
   });
 
