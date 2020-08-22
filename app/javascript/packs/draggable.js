@@ -104,8 +104,8 @@ export function Draggable() {
       event.preventDefault();
       log(event.type);
       window.moveTimer = setTimeout(function () {
-        startX = startX ? startX : event.targetTouches[0].clientX;
-        startY = startY ? startY : event.targetTouches[0].clientY;
+        startX = event.targetTouches[0].clientX;
+        startY = event.targetTouches[0].clientY;
         currentTarget = event.targetTouches[0].target;
         initSiblings(event.targetTouches[0]);
         currentTarget.style.zIndex = (window.zIndex++).toString();
@@ -160,8 +160,8 @@ export function Draggable() {
     this.mouseDown = function (event) {
       log(event.type);
       currentTarget = event.target;
-      startX = startX ? startX : event.clientX;
-      startY = startY ? startY : event.clientY;
+      startX = event.clientX;
+      startY = event.clientY;
       initSiblings(event);
       currentTarget.style.zIndex = (window.zIndex++).toString();
       currentTarget.classList.add('icon-shade');
