@@ -36,7 +36,7 @@ class SokoGlam
     page.css(".products .product-grid-item.mix").each do |element|
       product = Product.new(catalog_id: @catalog.id, product_type: type, category: cat, sourced_from: page.uri.to_s)
       product.published_at = element.attr('data-published-date')
-      product.image_url = element.css('.product__image a > img').first.attr('data-srcset')
+      product.image_url = element.css('.product__image img.responsive-image__image').first.attr('data-src').sub('{width}', '900')
       product.name = element.attr('data-name')
       product.brand = element.css('.product__vendor').first.text
       product.raw_price = element.css('.ProductPrice').first.text
