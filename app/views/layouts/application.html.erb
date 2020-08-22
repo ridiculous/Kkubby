@@ -13,7 +13,7 @@
 <body>
 <div class="top-bar">
   <div class="top-bar-content">
-    <%= link_to home_path, class: 'bold-link', ontouchstart: '' do %>
+    <%= link_to home_path, class: 'bold-link' do %>
       <div class="fl">
         <% if @user %>
           <div class="top-bar-username"><%= @user.username %>'s</div>
@@ -23,9 +23,9 @@
     <% end %>
     <div class="hamburger">
       <% if current_user %>
-        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, ontouchstart: ''), logout_path, class: '', ontouchstart: '' %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50), logout_path, class: '' %>
       <% else %>
-        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, ontouchstart: 'function(){}'), login_path, class: '', ontouchstart: 'function(){}' %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50), login_path, class: '' %>
       <% end %>
     </div>
   </div>

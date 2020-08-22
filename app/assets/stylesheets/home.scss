@@ -113,13 +113,14 @@ table.shelves {
     position: relative;
 
     .add-product {
-      font-size: 25px;
+      font-size: 32px;
+      line-height: 36px;
       border: none;
       position: absolute;
       top: -17px;
       right: -17px;
       text-decoration: none;
-      padding: 0 9px 1px 10px;
+      padding: 0 6px 1px 7px;
       z-index: 100;
     }
 

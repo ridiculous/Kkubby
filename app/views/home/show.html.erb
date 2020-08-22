@@ -15,7 +15,7 @@
             <% end %>
           <% end %>
           <% if can_edit? %>
-            <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name.split(/\b/).first.singularize), class: 'add-product btn round' %>
+            <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name), class: 'add-product btn round' %>
           <% end %>
         </td>
       </tr>
