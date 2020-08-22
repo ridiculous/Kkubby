@@ -13,7 +13,11 @@ export function Draggable() {
       if (logging) console.log(msg)
     }
 
-    function nearbyProducts(touchEvent, offsetX, offsetY) {
+    function eligibleProduct(el) {
+      return el && el.classList.contains('product-img') && currentTarget.id !== el.id && currentTarget.parentElement.parentElement === el.parentElement.parentElement
+    }
+
+    function nearbyProducts(touchEvent, offsetX, offsetY, highlight) {
       let imageOffsetLeft = offsetX + currentTarget.offsetLeft + currentTarget.offsetParent.offsetLeft + currentTarget.offsetParent.offsetParent.offsetLeft;
       let imageOffsetRight = imageOffsetLeft + currentTarget.offsetWidth;
       let pageY = touchEvent.clientY + offsetY;
@@ -21,25 +25,22 @@ export function Draggable() {
       let element = document.elementFromPoint(imageOffsetRight + padding, pageY);
       let leftElement = document.elementFromPoint(imageOffsetLeft - padding, pageY);
       let result = { left: null, right: null };
-      let eligibleProduct = function (el) {
-        return el && el.classList.contains('product-img') && currentTarget.id !== el.id && currentTarget.parentElement.parentElement === el.parentElement.parentElement
-      };
       currentTarget.parentElement.parentElement.querySelectorAll('.product-img').forEach(function (element) {
         element.classList.remove('nearby-target')
       });
       if (eligibleProduct(element)) {
-        element.classList.add('nearby-target');
         result.right = element;
+        if (highlight) element.classList.add('nearby-target');
       }
       if (eligibleProduct(leftElement)) {
-        leftElement.classList.add('nearby-target');
-        result.left = leftElement
+        result.left = leftElement;
+        if (highlight) leftElement.classList.add('nearby-target');
       }
       return result;
     }
 
     function initSiblings(touchEvent) {
-      let images = nearbyProducts(touchEvent, 0, 0);
+      let images = nearbyProducts(touchEvent, 0, 0, false);
       siblings = {};
       newSiblings = {};
       Object.assign(siblings, images);
@@ -134,7 +135,7 @@ export function Draggable() {
       let curX = event.targetTouches[0].clientX - startX;
       let curY = event.targetTouches[0].clientY - startY;
       document.body.classList.remove('touch-start');
-      Object.assign(newSiblings, nearbyProducts(event.targetTouches[0], curX, curY));
+      Object.assign(newSiblings, nearbyProducts(event.targetTouches[0], curX, curY, true));
       document.body.classList.add('touch-start');
       event.targetTouches[0].target.style.transform = 'translate(' + curX + 'px, ' + curY + 'px)';
     };
@@ -153,7 +154,7 @@ export function Draggable() {
       log(event.type);
       let curX = event.clientX - startX;
       let curY = event.clientY - startY;
-      Object.assign(newSiblings, nearbyProducts(event, curX, curY));
+      Object.assign(newSiblings, nearbyProducts(event, curX, curY, true));
       currentTarget.style.transform = 'translate(' + curX + 'px, ' + curY + 'px)';
     };
 

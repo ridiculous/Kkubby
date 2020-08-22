@@ -50,7 +50,6 @@ document.addEventListener('turbolinks:load', function () {
   }
 
   function visitProductPage(event) {
-    console.log(event.type)
     let url = event.target.parentElement.getAttribute('data-href');
     if (typeof Turbolinks === 'object') {
       Turbolinks.visit(url)
