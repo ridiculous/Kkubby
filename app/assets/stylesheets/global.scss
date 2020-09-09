@@ -17,14 +17,26 @@ body {
   background: linear-gradient(to right, $body-color, $body-color-light);
 }
 
-p, ol, ul, td, span, input, textarea {
+td, span, input, textarea {
   font-family: $standard-font;
   font-size: 16px;
   line-height: 1.6;
 }
 
-ul li {
-  list-style: none;
+p, ul, ol {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+ul {
+  li {
+    list-style: none;
+  }
+  &.bullet {
+    li {
+      list-style: decimal;
+    }
+  }
 }
 
 h1, h2, h3, h4, h5, h6, li {

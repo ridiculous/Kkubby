@@ -24,9 +24,9 @@
     <% end %>
     <div class="hamburger">
       <% if current_user %>
-        <%= link_to image_tag('white-panda.svg', height: 50, width: 50), logout_path, class: '' %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, class: 'signed-in'), logout_path %>
       <% else %>
-        <%= link_to image_tag('white-panda.svg', height: 50, width: 50), login_path, class: '' %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50), login_path %>
       <% end %>
     </div>
   </div>
@@ -37,8 +37,9 @@
 <div class="footer">
   <div class="divider"></div>
   <p>Kkubby Inc &copy; 2020</p>
+  <p><%= link_to "About Us", root_path, class: 'bold-link' %></p>
   <p>Contact us <%= link_to "@mykkubby", "https://twitter.com/mykkubby", target: '_blank', class: 'bold-link' %></p>
-  <p class="code-text">v<%= Rails.application.config.version %></p>
+  <p class="code-text small">v<%= Rails.application.config.version %></p>
 </div>
 </body>
 </html>

@@ -1,11 +1,23 @@
 <div class="page-content">
-  <p class="large">
-    Welcome to Kkubby! A place to organize your K-Beauty products and share them with your friends.
+  <p class="text-header">
+    Organize and share your K-beauty routine
   </p>
-  <p class="large">
-    Organize your current products on our preset shelves (or customize them by adding or renaming your shelves).
+  <p>
+    Organize your current products on our preset shelves (or customize them).
     Save products to your shelf, so you can add notes or mark it as a wishlist item.
     Easily share your routine with friends using your Kkubby link.
   </p>
-  <p class="large">Feel free to signup and try it out!</p>
+  <!--    <p class="large">Feel free to signup and try it out!</p>-->
+  <p class="text-header">
+    We have a 7-step routine
+  </p>
+  <p>
+    We start you off with 7 shelves, each representing one step of your routine
+  </p>
+  <ol>
+    <% Shelf::DEFAULTS.each do |name| %>
+      <%= content_tag(:li, name) %>
+    <% end %>
+  </ol>
+
 </div>

@@ -125,6 +125,7 @@ table.shelves {
     }
 
     .shelf-name {
+      color: #F7F7F7;
       position: relative;
       top: -17px;
       margin-bottom: -15px; // offset for padding
@@ -184,8 +185,10 @@ table.shelves {
     float: right;
 
     img {
-      filter: drop-shadow(0px 2px 3px #8C494E);
-      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      &.signed-in {
+        filter: drop-shadow(0px 2px 3px #8C494E);
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
     }
 
     div {
@@ -298,6 +301,12 @@ table.shelves {
 
 .bold {
   font-weight: bold;
+}
+
+.text-header {
+  font-size: 32px;
+  line-height: 35px;
+  color: $section-color;
 }
 
 .noselect {

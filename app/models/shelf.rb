@@ -6,13 +6,26 @@ class Shelf < ApplicationRecord
   validates :name, uniqueness: { scope: :user_id }
   before_validation :default_order_index
 
+  DEFAULTS = [
+      'Oil Cleansers',
+      'Water Cleansers',
+      'Toners',
+      'Essences',
+      'Masks',
+      'Serums / Ampoules',
+      'Moisturizers',
+  ].freeze
+
   def self.create_defaults(user)
-    user.shelves.create! name: 'Cleansers', order_index: 5
-    user.shelves.create! name: 'Toners', order_index: 10
-    user.shelves.create! name: 'Essences', order_index: 15
-    user.shelves.create! name: 'Masks', order_index: 20
-    user.shelves.create! name: 'Serums / Ampoules', order_index: 25
-    user.shelves.create! name: 'Moisturizers', order_index: 30
+    DEFAULTS.each_with_index do |name, n|
+      user.shelves.create! name: name, order_index: n += 5
+      user.shelves.create! name: name, order_index: n += 5
+      user.shelves.create! name: name, order_index: n += 5
+      user.shelves.create! name: name, order_index: n += 5
+      user.shelves.create! name: name, order_index: n += 5
+      user.shelves.create! name: name, order_index: n += 5
+      user.shelves.create! name: name, order_index: n += 5
+    end
   end
 
   # Reorder based on order of given list
