@@ -23,7 +23,7 @@
     <% if can_edit? %>
       <tr>
         <td class="add-new-shelf">
-          <div class="add-new-shelf-text"><p><a href="javascript:;" , class="bold-link">Add New Shelf</a></p></div>
+          <div class="add-new-shelf-text"><p><a href="javascript:;" class="bold-link">Add New Shelf</a></p></div>
           <div class="add-new-shelf-form form-content" style="display:none;">
             <%= form_for [@user, Shelf.new] do |f| %>
               <%= f.text_field :name, placeholder: "Enter a name", id: 'new_shelf_name' %>
