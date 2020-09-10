@@ -5,21 +5,19 @@
         <span><%= @shelf.name %></span>
         <%= form_for([@user, @shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
       </div>
-      <%= image_tag(@product.image_for_display, title: @product.name, class: 'original-product-img fl') %>
+      <p><%= @product.name %></p>
+      <p><strong><%= @product.brand %></strong></p>
+      <%= product_enlarged(@shelf_product) %>
       <div class="fl">
-        <p><strong><%= @product.brand %></strong></p>
-        <p><%= @product.name %></p>
-        <p>
-          <% if current_user %>
-            <%= link_to "Remove from shelf", user_shelf_product_path(@user, @shelf, id: @product), method: 'delete', class: 'btn' %>
-            <% if @shelf_product.wishlist? %>
-                <%= link_to "Remove from wishlist", user_shelf_product_path(@user, @shelf, id: @product, shelf_product: { wishlist: 0 }), method: 'put', class: 'btn' %>
-            <% else %>
-                <%= link_to "Add to wishlist", user_shelf_product_path(@user, @shelf, id: @product, shelf_product: { wishlist: 1 }), method: 'put', class: 'btn' %>
-            <% end %>
+        <% if current_user %>
+          <%= link_to "Remove", user_shelf_product_path(@user, @shelf, id: @product), method: 'delete', class: 'btn' %>
+          <% if @shelf_product.wishlist? %>
+            <%= link_to "Remove from wishlist", user_shelf_product_path(@user, @shelf, id: @product, shelf_product: { wishlist: 0 }), method: 'put', class: 'btn' %>
+          <% else %>
+            <%= link_to "Add to wishlist", user_shelf_product_path(@user, @shelf, id: @product, shelf_product: { wishlist: 1 }), method: 'put', class: 'btn' %>
           <% end %>
-          <%= link_to "Product website", @product.product_url, target: '_blank', class: 'btn' %>
-        </p>
+        <% end %>
+        <%= link_to "Product website", @product.product_url, target: '_blank', class: 'btn' %>
         <% if current_user %>
           <div class="form-content">
             <%= form_for @shelf_product, url: user_shelf_product_path(@user, @shelf, id: @product), method: 'patch' do |f| %>
@@ -29,9 +27,7 @@
             <% end %>
           </div>
         <% end %>
-        <p class="small">
-          Sourced from the <%= link_to @product.catalog.name, @product.sourced_from, target: '_blank', class: 'bold-link' %> catalog
-        </p>
+        <p class="small">Sourced from the <%= link_to @product.catalog.name, @product.sourced_from, target: '_blank', class: 'bold-link' %> catalog</p>
       </div>
     </td>
   </tr>
