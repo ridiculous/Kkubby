@@ -16,7 +16,7 @@
   <div class="top-bar-content">
     <%= link_to home_path, class: 'bold-link' do %>
       <div class="fl">
-        <% if @user %>
+        <% if @user&.persisted? %>
           <div class="top-bar-username"><%= @user.username %>'s</div>
         <% end %>
         <h1>Kkubby</h1>
@@ -37,7 +37,7 @@
 <div class="footer">
   <div class="divider"></div>
   <p>Kkubby Inc &copy; 2020</p>
-  <p><%= link_to "About Us", root_path, class: 'bold-link' %></p>
+  <p><%= link_to "About Us", root_path, class: 'bold-link' %> | <%= link_to 'Signup', signup_path, class: 'bold-link' %></p>
   <p>Contact us <%= link_to "@mykkubby", "https://twitter.com/mykkubby", target: '_blank', class: 'bold-link' %></p>
   <p class="code-text medium">v<%= Rails.application.config.version %></p>
 </div>

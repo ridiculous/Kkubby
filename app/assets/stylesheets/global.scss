@@ -43,10 +43,6 @@ h1, h2, h3, h4, h5, h6, li {
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, h5 {
-  //letter-spacing: 1px;
-}
-
 h1 {
   font-size: 40px;
   line-height: 45px;
@@ -54,20 +50,11 @@ h1 {
   padding-top: 0;
 }
 
-h2 {
-  line-height: 25px;
-}
-
-h3,
-h4,
-h5 {
-  font-size: 18px;
-  margin: 10px 0;
-  line-height: 20px;
-}
-
-h5 {
-  margin: 25px 0;
+h3 {
+  font-size: 32px;
+  line-height: 35px;
+  font-weight: normal;
+  color: $section-color;
 }
 
 textarea,
@@ -90,20 +77,33 @@ input[type=text] {
   vertical-align: middle;
 }
 
-input[type=email]:invalid {
-  border: 1px solid $red;
-  outline: none;
-}
-
 input[type=text],
 input[type=number] {
   vertical-align: middle;
 }
 
+input[type=email],
 input[type=number] {
   &:invalid {
-    border: 1px solid $red;
+    border-bottom: 1px solid rgb(247, 87, 142);
     outline: none;
+  }
+}
+
+.form-content {
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  textarea {
+    margin-right: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  textarea {
+    height: 300px;
+    resize: none;
+    overflow: auto;
   }
 }
 

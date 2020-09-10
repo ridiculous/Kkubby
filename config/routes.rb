@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       resources :products, controller: 'shelf_products'
     end
   end
+  get 'signup', to: 'users#new'
+  resources :users, only: :create
   get '/:username', to: 'home#show', as: 'user_home'
   root 'home#index'
 end

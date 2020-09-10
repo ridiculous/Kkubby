@@ -1,23 +1,23 @@
 <div class="page-content">
-  <p class="text-header">Organize your K-beauty routine</p>
+  <h3>Organize Your K-Beauty Routine</h3>
   <p>
     Organize your current products on our preset shelves (or customize them).
     Save products to your shelf, so you can add notes or mark it as a wishlist item.
     Easily share your routine with friends using your Kkubby link.
   </p>
   <!--    <p class="large">Feel free to signup and try it out!</p>-->
-  <p class="text-header">We have a 7-step routine</p>
+  <h3>7-Step Routine</h3>
   <p>
-    We start you off with 7 shelves, each representing one step of your routine
+    We start you off with 7 shelves, each representing a step in your routine
   </p>
   <ol>
     <% Shelf::DEFAULTS.each do |name| %>
       <%= content_tag(:li, name) %>
     <% end %>
   </ol>
-  <p> These are just what you start out with, and can be customized to fit your routine.</p>
-  <p class="text-header">Share with friends</p>
+  <p>Steps can be added, renamed, and rearranged to fit your routine.</p>
+  <h3>Share with Friends</h3>
   <p>Kkubbies are public by default, and accessible via your own URL, making it easy to share your routine with friends!</p>
-  <p class="text-header">Create an account</p>
-  <p><%= link_to 'Sign up', '#' %> to get started. It's free to create an account. Try it out!</p>
+  <h3>Create an Account</h3>
+  <p>It's free to try it out. <%= link_to 'Create an account', signup_path %> to get started.</p>
 </div>

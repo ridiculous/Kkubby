@@ -7,24 +7,18 @@ class Shelf < ApplicationRecord
   before_validation :default_order_index
 
   DEFAULTS = [
-      'Oil Cleansers',
-      'Water Cleansers',
-      'Toners',
-      'Essences',
-      'Masks',
-      'Serums / Ampoules',
-      'Moisturizers',
+    'Oil Cleansers',
+    'Water Cleansers',
+    'Toners',
+    'Essences',
+    'Masks',
+    'Serums / Ampoules',
+    'Moisturizers',
   ].freeze
 
   def self.create_defaults(user)
     DEFAULTS.each_with_index do |name, n|
-      user.shelves.create! name: name, order_index: n += 5
-      user.shelves.create! name: name, order_index: n += 5
-      user.shelves.create! name: name, order_index: n += 5
-      user.shelves.create! name: name, order_index: n += 5
-      user.shelves.create! name: name, order_index: n += 5
-      user.shelves.create! name: name, order_index: n += 5
-      user.shelves.create! name: name, order_index: n += 5
+      user.shelves.create! name: name, order_index: (n + 1) * 5
     end
   end
 

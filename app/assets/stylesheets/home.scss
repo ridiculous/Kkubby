@@ -5,6 +5,10 @@
 
 .page-content {
   padding: 20px;
+
+  a {
+    @extend .bold-link;
+  }
 }
 
 .box {
@@ -26,22 +30,6 @@
 
   img {
     pointer-events: none;
-  }
-}
-
-.form-content {
-  input[type=text],
-  input[type=password],
-  textarea {
-    margin-right: 5px;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-
-  textarea {
-    height: 300px;
-    resize: none;
-    overflow: auto;
   }
 }
 
@@ -301,12 +289,6 @@ table.shelves {
 
 .bold {
   font-weight: bold;
-}
-
-.text-header {
-  font-size: 32px;
-  line-height: 35px;
-  color: $section-color;
 }
 
 .noselect {

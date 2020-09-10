@@ -1,0 +1,31 @@
+<div class="page-content">
+  <div class="login-form form-content">
+    <%= form_for(@user) do |f| %>
+      <div>
+        <%= f.label(:email, 'Email (optional)', class: 'medium-major') %>
+        <div>
+          <%= f.email_field(:email) %>
+        </div>
+      </div>
+      <div>
+        <%= f.label(:username, 'Pick a username (letters and numbers only)', class: 'medium-major') %>
+        <div>
+          <%= f.text_field(:username) %>
+        </div>
+      </div>
+      <div>
+        <%= f.label(:password, class: 'medium-major') %>
+        <div>
+          <%= f.password_field(:password) %>
+        </div>
+      </div>
+      <div>
+        <%= f.submit('Signup', class: 'btn wide', name: '') %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  document.getElementById('user_email').focus();
+</script>
