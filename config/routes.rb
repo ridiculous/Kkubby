@@ -11,13 +11,13 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create', as: 'process_login'
   get 'search', to: 'product_search#index', as: 'product_search'
   put 'update_product_order', to: 'product_order#update', as: 'update_product_order'
-  scope path: ':username', as: 'user' do
+  scope path: '@:username', as: 'user' do
     resources :shelves do
       resources :products, controller: 'shelf_products'
     end
   end
+  get '/@:username', to: 'home#show', as: 'user_home'
   get 'signup', to: 'users#new'
   resources :users, only: :create
-  get '/:username', to: 'home#show', as: 'user_home'
   root 'home#index'
 end

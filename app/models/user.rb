@@ -8,7 +8,6 @@ class User < ApplicationRecord
   validates :username,
             presence: true,
             uniqueness: { case_sensitive: false },
-            exclusion: { in: %w[login signin logout search update_product_order shelves products users admin], message: "has already been taken" },
             format: { with: /\A\w+\z/ }
   before_validation :squeeze_username
   after_create ->(user) { Shelf.create_defaults(user) }
