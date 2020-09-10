@@ -8,9 +8,7 @@
       <%= image_tag(@product.image_for_display, title: @product.name, class: 'original-product-img fl') %>
       <div class="fl">
         <p><strong><%= @product.brand %></strong></p>
-        <p>
-          <%= @product.name %>
-        </p>
+        <p><%= @product.name %></p>
         <p>
           <% if current_user %>
             <%= link_to "Remove from shelf", user_shelf_product_path(@user, @shelf, id: @product), method: 'delete', class: 'btn' %>
