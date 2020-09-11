@@ -32,16 +32,16 @@ export function Draggable() {
       currentTarget.parentElement.parentElement.querySelectorAll('.product-img').forEach(function (element) {
         element.classList.remove('nearby-target')
       });
-      let rightElement = grab(document.elementFromPoint(imageOffsetRight + padding, pageY)) ||
-        grab(document.elementFromPoint(imageOffsetRight + padding, pageY - (currentTarget.offsetHeight))) ||
-        grab(document.elementFromPoint(imageOffsetRight + padding, pageY + (currentTarget.offsetHeight)));
+      let rightElement = grab(document.elementFromPoint(imageOffsetRight + padding, pageY));
+      // grab(document.elementFromPoint(imageOffsetRight + padding, pageY - (currentTarget.offsetHeight))) ||
+      // grab(document.elementFromPoint(imageOffsetRight + padding, pageY + (currentTarget.offsetHeight)));
       if (rightElement) {
         result.right = rightElement;
         if (highlight) rightElement.classList.add('nearby-target');
       }
-      let leftElement = grab(document.elementFromPoint(imageOffsetLeft - padding, pageY)) ||
-        grab(document.elementFromPoint(imageOffsetLeft + padding, pageY - (currentTarget.offsetHeight))) ||
-        grab(document.elementFromPoint(imageOffsetLeft + padding, pageY + (currentTarget.offsetHeight)));
+      let leftElement = grab(document.elementFromPoint(imageOffsetLeft - padding, pageY));
+      // grab(document.elementFromPoint(imageOffsetLeft + padding, pageY - (currentTarget.offsetHeight))) ||
+      // grab(document.elementFromPoint(imageOffsetLeft + padding, pageY + (currentTarget.offsetHeight)));
       if (leftElement) {
         result.left = leftElement;
         if (highlight) leftElement.classList.add('nearby-target');
