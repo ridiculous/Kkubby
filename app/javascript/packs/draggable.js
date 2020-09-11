@@ -13,6 +13,12 @@ export function Draggable() {
       if (logging) console.log(msg)
     }
 
+    function grab(element) {
+      if (eligibleProduct(element)) {
+        return element;
+      }
+    }
+
     function eligibleProduct(el) {
       return el && el.classList.contains('product-img') && currentTarget.id !== el.id && currentTarget.parentElement.parentElement === el.parentElement.parentElement
     }
@@ -22,16 +28,20 @@ export function Draggable() {
       let imageOffsetRight = imageOffsetLeft + currentTarget.offsetWidth;
       let pageY = touchEvent.clientY + offsetY;
       let padding = 10;
-      let element = document.elementFromPoint(imageOffsetRight + padding, pageY);
-      let leftElement = document.elementFromPoint(imageOffsetLeft - padding, pageY);
       let result = { left: null, right: null };
       currentTarget.parentElement.parentElement.querySelectorAll('.product-img').forEach(function (element) {
         element.classList.remove('nearby-target')
       });
-      if (eligibleProduct(element)) {
-        result.right = element;
-        if (highlight) element.classList.add('nearby-target');
+      let rightElement = grab(document.elementFromPoint(imageOffsetRight + padding, pageY)) ||
+        grab(document.elementFromPoint(imageOffsetRight + padding, pageY - (currentTarget.offsetHeight))) ||
+        grab(document.elementFromPoint(imageOffsetRight + padding, pageY + (currentTarget.offsetHeight)));
+      if (rightElement) {
+        result.right = rightElement;
+        if (highlight) rightElement.classList.add('nearby-target');
       }
+      let leftElement = grab(document.elementFromPoint(imageOffsetLeft - padding, pageY)) ||
+        grab(document.elementFromPoint(imageOffsetLeft + padding, pageY - (currentTarget.offsetHeight))) ||
+        grab(document.elementFromPoint(imageOffsetLeft + padding, pageY + (currentTarget.offsetHeight)));
       if (eligibleProduct(leftElement)) {
         result.left = leftElement;
         if (highlight) leftElement.classList.add('nearby-target');
@@ -160,6 +170,7 @@ export function Draggable() {
 
     this.mouseDown = function (event) {
       log(event.type);
+      if (event.which === 3) return true;
       currentTarget = event.target;
       startX = event.clientX;
       startY = event.clientY;
