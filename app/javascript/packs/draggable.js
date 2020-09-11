@@ -7,7 +7,7 @@ export function Draggable() {
     let startX, startY, currentTarget;
     let siblings = {};
     let newSiblings = {};
-    let logging = true;
+    let logging = false;
 
     function log(msg) {
       if (logging) console.log(msg)
@@ -42,7 +42,7 @@ export function Draggable() {
       let leftElement = grab(document.elementFromPoint(imageOffsetLeft - padding, pageY)) ||
         grab(document.elementFromPoint(imageOffsetLeft + padding, pageY - (currentTarget.offsetHeight))) ||
         grab(document.elementFromPoint(imageOffsetLeft + padding, pageY + (currentTarget.offsetHeight)));
-      if (eligibleProduct(leftElement)) {
+      if (leftElement) {
         result.left = leftElement;
         if (highlight) leftElement.classList.add('nearby-target');
       }
@@ -70,7 +70,9 @@ export function Draggable() {
 
     function updateNodePosition() {
       if (newSiblings.left) {
+        log("left sibling found");
         if (!siblings.left || newSiblings.left.id !== siblings.left.id) {
+          log("Rearranging image");
           insertTarget(newSiblings.left, function (list, item, sibling) {
             if (sibling.nextElementSibling) {
               list.insertBefore(item, sibling.nextElementSibling);
@@ -78,15 +80,21 @@ export function Draggable() {
               list.appendChild(item);
             }
           });
+        } else {
+          // debugger;
         }
       } else if (newSiblings.right) {
+        log("right sibling found");
         if (!siblings.right || newSiblings.right.id !== siblings.right.id) {
           insertTarget(newSiblings.right, function (list, item, sibling) {
             if (sibling) {
+              log("Rearranging image");
               list.insertBefore(item, sibling);
             }
           });
         }
+      } else {
+        log("No siblings to update");
       }
     }
 
@@ -131,7 +139,9 @@ export function Draggable() {
       log(event.type);
       clearTimeout(window.moveTimer);
       document.body.classList.remove('touch-start');
-      if (!currentTarget) return true;
+      if (!currentTarget) {
+        return log("No current target");
+      }
       currentTarget.classList.remove('icon-shade');
       currentTarget.removeEventListener('touchmove', self.touchMove);
       currentTarget.style.transform = '';
