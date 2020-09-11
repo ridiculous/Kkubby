@@ -24,11 +24,9 @@ class Shelf < ApplicationRecord
 
   # Reorder based on order of given list
   def reorder_products(ids)
-    transaction do
-      products = shelf_products.index_by(&:id)
-      ids.map(&:to_i).each_with_index do |id, index|
-        products[id].update_column(:order_index, index)
-      end
+    products = shelf_products.index_by(&:id)
+    ids.map(&:to_i).each_with_index do |id, index|
+      products[id].update_column(:order_index, index)
     end
   end
 
