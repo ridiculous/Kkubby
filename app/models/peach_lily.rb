@@ -1,68 +1,49 @@
 class PeachLily
-  def initialize
+  def initialize(debug: false)
     @catalog = Catalog.where(name: 'Peach & Lily').first_or_create!
     @visited = {}
     @url = "https://www.peachandlily.com".freeze
-  end
-
-  def test(path)
-    agent = Mechanize.new
-    page = agent.get(@url)
+    @debug = debug
   end
 
   def call
     Mechanize.start do |agent|
-      create_products(agent, 'Double-Cleanse', 'cleansers')
-      create_products(agent, 'Toners', 'toners')
-      create_products(agent, 'Treatments', 'essence-serum')
-      create_products(agent, 'Treatments', 'serums-ampoules', 'Serum / Ampoule')
-      create_products(agent, 'Facial Oils', 'facial-oils')
-      create_products(agent, 'Eye Care', 'eye-creams', 'Eye Cream')
-      create_products(agent, 'Moisturizers', 'moisturizer', 'Facial Moisturizer')
-      create_products(agent, 'Moisturizers', 'facial-mists', 'Facial Mist')
-      create_products(agent, 'Exfoliators', 'exfoliate', 'Exfoliators')
-      create_products(agent, 'Masks', 'sleeping-masks')
-      create_products(agent, 'Masks', 'masks')
-      create_products(agent, 'Masks', 'sheet-masks')
-      create_products(agent, 'Sun Protection', 'sunscreen')
-      create_products(agent, 'Hair & Beauty', 'body-care')
-      # Look for any stragglers we missed
-      scrape_all_other_products(agent)
+      create_products(agent, type: 'Oil Cleansers')
+      create_products(agent, type: 'Water Cleansers')
+      create_products(agent, type: 'Toners')
+      create_products(agent, type: 'Essences')
+      create_products(agent, type: 'Serums / Ampoules', key: 'serum-ampoules', category: 'Serums / Ampoules')
+      create_products(agent, type: 'Oils')
+      create_products(agent, type: 'Moisturizers')
+      create_products(agent, type: 'Eye Treatments', category: 'Eye Cream')
+      create_products(agent, type: 'Sun Protection', key: 'sunscreens')
+      create_products(agent, type: 'Spot Treatments')
+      create_products(agent, type: 'Exfoliators')
+      create_products(agent, type: 'Masks')
+      create_products(agent, type: 'Kits')
     end
     true
   end
 
-  def scrape_all_other_products(agent)
-    page = agent.get(@url)
-    page.css('.main-nav__list .sub-nav__link').each do |link|
-      if link.attr('href').start_with?('/collections')
-        create_products(agent, link.text.strip.titleize, link.attr('href').split('/').last)
-      elsif link.attr('href').start_with?('/products')
-        # Only a single product to scrape from the product detail page
-        product_url = "https://www.peachandlily.com#{link.attr('href')}"
-        page = load_page(agent, product_url)
-        next unless page
-        element = page.css('#productinfo')
-        product = Product.new(catalog_id: @catalog.id, sourced_from: element.document.url, product_url: product_url)
-        product.image_url = element.css('.main .image > img').attr('src').to_s
-        product.name = element.css('#product-name').text.strip
-        product.brand = element.css('#product-vendor').text.strip.titleize
-        product.raw_price = element.css('#price').text.strip
-        product.save || puts(product.errors.full_messages.join(', '))
-      end
-    end
-  end
-
-  def create_products(agent, type, key, category = key)
+  def create_products(agent, type:, key: nil, category: key)
     cat = category && category.underscore.humanize.titlecase
+    key ||= type.downcase.split.join('-')
     load_paginated_products(agent, key).each do |element|
-      product = Product.new(catalog_id: @catalog.id, product_type: type, category: cat, sourced_from: element.document.url)
-      product.image_url = element.css('.imgcont a > img').attr('src').to_s
-      product.name = element.css('.product-title').text.strip
-      product.brand = element.css('.product-vendor').text.strip.titleize.presence || type
-      product.raw_price = element.css('.price .product-price').text.strip
-      product.product_url = "https://www.peachandlily.com#{element.css('a.image-inner-wrap').attr('href')}"
-      product.save || puts(product.errors.full_messages.join(', '))
+      begin
+        product = Product.new(catalog_id: @catalog.id, product_type: type, category: cat, sourced_from: element.document.url)
+        product.image_url = element.css('.image-container img').first.attr('data-src').sub('{width}', '900')
+        product.name = element.css('.product-card--title').text.strip
+        product.brand = element.css('.product-card-details > span').first.text.strip.titleize.presence || type
+        product.raw_price = element.css('.price').text.strip.gsub(/ /, '')
+        product.product_url = "https://www.peachandlily.com#{element.css('.product-card-image a').first.attr('href')}"
+        product.save || puts(product.errors.full_messages.join(', '))
+      rescue => e
+        if @debug
+          debugger
+        else
+          raise e
+        end
+      end
     end
   end
 
@@ -72,8 +53,12 @@ class PeachLily
     loop do
       url = "https://www.peachandlily.com/collections/#{key}?page=#{page_num}"
       page = load_page(agent, url)
+      # debugger if @debug
       break unless page
-      items = page.css(".productlist .product")
+      items = page.css("#collection-container .product-card")
+      if page_num == 1 && items.blank?
+        puts "ERROR: No results found! Expected results"
+      end
       break if items.blank?
       products.concat(items)
       page_num += 1
@@ -95,5 +80,9 @@ class PeachLily
         puts "Skipping"
       end
     end
+  end
+
+  def test(path)
+    Mechanize.new.get(@url)
   end
 end

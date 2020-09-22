@@ -12,7 +12,7 @@ class SokoGlam
       create_products(agent, 'Exfoliators', 'chemical-exfoliators')
       create_products(agent, 'Toners', 'toner')
       create_products(agent, 'Treatments', 'essence')
-      create_products(agent, 'Treatments', 'serum-ampoule', 'Serum / Ampoule')
+      create_products(agent, 'Treatments', 'serum-ampoule', 'Serums / Ampoules')
       create_products(agent, 'Treatments', 'spot-treatment')
       create_products(agent, 'Masks', 'sheet-face-mask')
       create_products(agent, 'Masks', 'wash-off-mask')
