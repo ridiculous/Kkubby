@@ -25,7 +25,8 @@ class Product < ApplicationRecord
 
   def upload_image
     return if image.attached?
-    image.attach(filename: image_url.split('/').last.split('?').first, io: URI.open("https:#{image_url}"))
+    url = image_url.start_with?('http') ? image_url : "https:#{image_url}"
+    image.attach(filename: image_url.split('/').last.split('?').first, io: URI.open(url))
   end
 
   def image_for_display(size: nil)

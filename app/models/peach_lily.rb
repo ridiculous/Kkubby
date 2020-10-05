@@ -35,7 +35,7 @@ class PeachLily
         product.name = element.css('.product-card--title').text.strip
         product.brand = element.css('.product-card-details > span').first.text.strip.titleize.presence || type
         product.raw_price = element.css('.price').text.strip.gsub(/ /, '')
-        product.product_url = "https://www.peachandlily.com#{element.css('.product-card-image a').first.attr('href')}"
+        product.product_url = "#{@url}#{element.css('.product-card-image a').first.attr('href')}"
         product.save || puts(product.errors.full_messages.join(', '))
       rescue => e
         if @debug
@@ -51,7 +51,7 @@ class PeachLily
     products = []
     page_num = 1
     loop do
-      url = "https://www.peachandlily.com/collections/#{key}?page=#{page_num}"
+      url = "#{@url}/collections/#{key}?page=#{page_num}"
       page = load_page(agent, url)
       # debugger if @debug
       break unless page
