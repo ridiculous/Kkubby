@@ -2,12 +2,13 @@ export function Draggable() {
   window.zIndex = window.zIndex || 1000;
   window.moveTimer = window.moveTimer || 0;
 
-  this.TouchHandler = function () {
+  this.TouchHandler = function (debug) {
     let self = this;
     let startX, startY, currentTarget;
     let siblings = {};
     let newSiblings = {};
-    let logging = false;
+    let logging = !!debug;
+    self.moved = false;
 
     function log(msg) {
       if (logging) console.log(msg)
@@ -174,12 +175,14 @@ export function Draggable() {
       log(event.type);
       let curX = event.clientX - startX;
       let curY = event.clientY - startY;
+      self.moved = true;
       Object.assign(newSiblings, nearbyProducts(event, curX, curY, true));
       currentTarget.style.transform = 'translate(' + curX + 'px, ' + curY + 'px)';
     };
 
     this.mouseDown = function (event) {
       log(event.type);
+      self.moved = false;
       if (event.which === 3) return true;
       currentTarget = event.target;
       startX = event.clientX;

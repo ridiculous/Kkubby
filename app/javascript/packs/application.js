@@ -59,9 +59,8 @@ document.addEventListener('turbolinks:load', function () {
   }
 
   productImages.forEach(function (element) {
-    element.addEventListener('click', visitProductPage);
     if (element.classList.contains('draggable')) {
-      let handler = new draggable.TouchHandler;
+      let handler = new draggable.TouchHandler();
       // Mobile
       element.addEventListener('touchstart', handler.touchStart, { passive: true });
       element.addEventListener('touchend', handler.touchEnd, { passive: true });
@@ -69,9 +68,19 @@ document.addEventListener('turbolinks:load', function () {
       // Desktop
       element.addEventListener('mousedown', handler.mouseDown);
       // Disable default browser behavior
-      element.ondragstart = function() {
+      element.ondragstart = function () {
         return false;
       };
+      element.addEventListener('click', function (event) {
+        if (handler.moved) {
+          event.preventDefault();
+          return false;
+        } else {
+          visitProductPage(event);
+        }
+      });
+    } else {
+      element.addEventListener('click', visitProductPage);
     }
   });
 
