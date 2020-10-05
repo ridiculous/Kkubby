@@ -15,7 +15,7 @@ class PeachLily
       create_products(agent, type: 'Serums / Ampoules', key: 'serum-ampoules', category: 'Serums / Ampoules')
       create_products(agent, type: 'Oils')
       create_products(agent, type: 'Moisturizers')
-      create_products(agent, type: 'Eye Treatments', category: 'Eye Cream')
+      create_products(agent, type: 'Eye Care', category: 'Cream', key: 'eye-treatments')
       create_products(agent, type: 'Sun Protection', key: 'sunscreens')
       create_products(agent, type: 'Spot Treatments')
       create_products(agent, type: 'Exfoliators')
@@ -48,22 +48,13 @@ class PeachLily
   end
 
   def load_paginated_products(agent, key)
-    products = []
-    page_num = 1
-    loop do
-      url = "#{@url}/collections/#{key}?page=#{page_num}"
-      page = load_page(agent, url)
-      # debugger if @debug
-      break unless page
-      items = page.css("#collection-container .product-card")
-      if page_num == 1 && items.blank?
-        puts "ERROR: No results found! Expected results"
-      end
-      break if items.blank?
-      products.concat(items)
-      page_num += 1
+    url = "#{@url}/collections/#{key}"
+    page = load_page(agent, url)
+    items = page.css("#collection-container .product-card")
+    if items.blank?
+      raise "ERROR: No results found! Expected results"
     end
-    products
+    items
   end
 
   def load_page(agent, url)
@@ -72,7 +63,7 @@ class PeachLily
       false
     else
       @visited[url] = 1
-      puts "Loading ... #{url}"
+      puts "Collecting products from ... #{url}"
       begin
         agent.get(url)
       rescue Mechanize::ResponseCodeError => e

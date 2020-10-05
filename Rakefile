@@ -7,10 +7,10 @@ Rails.application.load_tasks
 
 task build_that_shit: :environment do
   time = Benchmark.realtime do
-    t = []
-    t << Thread.new { SokoGlam.new.call }
-    t << Thread.new { PeachLily.new.call }
-    t.map(&:join)
+    threads = [SokoGlam, PeachLily, SkinCeuticals].map do |scraper|
+      Thread.new { scraper.new.call }
+    end
+    threads.map(&:join)
   end
   puts "Done in #{time.round(4)}s"
 end

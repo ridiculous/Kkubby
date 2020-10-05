@@ -9,6 +9,23 @@ class SkinCeuticals
     Mechanize.start do |agent|
       agent.log = Rails.logger if @debug
       create_products(agent, key: 'skin-care/category/facial-cleansers', type: 'Cleanser')
+      create_products(agent, key: 'skin-care/category/antioxidants', type: 'Serums / Ampoules')
+      create_products(agent, key: 'skin-care/serums/hyaluronic-acid-serum', type: 'Serums / Ampoules')
+      create_products(agent, key: 'skin-care/serums/vitamin-c-serum', type: 'Serums / Ampoules')
+      create_products(agent, key: 'skin-care/serums/exfoliating-serum', type: 'Serums / Ampoules')
+      create_products(agent, key: 'skin-care/serums/hydrating-serum', type: 'Serums / Ampoules')
+      create_products(agent, key: 'skin-care/serums/oil-free-serum', type: 'Serums / Ampoules')
+      create_products(agent, key: 'skin-care/category/sunscreens', type: 'Sun Protection', category: 'Sunscreen')
+      create_products(agent, key: 'skin-care/category/facial-masks', type: 'Masks')
+      create_products(agent, key: 'skin-care/category/retinol-creams', type: 'Retinol Creams', category: 'Cream')
+      create_products(agent, key: 'skin-care/category/facial-toners', type: 'Toners')
+      create_products(agent, key: 'skin-care/category/moisturizers', type: 'Moisturizers', category: 'Facial Moisturizer')
+      create_products(agent, key: 'skin-care/category/facial-exfoliators', type: 'Exfoliators')
+      create_products(agent, key: 'skin-care/category/anti-aging-creams', type: 'Anti-Aging Creams', category: 'Cream')
+      create_products(agent, key: 'skin-care/category/night-creams', type: 'Night Creams', category: 'Cream')
+      create_products(agent, key: 'skin-care/category/acne-products', type: 'Acne Products', category: 'Acne')
+      create_products(agent, key: 'skin-care/category/eye-care', type: 'Eye Care', category: 'Cream')
+      create_products(agent, key: 'skin-care/category/body-care', type: 'Body Care', category: 'Cream')
     end
   end
 
@@ -23,7 +40,7 @@ class SkinCeuticals
         product.brand = @catalog.name
         product.raw_price = element.css('.product_details_wrapper .product_price').first.attr('data-pricevalue')
         product.product_url = "#{@url}#{name.attr('href').sub(/\?.+\z/, '')}"
-        product.save! || puts(product.errors.full_messages.join(', '))
+        product.save || puts(product.errors.full_messages.join(', '))
       rescue => e
         if @debug
           debugger
@@ -36,7 +53,7 @@ class SkinCeuticals
 
   def load_products(agent, key)
     url = "#{@url}/#{key}"
-    debugger if @debug
+    puts "Collecting products from ... #{url}"
     page = agent.get(url)
     items = page.css(".search_result_items .product_tile")
     if items.blank?

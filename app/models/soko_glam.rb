@@ -5,9 +5,9 @@ class SokoGlam
 
   def call
     Mechanize.start do |agent|
-      create_products(agent, 'Double-Cleanse', 'oil-cleansers')
-      create_products(agent, 'Double-Cleanse', 'water-based-cleansers')
-      create_products(agent, 'Double-Cleanse', 'makeup-remover-wipes')
+      create_products(agent, 'Oil Cleansers', 'oil-cleansers')
+      create_products(agent, 'Water Cleansers', 'water-based-cleansers')
+      create_products(agent, 'Cleanser', 'makeup-remover-wipes')
       create_products(agent, 'Exfoliators', 'physical-exfoliators')
       create_products(agent, 'Exfoliators', 'chemical-exfoliators')
       create_products(agent, 'Toners', 'toner')

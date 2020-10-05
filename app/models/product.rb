@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :catalog
   has_many :shelf_products, dependent: :destroy
   has_one_attached :image
+  before_validation :normalize_brand
   validates :brand, :image_url, presence: true
   validates :name, presence: true, uniqueness: { scope: :brand }
   before_create :set_price
@@ -26,7 +27,7 @@ class Product < ApplicationRecord
   def upload_image
     return if image.attached?
     url = image_url.start_with?('http') ? image_url : "https:#{image_url}"
-    image.attach(filename: image_url.split('/').last.split('?').first, io: URI.open(url))
+    image.attach(filename: image_url.split('/').last.split('?').first, io: URI.open(url.gsub(/\s/, '%20')))
   end
 
   def image_for_display(size: nil)
@@ -46,5 +47,9 @@ class Product < ApplicationRecord
       num_price = raw_price[/\d+\.?\d*/]
       self.price = Float(num_price) if num_price
     end
+  end
+
+  def normalize_brand
+    self.brand &&= brand.upcase
   end
 end
