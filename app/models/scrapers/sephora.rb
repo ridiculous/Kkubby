@@ -1,4 +1,22 @@
 class Scrapers::Sephora
+  RESOURCES = {
+    "shop/face-serum" => { type: 'Serums / Ampoules' },
+    "shop/acne-treatment-blemish-remover" => { type: 'Blemish Removers', category: 'Acne' },
+    "shop/night-cream" => { type: 'Night Creams', category: 'Cream' },
+    "shop/cleansing-oil-face-oil" => { type: 'Facial Oils', category: 'Oil' },
+    "shop/face-mist-face-spray" => { type: 'Facial Mists', category: 'Moisturizer' },
+    "shop/bb-cream-cc-cream" => { type: 'BB & CC Creams', category: 'Cream' },
+    "shop/face-wash-facial-cleanser" => { type: 'Cleansers' },
+    "shop/exfoliating-scrub-exfoliator" => { type: 'Exfoliators' },
+    "shop/makeup-remover-skincare" => { type: 'Makeup Removers', category: 'Makeup' },
+    "shop/face-wipes" => { type: 'Facial Wipes', category: 'Cleansers' },
+    "shop/facial-toner-skin-toner" => { type: 'Facial Toners', category: 'Toner' },
+    "shop/facial-treatment-masks" => { type: 'Face Masks', category: 'Mask' },
+    "shop/sheet-masks" => { type: 'Sheet Masks', category: 'Mask' },
+    "shop/eye-cream-dark-circles" => { type: 'Eye Care', category: 'Cream' },
+    "shop/eye-mask" => { type: 'Eye Care', category: 'Mask' }
+  }.freeze
+
   def initialize(debug: false)
     @catalog = Catalog.where(name: 'Sephora').first_or_create!
     @url = "https://www.sephora.com".freeze
@@ -6,51 +24,18 @@ class Scrapers::Sephora
     @debug = debug
   end
 
-  def call
-    @scraper.load_paginated_products("shop/face-serum") do |e, u|
-      create_product(e, type: 'Serums / Ampoules', uri: u)
-    end
-    @scraper.load_paginated_products("shop/acne-treatment-blemish-remover") do |e, u|
-      create_product(e, type: 'Blemish Removers', category: 'Acne', uri: u)
-    end
-    @scraper.load_paginated_products("shop/night-cream") do |e, u|
-      create_product(e, type: 'Night Creams', category: 'Cream', uri: u)
-    end
-    @scraper.load_paginated_products("shop/cleansing-oil-face-oil") do |e, u|
-      create_product(e, type: 'Facial Oils', category: 'Oil', uri: u)
-    end
-    @scraper.load_paginated_products("shop/face-mist-face-spray") do |e, u|
-      create_product(e, type: 'Facial Mists', category: 'Moisturizer', uri: u)
-    end
-    @scraper.load_paginated_products("shop/bb-cream-cc-cream") do |e, u|
-      create_product(e, type: 'BB & CC Creams', category: 'Cream', uri: u)
-    end
-    @scraper.load_paginated_products("shop/face-wash-facial-cleanser") do |e, u|
-      create_product(e, type: 'Cleansers', uri: u)
-    end
-    @scraper.load_paginated_products("shop/exfoliating-scrub-exfoliator") do |e, u|
-      create_product(e, type: 'Exfoliators', uri: u)
-    end
-    @scraper.load_paginated_products("shop/makeup-remover-skincare") do |e, u|
-      create_product(e, type: 'Makeup Removers', category: 'Makeup', uri: u)
-    end
-    @scraper.load_paginated_products("shop/face-wipes") do |e, u|
-      create_product(e, type: 'Facial Wipes', category: 'Cleansers', uri: u)
-    end
-    @scraper.load_paginated_products("shop/facial-toner-skin-toner") do |e, u|
-      create_product(e, type: 'Facial Toners', category: 'Toner', uri: u)
-    end
-    @scraper.load_paginated_products("shop/facial-treatment-masks") do |e, u|
-      create_product(e, type: 'Face Masks', category: 'Mask', uri: u)
-    end
-    @scraper.load_paginated_products("shop/sheet-masks") do |e, u|
-      create_product(e, type: 'Sheet Masks', category: 'Mask', uri: u)
-    end
-    @scraper.load_paginated_products("shop/eye-cream-dark-circles") do |e, u|
-      create_product(e, type: 'Eye Care', category: 'Cream', uri: u)
-    end
-    @scraper.load_paginated_products("shop/eye-mask") do |e, u|
-      create_product(e, type: 'Eye Care', category: 'Mask', uri: u)
+  def call(target_resource = nil)
+    RESOURCES.each do |resource, opts|
+      if target_resource
+        if target_resource == resource
+          target_resource = nil
+        else
+          next
+        end
+      end
+      @scraper.load_paginated_products(resource) do |e, u|
+        create_product(e, uri: u, **opts)
+      end
     end
   end
 

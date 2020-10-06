@@ -22,9 +22,10 @@ class Scrapers::Base
       end
       page += 1
     end
-    puts "Done!"
   ensure
+    puts "Shutting down session..."
     session.reset!
     session.quit
+    puts "Shutdown complete"
   end
 end
