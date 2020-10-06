@@ -1,6 +1,6 @@
 require 'capybara/apparition'
 # Initially added to scrape sephora website
-Capybara.register_driver(:phantom) { |app| Capybara::Apparition::Driver.new(app, js_errors: false, debug: false, browser_logger: nil, headless: true) }
+Capybara.register_driver(:phantom) { |app| Capybara::Apparition::Driver.new(app, js_errors: false, debug: false, browser_logger: nil, headless: true, browser_options: { 'no-sandbox' => nil, 'disable-web-security' => nil, 'disable-features' => 'VizDisplayCompositor' }) }
 Capybara.javascript_driver = :phantom
 Capybara.ignore_hidden_elements = false
 Capybara.default_max_wait_time = 10
