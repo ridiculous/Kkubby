@@ -31,7 +31,7 @@ class Scrapers::SokoGlam
   def create_products(agent, type, key, category = key)
     cat = category.underscore.humanize.titlecase
     url = "https://sokoglam.com/collections/#{key}"
-    puts "Collecting products from ... #{url}"
+    puts "Collecting products from... #{url}"
     page = agent.get(url)
     page.css(".products .product-grid-item.mix").each do |element|
       product = Product.new(catalog_id: @catalog.id, product_type: type, category: cat, sourced_from: page.uri.to_s)
@@ -49,7 +49,7 @@ class Scrapers::SokoGlam
     el = nil
     Mechanize.start do |agent|
       url = "https://sokoglam.com/collections/#{key}"
-      puts "Collecting products from ... #{url}"
+      puts "Collecting products from... #{url}"
       page = agent.get(url)
       el = page.css(".products .product-grid-item.mix").first
     end

@@ -14,7 +14,7 @@ class Scrapers::Base
       sleep 10
       products = session.all(product_elements)
       break if products.blank?
-      puts "Collecting products..."
+      puts "Collecting products from..."
       products.each_with_index do |element, i|
         if (i + 1) % 4 == 0
           session.scroll_to(element)

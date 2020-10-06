@@ -13,7 +13,7 @@ class Scrapers::PeachLily
       create_products(agent, type: 'Toners')
       create_products(agent, type: 'Essences')
       create_products(agent, type: 'Serums / Ampoules', key: 'serum-ampoules', category: 'Serums / Ampoules')
-      create_products(agent, type: 'Facial Oils', category: 'Oil')
+      create_products(agent, type: 'Facial Oils', category: 'Oil', key: 'oils')
       create_products(agent, type: 'Moisturizers')
       create_products(agent, type: 'Eye Care', category: 'Cream', key: 'eye-treatments')
       create_products(agent, type: 'Sun Protection', category: 'Sunscreen', key: 'sunscreens')
@@ -52,18 +52,18 @@ class Scrapers::PeachLily
     page = load_page(agent, url)
     items = page.css("#collection-container .product-card")
     if items.blank?
-      raise "ERROR: No results found! Expected results"
+      raise "ERROR: No results found! Expected results at... #{url}"
     end
     items
   end
 
   def load_page(agent, url)
     if @visited.key?(url)
-      puts "Already visited #{url} ... skipping"
+      puts "Already visited #{url}... skipping"
       false
     else
       @visited[url] = 1
-      puts "Collecting products from ... #{url}"
+      puts "Collecting products from... #{url}"
       begin
         agent.get(url)
       rescue Mechanize::ResponseCodeError => e
