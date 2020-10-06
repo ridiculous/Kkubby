@@ -1,20 +1,18 @@
 class Scrapers::Base
-  attr_accessor :session
-
-  def initialize
-    @session = Capybara::Session.new(Capybara.javascript_driver, Rails.application)
+  def initialize(domain)
+    @domain = domain
   end
 
-  def load_paginated_products(url, page: 1, key: 'currentPage', product_elements: '.css-12egk0t')
+  def load_paginated_products(resource, page: 1, key: 'currentPage', product_elements: '.css-12egk0t')
+    session = Capybara::Session.new(Capybara.javascript_driver, Rails.application)
     loop do
-      uri = "#{url}?#{key}=#{page}"
-      puts "Loading page... #{uri}"
+      uri = "#{@domain}/#{resource}?#{key}=#{page}"
+      puts "Collecting products from... #{uri}"
       session.visit(uri)
       puts "Sleeping..."
       sleep 10
       products = session.all(product_elements)
       break if products.blank?
-      puts "Collecting products from..."
       products.each_with_index do |element, i|
         if (i + 1) % 4 == 0
           session.scroll_to(element)
@@ -25,5 +23,8 @@ class Scrapers::Base
       page += 1
     end
     puts "Done!"
+  ensure
+    session.reset!
+    session.quit
   end
 end
