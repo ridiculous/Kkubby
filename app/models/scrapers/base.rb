@@ -15,9 +15,11 @@ class Scrapers::Base
       products = session.all(product_elements)
       break if products.blank?
       puts "Collecting products..."
-      products.each do |element|
-        session.scroll_to(element)
-        sleep 1
+      products.each_with_index do |element, i|
+        if (i + 1) % 4 == 0
+          session.scroll_to(element)
+          sleep 1
+        end
         yield element, uri
       end
       page += 1
