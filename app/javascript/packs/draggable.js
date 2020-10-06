@@ -199,6 +199,7 @@ export function Draggable() {
       currentTarget.classList.remove('icon-shade');
       currentTarget.style.transform = '';
       document.removeEventListener('mousemove', self.onMouseMove);
+      document.removeEventListener('mouseup', self.mouseUp);
       resetTracers();
       updateNodePosition();
     }
