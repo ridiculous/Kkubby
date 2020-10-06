@@ -1,4 +1,4 @@
-class PeachLily
+class Scrapers::PeachLily
   def initialize(debug: false)
     @catalog = Catalog.where(name: 'Peach & Lily').first_or_create!
     @visited = {}

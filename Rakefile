@@ -6,11 +6,14 @@ require_relative 'config/application'
 Rails.application.load_tasks
 
 task build_that_shit: :environment do
+  scrapers = [
+    Scrapers::SokoGlam,
+    Scrapers::PeachLily,
+    Scrapers::SkinCeuticals,
+    Scrapers::Sephora,
+  ]
   time = Benchmark.realtime do
-    threads = [SokoGlam, PeachLily, SkinCeuticals].map do |scraper|
-      Thread.new { scraper.new.call }
-    end
-    threads.map(&:join)
+    scrapers.map { |scraper| Thread.new { scraper.new.call } }.map(&:join)
   end
-  puts "Done in #{time.round(4)}s"
+  puts "Done in #{time.round(2)}s"
 end

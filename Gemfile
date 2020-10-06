@@ -29,6 +29,16 @@ gem 'therubyracer'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# Scrapers
+gem 'capybara', '>= 2.15'
+gem 'apparition'
+gem 'mechanize'
+
+# Deployments
+gem 'mina', '~> 1.2'
+gem 'mina-puma', require: false
+gem 'image_processing'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -43,19 +53,5 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry'
+  gem 'pry-rails'
 end
-
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-end
-
-gem 'mechanize'
-
-# Deployments
-gem 'mina', '~> 1.2'
-gem 'mina-puma', require: false
-gem 'image_processing'

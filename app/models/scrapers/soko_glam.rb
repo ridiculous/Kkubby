@@ -1,4 +1,4 @@
-class SokoGlam
+class Scrapers::SokoGlam
   def initialize
     @catalog = Catalog.where(name: 'Soko Glam').first_or_create!
   end

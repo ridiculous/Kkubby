@@ -1,4 +1,4 @@
-class SkinCeuticals
+class Scrapers::SkinCeuticals
   def initialize(debug: false)
     @catalog = Catalog.where(name: 'SkinCeuticals').first_or_create!
     @url = "https://www.skinceuticals.com".freeze
