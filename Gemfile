@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Scrapers
 gem 'capybara', '>= 2.15'
+gem 'webdrivers'
 gem 'apparition'
 gem 'mechanize'
 
