@@ -14,7 +14,9 @@ class Scrapers::Sephora
     "shop/facial-treatment-masks" => { type: 'Face Masks', category: 'Mask' },
     "shop/sheet-masks" => { type: 'Sheet Masks', category: 'Mask' },
     "shop/eye-cream-dark-circles" => { type: 'Eye Care', category: 'Cream' },
-    "shop/eye-mask" => { type: 'Eye Care', category: 'Mask' }
+    "shop/eye-mask" => { type: 'Eye Care', category: 'Mask' },
+    "shop/sunscreen-sun-protection" => { type: 'Sunscreens', category: 'SPF' },
+    "shop/facial-peels" => { type: 'Facial Peels', category: 'Peel' },
   }.freeze
 
   def initialize(debug: false)
