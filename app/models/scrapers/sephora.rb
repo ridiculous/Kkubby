@@ -50,7 +50,7 @@ class Scrapers::Sephora
     product.name = element.find('[data-at=sku_item_name]').text.strip
     product.brand = element.find('[data-at=sku_item_brand]').text.strip
     product.raw_price = element.find('[data-at=sku_item_price_list]').text.strip
-    product.product_url = "#{@url}#{element.find('.css-ix8km1')[:href].to_s[/(.*)\?/, 1]}"
+    product.product_url = element.find('.css-ix8km1')[:href].to_s[/(.*)\?/, 1]
     product.save || puts(product.errors.full_messages.join(', '))
   rescue => e
     if @debug
