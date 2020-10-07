@@ -10,10 +10,11 @@ task build_that_shit: :environment do
     Scrapers::SokoGlam,
     Scrapers::PeachLily,
     Scrapers::SkinCeuticals,
+    Scrapers::Ulta,
     Scrapers::Sephora,
   ]
   time = Benchmark.realtime do
-    scrapers.map { |scraper| Thread.new { scraper.new.call } }.map(&:join)
+    scrapers.map(&:new).each(&:call)
   end
   puts "Done in #{time.round(2)}s"
 end

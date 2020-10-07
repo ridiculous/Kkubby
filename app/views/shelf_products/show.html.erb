@@ -27,7 +27,9 @@
             <% end %>
           </div>
         <% end %>
-        <p class="small">Sourced from the <%= link_to @product.catalog.name, @product.sourced_from, target: '_blank', class: 'bold-link' %> catalog</p>
+        <% if @catalog %>
+          <p class="small">Sourced from the <%= link_to @catalog.name, @product.sourced_from, target: '_blank', class: 'bold-link' %> catalog</p>
+        <% end %>
       </div>
     </td>
   </tr>

@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
-  belongs_to :catalog
+  # @note Commented out because Rails was querying the catalog on every save, for some unknown reason
+  # @todo find out why a query was performed for catalog when saving a product
+  # belongs_to :catalog
   has_many :shelf_products, dependent: :destroy
   has_one_attached :image
   before_validation :normalize_brand
