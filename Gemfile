@@ -35,6 +35,9 @@ gem 'webdrivers'
 gem 'apparition'
 gem 'mechanize'
 
+# Views
+gem 'pagy'
+
 # Deployments
 gem 'mina', '~> 1.2'
 gem 'mina-puma', require: false

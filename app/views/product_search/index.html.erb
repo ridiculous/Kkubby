@@ -8,6 +8,12 @@
     </div>
   <% end %>
   <% if @products.any? %>
+    <% if @products.size < 20 %>
+      <p>Found <%= @products.size %> products matching your search</p>
+    <% else %>
+      <p>Showing top 20 (of <%= @pagy.count %>) products matching your search</p>
+      <%== pagy_nav(@pagy) %>
+    <% end %>
     <table class="product-list">
       <tr>
         <th style="width: 160px"></th>
@@ -26,6 +32,7 @@
         </tr>
       <% end %>
     </table>
+    <%== pagy_nav(@pagy) %>
   <% elsif params[:query].present? %>
     <p>Nothing found. <span class="suggested-product"><%= suggested_product(params[:query]) %></span></p>
   <% end %>

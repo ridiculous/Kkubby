@@ -147,6 +147,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     ntlm-http (0.1.1)
     open4 (1.3.4)
+    pagy (3.8.3)
     pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -273,6 +274,7 @@ DEPENDENCIES
   mechanize
   mina (~> 1.2)
   mina-puma
+  pagy
   pg
   pry
   pry-rails
