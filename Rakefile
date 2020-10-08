@@ -11,10 +11,10 @@ task build_that_shit: :environment do
     Scrapers::PeachLily,
     Scrapers::SkinCeuticals,
     Scrapers::Ulta,
-    # Scrapers::Sephora, Too much memory required
+    Scrapers::Sephora
   ]
-  time = Benchmark.realtime do
-    scrapers.map(&:new).each(&:call)
+  while scraper = scrapers.pop
+    scraper.new.call
   end
-  puts "Done in #{time.round(2)}s"
+  puts :Done
 end
