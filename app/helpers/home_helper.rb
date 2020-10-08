@@ -12,37 +12,23 @@ module HomeHelper
 
   # @param [Product] product
   def product_thumbnail(product, wishlist: nil, draggable: nil)
-    image_height = case request.env["HTTP_USER_AGENT"]
-                   when /Mobile|Android/
-                     125
-                   else
-                     250
-                   end
     css = "product-img"
     css += " wishlist" if wishlist
     css += " draggable" if draggable
-    product_image(product, image_height, css)
+    product_image(product, mobile_device? ? 125 : 250, css)
   end
 
   # @param [Product] product
   def product_search_thumbnail(product)
-    image_height = case request.env["HTTP_USER_AGENT"]
-                   when /Mobile|Android/
-                     175
-                   else
-                     250
-                   end
-    product_image(product, image_height, "product-img")
+    product_image(product, mobile_device? ? 175 : 250, "product-img")
   end
 
   def product_enlarged(product)
-    image_height = case request.env["HTTP_USER_AGENT"]
-                   when /Mobile|Android/
-                     275
-                   else
-                     500
-                   end
-    product_image(product, image_height, 'original-product-img fl')
+    product_image(product, mobile_device? ? 275 : 500, 'original-product-img fl')
+  end
+
+  def mobile_device?
+    request.env["HTTP_USER_AGENT"].match? /Mobile|Android/
   end
 
   # @param [Product] product
