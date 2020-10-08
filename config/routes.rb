@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :shelves do
       resources :products, controller: 'shelf_products'
     end
+    get :profile, to: 'profile#edit'
   end
   get '/@:username', to: 'home#show', as: 'user_home'
   get 'signup', to: 'users#new'

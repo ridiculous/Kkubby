@@ -23,4 +23,8 @@ class User < ApplicationRecord
   def to_param
     username
   end
+
+  def share_link
+    "kkubby.com/@#{username}"
+  end
 end

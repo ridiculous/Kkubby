@@ -94,8 +94,10 @@ document.addEventListener('turbolinks:load', function () {
     panda.addEventListener('click', function(e) {
       if(profileModal.classList.contains('active')) {
         profileModal.classList.remove('active');
+        document.body.classList.remove('touch-open-profile')
       } else {
         profileModal.classList.add('active');
+        document.body.classList.add('touch-open-profile')
       }
       e.preventDefault();
       return false;
