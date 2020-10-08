@@ -11,7 +11,7 @@ task build_that_shit: :environment do
     Scrapers::PeachLily,
     Scrapers::SkinCeuticals,
     Scrapers::Ulta,
-    Scrapers::Sephora,
+    # Scrapers::Sephora, Too much memory required
   ]
   time = Benchmark.realtime do
     scrapers.map(&:new).each(&:call)

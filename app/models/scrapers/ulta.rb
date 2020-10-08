@@ -61,8 +61,9 @@ class Scrapers::Ulta
     product.image_url = element.css('.product img:not(.lazyload)').first.attr('src').sub('$md$', '') + 'fmt=jpg&fit=constrain,1&hei=900&op_sharpen=1&resMode=bilin'
     product.name = element.css('.prod-desc').first.text.strip
     product.brand = element.css('.prod-title').first.text.strip
-    # When there's a sale for the item, then regPrice is not there, but the original/old price is shown
-    product.raw_price = (element.css('.regPrice').first || element.css('.pro-old-price').first).text.strip
+    # When there's a sale for the item, then regPrice is not there, but the original/old price is shown, and some products have no price
+    price = element.css('.regPrice').first || element.css('.pro-old-price').first
+    product.raw_price = price.text.strip if price
     product.product_url = "#{@url}#{element.css('.prod-desc a').first.attr('href')}"
     product.save || puts(product.errors.full_messages.join(', '))
   rescue => e

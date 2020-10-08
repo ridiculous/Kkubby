@@ -13,7 +13,7 @@ class User < ApplicationRecord
   after_create ->(user) { Shelf.create_defaults(user) }
 
   def squeeze_username
-    self.username &&= username.gsub(/\s+/, '')
+    self.username &&= username.gsub(/\s+/, '').downcase
   end
 
   def display_username
