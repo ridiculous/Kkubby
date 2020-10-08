@@ -53,12 +53,13 @@ class Scrapers::Ulta
     end
   end
 
-  def create_product(element, type:, category: type)
+  def create_product(element, type:, category: type, retried: false)
+    img_height ||= 900
     product = Product.new(catalog_id: @catalog.id,
                           product_type: type,
                           category: category.underscore.humanize.titlecase,
                           sourced_from: element.document.url)
-    product.image_url = element.css('.product img:not(.lazyload)').first.attr('src').sub('$md$', '') + 'fmt=jpg&fit=constrain,1&hei=900&op_sharpen=1&resMode=bilin'
+    product.image_url = element.css('.product img:not(.lazyload)').first.attr('src').sub('$md$', '') + "fmt=jpg&fit=constrain,1&hei=#{img_height}&op_sharpen=1&resMode=bilin"
     product.name = element.css('.prod-desc').first.text.strip
     product.brand = element.css('.prod-title').first.text.strip
     # When there's a sale for the item, then regPrice is not there, but the original/old price is shown, and some products have no price
@@ -66,6 +67,15 @@ class Scrapers::Ulta
     product.raw_price = price.text.strip if price
     product.product_url = "#{@url}#{element.css('.prod-desc a').first.attr('href')}"
     product.save || puts(product.errors.full_messages.join(', '))
+  rescue OpenURI::HTTPError => e
+    if retried
+      raise e
+    end
+    puts "ERROR (retrying) #{e.class}:#{e.message}"
+    # Very rarely are some images only available in smaller sizes (ex https://www.ulta.com/no-slip-skin-care-tool?productId=xlsImpprod3690025)
+    img_height = 350
+    retried = true
+    retry
   rescue => e
     if @debug
       debugger
