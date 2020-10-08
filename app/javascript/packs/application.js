@@ -20,7 +20,7 @@ document.addEventListener('turbolinks:load', function () {
     , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]')
     , productImages = document.querySelectorAll('.product-img')
     , panda = document.querySelector('.top-bar .signed-in')
-    , profileModal = document.querySelector('.outer-profile')
+    , profileModal = document.querySelector('.profile-modal')
     , draggable = new Draggable;
 
   if (newShelf) {

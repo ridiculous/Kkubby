@@ -45,16 +45,21 @@
     bottom: -100px;
     position: fixed;
   }
+  from {
+    bottom: -2000px;
+    position: absolute;
+  }
 }
 
-.outer-profile {
-  bottom: -2000px;
+.profile-modal {
+  display: none;
   position: absolute;
   height: 100%;
   width: 100%;
   z-index: 9999;
 
   &.active {
+    display: block;
     animation-name: slideUp;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
@@ -70,6 +75,12 @@
     z-index: 99999;
     border-radius: 20px;
     box-shadow: -3px 10px 8px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .profile-modal .profile {
+    width: 100%;
   }
 }
 
