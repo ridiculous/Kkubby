@@ -24,7 +24,7 @@
     <% end %>
     <div class="hamburger">
       <% if current_user %>
-        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, class: 'signed-in'), logout_path %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, class: 'signed-in'), '#' %>
       <% else %>
         <%= link_to image_tag('white-panda.svg', height: 50, width: 50), login_path %>
       <% end %>
@@ -41,5 +41,6 @@
   <p>Contact us <%= link_to "@mykkubby", "https://twitter.com/mykkubby", target: '_blank', class: 'bold-link' %></p>
   <p class="code-text medium">v<%= Rails.application.config.version %></p>
 </div>
+<div class="outer-profile"><div id="profile" class="profile"></div></div>
 </body>
 </html>

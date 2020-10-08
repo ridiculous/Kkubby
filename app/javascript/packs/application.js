@@ -19,6 +19,8 @@ document.addEventListener('turbolinks:load', function () {
     , shelfNames = document.querySelectorAll('.shelf-name > span')
     , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]')
     , productImages = document.querySelectorAll('.product-img')
+    , panda = document.querySelector('.top-bar .signed-in')
+    , profileModal = document.querySelector('.outer-profile')
     , draggable = new Draggable;
 
   if (newShelf) {
@@ -87,4 +89,16 @@ document.addEventListener('turbolinks:load', function () {
   document.addEventListener('scroll', function () {
     clearTimeout(window.moveTimer);
   });
+
+  if (panda){
+    panda.addEventListener('click', function(e) {
+      if(profileModal.classList.contains('active')) {
+        profileModal.classList.remove('active');
+      } else {
+        profileModal.classList.add('active');
+      }
+      e.preventDefault();
+      return false;
+    });
+  }
 });

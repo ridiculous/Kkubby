@@ -39,6 +39,40 @@
   }
 }
 
+/* The animation code */
+@keyframes slideUp {
+  to {
+    bottom: -100px;
+    position: fixed;
+  }
+}
+
+.outer-profile {
+  bottom: -2000px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+
+  &.active {
+    animation-name: slideUp;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+
+  .profile {
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    position: relative;
+    background: $modal-color;
+    border: 2px solid $body-color;
+    z-index: 99999;
+    border-radius: 20px;
+    box-shadow: -3px 10px 8px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
 .products {
   margin: 0;
   padding: 0;
