@@ -8,10 +8,10 @@
     </div>
   <% end %>
   <% if @products.any? %>
-    <% if @products.size < 20 %>
+    <% if @products.size < 20 && @pagy.pages == 1 %>
       <p>Found <%= @products.size %> products</p>
     <% else %>
-      <p>Showing top 20 (of <%= @pagy.count %>) products</p>
+      <p>Showing <%= @products.size %> out of <%= @pagy.count %> products</p>
       <%== pagy_nav(@pagy) %>
     <% end %>
     <table class="product-list">
@@ -21,13 +21,15 @@
       </tr>
       <% @products.each do |product| %>
         <tr>
-          <td><%= link_to product_thumbnail(product), user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' %></td>
+          <td><%= link_to product_search_thumbnail(product), user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' %></td>
           <td>
-            <%= link_to user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' do %>
-              <p><strong><%= product.brand %></strong></p>
-              <%= product.name %>
-              <p class="small"><%= product.product_type %></p>
-            <% end %>
+            <div class="box">
+              <%= link_to user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' do %>
+                <p><strong><%= product.brand %></strong></p>
+                <%= product.name %>
+                <p class="small"><%= product.product_type %></p>
+              <% end %>
+            </div>
           </td>
         </tr>
       <% end %>

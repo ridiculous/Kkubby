@@ -16,12 +16,23 @@ module HomeHelper
                    when /Mobile|Android/
                      125
                    else
-                     200
+                     250
                    end
     css = "product-img"
     css += " wishlist" if wishlist
     css += " draggable" if draggable
     product_image(product, image_height, css)
+  end
+
+  # @param [Product] product
+  def product_search_thumbnail(product)
+    image_height = case request.env["HTTP_USER_AGENT"]
+                   when /Mobile|Android/
+                     175
+                   else
+                     250
+                   end
+    product_image(product, image_height, "product-img")
   end
 
   def product_enlarged(product)
@@ -38,7 +49,7 @@ module HomeHelper
   # @param [Integer] image_height
   # @param [String] css - classes to add to the image tag
   def product_image(product, image_height, css = nil)
-    image_tag(product.image_for_display(size: [image_height, image_height, background: '#FFF']),
+    image_tag(product.image_for_display(size: [image_height * 0.80, image_height, background: '#FFF']),
               height: image_height, title: product.name, class: css, id: product.name.parameterize)
   end
 end
