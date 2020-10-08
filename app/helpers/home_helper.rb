@@ -10,34 +10,35 @@ module HomeHelper
     end
   end
 
-  # @param [ShelfProduct] sp
-  def product_thumbnail(sp)
+  # @param [Product] product
+  def product_thumbnail(product, wishlist: nil, draggable: nil)
     image_height = case request.env["HTTP_USER_AGENT"]
-                   when /iPhone/
+                   when /Mobile|Android/
                      125
                    else
-                     250
+                     200
                    end
     css = "product-img"
-    css += " wishlist" if sp.wishlist?
-    css += " draggable" if can_edit?
-    product_image(sp, image_height, css)
+    css += " wishlist" if wishlist
+    css += " draggable" if draggable
+    product_image(product, image_height, css)
   end
 
-  def product_enlarged(sp)
+  def product_enlarged(product)
     image_height = case request.env["HTTP_USER_AGENT"]
-                   when /iPhone/
-                     400
+                   when /Mobile|Android/
+                     275
                    else
-                     575
+                     500
                    end
-    product_image(sp, image_height, 'original-product-img fl')
+    product_image(product, image_height, 'original-product-img fl')
   end
 
-  # @param [ShelfProduct] sp
+  # @param [Product] product
   # @param [Integer] image_height
   # @param [String] css - classes to add to the image tag
-  def product_image(sp, image_height, css = nil)
-    image_tag(sp.product.image_for_display(size: [nil, image_height]), height: image_height, title: sp.name, class: css, id: sp.name.parameterize)
+  def product_image(product, image_height, css = nil)
+    image_tag(product.image_for_display(size: [image_height, image_height, background: '#FFF']),
+              height: image_height, title: product.name, class: css, id: product.name.parameterize)
   end
 end

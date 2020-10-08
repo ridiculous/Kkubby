@@ -66,19 +66,9 @@
   }
 }
 
-.product-search-img {
-  border-radius: 5px;
-  height: initial;
-  max-height: 200px;
-  min-height: 100px;
-  display: inline-block;
-}
-
 .original-product-img {
   border-radius: 5px;
-  height: initial;
   margin: 0 10px 10px 0;
-  max-width: 100%;
 }
 
 #close-alert {
@@ -334,4 +324,9 @@ table.shelves {
 .bold-link {
   font-weight: bold;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.compact {
+  margin: 0;
+  padding: 0;
 }

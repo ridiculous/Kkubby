@@ -5,9 +5,9 @@
         <span><%= @shelf.name %></span>
         <%= form_for([@user, @shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
       </div>
-      <p><%= @product.name %></p>
-      <p><strong><%= @product.brand %></strong></p>
-      <%= product_enlarged(@shelf_product) %>
+      <p class="compact"><%= @product.name %></p>
+      <p class="compact"><strong><%= @product.brand %></strong></p>
+      <%= product_enlarged(@product) %>
       <div class="fl">
         <% if current_user %>
           <%= link_to "Remove", user_shelf_product_path(@user, @shelf, id: @product), method: 'delete', class: 'btn' %>

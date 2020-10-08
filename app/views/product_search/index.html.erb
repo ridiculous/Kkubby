@@ -9,9 +9,9 @@
   <% end %>
   <% if @products.any? %>
     <% if @products.size < 20 %>
-      <p>Found <%= @products.size %> products matching your search</p>
+      <p>Found <%= @products.size %> products</p>
     <% else %>
-      <p>Showing top 20 (of <%= @pagy.count %>) products matching your search</p>
+      <p>Showing top 20 (of <%= @pagy.count %>) products</p>
       <%== pagy_nav(@pagy) %>
     <% end %>
     <table class="product-list">
@@ -21,7 +21,7 @@
       </tr>
       <% @products.each do |product| %>
         <tr>
-          <td><%= link_to image_tag(product.image_for_display, size: '150x150', title: product.name, class: 'product-search-img'), user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' %></td>
+          <td><%= link_to product_thumbnail(product), user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' %></td>
           <td>
             <%= link_to user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' do %>
               <p><strong><%= product.brand %></strong></p>

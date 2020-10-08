@@ -35,7 +35,7 @@ class Product < ApplicationRecord
   def image_for_display(size: nil)
     if image.attached?
       if size
-        image.variant(resize_to_limit: size).processed
+        image.variant(resize_and_pad: size).processed
       else
         image
       end
