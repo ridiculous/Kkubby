@@ -2,7 +2,6 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
-require 'mina/puma'
 
 set :term_mode, :system
 set :domain, 'kkubby.com'
@@ -20,12 +19,6 @@ set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/
 # For single-user RVM
 set :rvm_path, "/usr/share/rvm/scripts/rvm"
 set :rvm_use_path, "/usr/share/rvm/scripts/rvm"
-
-set :puma_config, -> { "#{fetch(:current_path)}/config/puma-prod.rb" }
-set :pumactl_socket, -> { "#{fetch(:shared_path)}/sockets/pumactl.sock" }
-set :puma_socket, -> { "#{fetch(:shared_path)}/sockets/puma.sock" }
-set :puma_state, -> { "#{fetch(:shared_path)}/sockets/puma.state" }
-set :puma_pid, -> { "#{fetch(:shared_path)}/pids/puma.pid" }
 
 set :whenever_name, -> { "kkubby_production" }
 set :node_version, 'stable'
@@ -82,7 +75,7 @@ task :deploy do
     invoke :'deploy:cleanup'
     on :launch do
       # invoke :'whenever:update'
-      invoke :'puma:phased_restart'
+      command %[systemctl reload puma.service]
     end
   end
 end

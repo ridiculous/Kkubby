@@ -40,7 +40,6 @@ gem 'pagy'
 
 # Deployments
 gem 'mina'
-gem 'mina-puma', require: false
 gem 'image_processing'
 
 group :development, :test do

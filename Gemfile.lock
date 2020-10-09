@@ -131,9 +131,6 @@ GEM
     mina (1.2.3)
       open4 (~> 1.3.4)
       rake
-    mina-puma (1.1.0)
-      mina (~> 1.2.0)
-      puma (>= 2.13)
     mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -274,7 +271,6 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   mechanize
   mina
-  mina-puma
   pagy
   pg
   pry
