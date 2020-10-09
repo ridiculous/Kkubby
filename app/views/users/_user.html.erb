@@ -3,19 +3,23 @@
   <div class="form-content">
     <%= form_for current_user, url: user_profile_path(current_user), remote: true do |f| %>
       <p>
-        <%= f.label :name %>
+        <%= f.label :name, 'Display name (public)' %>
         <%= f.text_field :name %>
       </p>
       <p>
-        <%= f.label :email %>
-        <%= f.email_field :email %>
+        <%= f.label :share_link, 'Share Link (public)' %>
+        <%= f.text_field :share_link, readonly: 1, onclick: 'this.select(); return false', name: nil %>
       </p>
       <p>
-        <%= f.label :share_link %>
-        <%= f.text_field :share_link, readonly: 1, onclick: 'this.select(); return false', name: nil %>
+        <%= f.label :email, 'Email (private)' %>
+        <%= f.email_field :email %>
       </p>
       <p style="padding-top: 20px;">
         <%= f.submit 'Save Profile', class: 'btn wide', data: { disable_with: 'Save Profile' } %>
+      </p>
+      <div class="divider"></div>
+      <p>
+        <%= link_to 'Home', user_home_path(current_user), class: 'btn wide' %>
       </p>
       <div class="divider"></div>
       <p>

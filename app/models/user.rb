@@ -20,6 +20,10 @@ class User < ApplicationRecord
     username.strip.humanize
   end
 
+  def display_name
+    name.presence || display_username
+  end
+
   def to_param
     username
   end

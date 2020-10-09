@@ -17,7 +17,7 @@
     <%= link_to home_path, class: 'bold-link' do %>
       <div class="fl">
         <% if @user&.persisted? %>
-          <div class="top-bar-username"><%= @user.username %>'s</div>
+          <div class="top-bar-username"><%= @user.display_name %>'s</div>
         <% end %>
         <h1>Kkubby</h1>
       </div>
