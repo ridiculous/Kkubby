@@ -5,18 +5,17 @@
       <div>
         <%= label_tag(:username, 'Username', class: 'medium-major') %>
         <div>
-          <%= text_field_tag(:username, params[:username]) %>
+          <%= text_field_tag(:username, params[:username], tabindex: 1) %>
         </div>
       </div>
       <div>
         <%= label_tag(:password, 'Password', class: 'medium-major') %>
         <div>
-          <%= password_field_tag(:password, '') %>
+          <%= password_field_tag(:password, '', tabindex: 2) %>
         </div>
       </div>
       <div>
-        <%= submit_tag('Login', class: 'btn wide', name: '') %>
-        <%#= check_box_tag(:remember_me) %> <%#= label_tag(:remember_me, nil, style: 'display:inline-block') %>
+        <%= submit_tag('Login', class: 'btn wide', name: '', tabindex: 3) %>
       </div>
     <% end %>
   </div>

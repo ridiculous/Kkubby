@@ -12,7 +12,7 @@ class Shelf < ApplicationRecord
     'Toners',
     'Essences',
     'Masks',
-    'Serums / Ampoules',
+    'Serums',
     'Moisturizers',
   ].freeze
 

@@ -1,6 +1,6 @@
 class Scrapers::Sephora
   RESOURCES = {
-    "shop/face-serum" => { type: 'Serums / Ampoules' },
+    "shop/face-serum" => { type: 'Serums' },
     "shop/acne-treatment-blemish-remover" => { type: 'Blemish Removers', category: 'Acne' },
     "shop/night-cream" => { type: 'Night Creams', category: 'Cream' },
     "shop/cleansing-oil-face-oil" => { type: 'Facial Oils', category: 'Oil' },

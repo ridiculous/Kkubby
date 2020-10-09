@@ -9,12 +9,12 @@ class Scrapers::SkinCeuticals
     Mechanize.start do |agent|
       agent.log = Rails.logger if @debug
       create_products(agent, key: 'skin-care/category/facial-cleansers', type: 'Cleanser')
-      create_products(agent, key: 'skin-care/category/antioxidants', type: 'Serums / Ampoules')
-      create_products(agent, key: 'skin-care/serums/hyaluronic-acid-serum', type: 'Serums / Ampoules')
-      create_products(agent, key: 'skin-care/serums/vitamin-c-serum', type: 'Serums / Ampoules')
-      create_products(agent, key: 'skin-care/serums/exfoliating-serum', type: 'Serums / Ampoules')
-      create_products(agent, key: 'skin-care/serums/hydrating-serum', type: 'Serums / Ampoules')
-      create_products(agent, key: 'skin-care/serums/oil-free-serum', type: 'Serums / Ampoules')
+      create_products(agent, key: 'skin-care/category/antioxidants', type: 'Serums')
+      create_products(agent, key: 'skin-care/serums/hyaluronic-acid-serum', type: 'Serums')
+      create_products(agent, key: 'skin-care/serums/vitamin-c-serum', type: 'Serums')
+      create_products(agent, key: 'skin-care/serums/exfoliating-serum', type: 'Serums')
+      create_products(agent, key: 'skin-care/serums/hydrating-serum', type: 'Serums')
+      create_products(agent, key: 'skin-care/serums/oil-free-serum', type: 'Serums')
       create_products(agent, key: 'skin-care/category/sunscreens', type: 'Sun Protection', category: 'Sunscreen')
       create_products(agent, key: 'skin-care/category/facial-masks', type: 'Masks')
       create_products(agent, key: 'skin-care/category/retinol-creams', type: 'Retinol Creams', category: 'Cream')

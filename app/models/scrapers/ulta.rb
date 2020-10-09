@@ -2,7 +2,7 @@ class Scrapers::Ulta
   RESOURCES = {
     "skin-care-cleansers?N=2794" => { type: 'Cleansers', category: 'Cleanser' },
     "skin-care-moisturizers?N=2796" => { type: 'Moisturizers', category: 'Facial Moisturizer' },
-    "skin-care-treatment-serums?N=27cs" => { type: 'Serums / Ampoules' },
+    "skin-care-treatment-serums?N=27cs" => { type: 'Serums' },
     "skin-care-eye-treatments?N=270k" => { type: 'Eye Care', category: 'Cream' },
     "skin-care-suncare?N=27fe" => { type: 'Sunscreens', category: 'SPF' },
   }.freeze

@@ -12,7 +12,7 @@ class Scrapers::PeachLily
       create_products(agent, type: 'Water Cleansers')
       create_products(agent, type: 'Toners')
       create_products(agent, type: 'Essences')
-      create_products(agent, type: 'Serums / Ampoules', key: 'serum-ampoules', category: 'Serums / Ampoules')
+      create_products(agent, type: 'Serums', key: 'serum-ampoules', category: 'Serums')
       create_products(agent, type: 'Facial Oils', category: 'Oil', key: 'oils')
       create_products(agent, type: 'Moisturizers')
       create_products(agent, type: 'Eye Care', category: 'Cream', key: 'eye-treatments')
