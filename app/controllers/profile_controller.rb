@@ -8,6 +8,6 @@ class ProfileController < ApplicationController
   private
 
   def user_params
-    params[:user].permit(:name, :email)
+    params[:user].permit(:name)
   end
 end

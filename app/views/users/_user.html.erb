@@ -8,11 +8,7 @@
       </p>
       <p>
         <%= f.label :share_link, 'Share Link (public)' %>
-        <%= f.text_field :share_link, readonly: 1, onclick: 'this.select(); return false', name: nil %>
-      </p>
-      <p>
-        <%= f.label :email, 'Email (private)' %>
-        <%= f.email_field :email %>
+        <%= f.text_field :share_link, onclick: 'this.select(); return false', ontouchstart: 'this.select(); return false', onkeydown: 'return false', name: nil %>
       </p>
       <p style="padding-top: 20px;">
         <%= f.submit 'Save Profile', class: 'btn wide', data: { disable_with: 'Save Profile' } %>
