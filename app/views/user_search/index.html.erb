@@ -1,0 +1,33 @@
+<div class="page-content">
+  <p>Search for another user</p>
+  <%= form_tag user_search_path, method: 'get' do %>
+    <div class="form-content">
+      <%= text_field_tag :query, params[:query], class: 'text-input' %>
+      <%= submit_tag 'Search', name: "", class: "btn wide" %>
+    </div>
+  <% end %>
+  <% if @users.any? %>
+    <p>Showing <%= @users.size %> out of <%= @pagy.count %> users</p>
+    <table class="user-list">
+      <tr>
+        <th style="width: 160px"></th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <div class="box">
+              <%= link_to user.username, user_home_path(user), class: 'bold-link large' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%== pagy_nav(@pagy) %>
+  <% elsif params[:query].present? %>
+    <p>Nobody matching that description. Sorry.</p>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  document.getElementById('query').focus();
+</script>

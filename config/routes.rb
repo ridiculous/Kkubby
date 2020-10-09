@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
   get '/@:username', to: 'home#show', as: 'user_home'
   get 'signup', to: 'users#new'
+  get 'user_search', to: 'user_search#index', as: 'user_search'
   resources :users, only: :create
   root 'home#index'
 end
