@@ -21,6 +21,7 @@ document.addEventListener('turbolinks:load', function () {
     , productImages = document.querySelectorAll('.product-img')
     , panda = document.querySelector('.top-bar .signed-in')
     , profileModal = document.querySelector('.profile-modal')
+    , userForm = document.querySelector('form.edit_user')
     , draggable = new Draggable;
 
   if (newShelf) {
@@ -102,5 +103,14 @@ document.addEventListener('turbolinks:load', function () {
       e.preventDefault();
       return false;
     });
+  }
+
+  if (userForm) {
+    userForm.addEventListener('ajax:complete', function() {
+      setTimeout(function(){
+        document.body.classList.remove('touch-open-profile');
+        profileModal.classList.remove('active');
+      }, 1000)
+    })
   }
 });

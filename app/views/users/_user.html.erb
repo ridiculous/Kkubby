@@ -1,7 +1,7 @@
 <div class="page-content profile-content">
   <div class="top-tab"><div class="top-tab-line"></div><div class="top-tab-line"></div></div>
   <div class="form-content">
-    <%= form_for current_user, url: user_profile_path(current_user) do |f| %>
+    <%= form_for current_user, url: user_profile_path(current_user), remote: true do |f| %>
       <p>
         <%= f.label :name %>
         <%= f.text_field :name %>
@@ -12,10 +12,10 @@
       </p>
       <p>
         <%= f.label :share_link %>
-        <%= f.text_field :share_link, readonly: 1 %>
+        <%= f.text_field :share_link, readonly: 1, onclick: 'this.select(); return false', name: nil %>
       </p>
-      <p>
-        <%= f.submit 'Save Profile', class: 'btn wide' %>
+      <p style="padding-top: 20px;">
+        <%= f.submit 'Save Profile', class: 'btn wide', data: { disable_with: 'Save Profile' } %>
       </p>
       <div class="divider"></div>
       <p>
