@@ -2,6 +2,9 @@
 # currently have one core
 workers 1
 
+# Run GC before fork
+nakayoshi_fork
+
 # Min and Max threads per worker
 threads 1, 8
 
