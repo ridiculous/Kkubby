@@ -1,5 +1,6 @@
 class UserSearchController < ApplicationController
   before_action :authenticate_user
+  before_action :user_from_params
 
   def index
     @pagy, @users = pagy(find_users, items: 20)

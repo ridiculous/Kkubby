@@ -15,9 +15,11 @@
       <% @users.each do |user| %>
         <tr>
           <td>
-            <div class="box">
-              <%= link_to user.username, user_home_path(user), class: 'bold-link large' %>
-            </div>
+            <%= link_to user_home_path(user) do %>
+              <div class="box large bold-link">
+                <%= user.display_name %>
+              </div>
+            <% end %>
           </td>
         </tr>
       <% end %>
