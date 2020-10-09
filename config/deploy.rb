@@ -75,7 +75,9 @@ task :deploy do
     invoke :'deploy:cleanup'
     on :launch do
       # invoke :'whenever:update'
+      command %[echo "-----> Restarting Puma..."]
       command %[systemctl restart puma.service]
+      command %[echo "-----> Puma restarted."]
     end
   end
 end
