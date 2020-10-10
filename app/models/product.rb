@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   validates :brand, :image_url, presence: true
   validates :name, presence: true, uniqueness: { scope: :brand }
   before_create :set_price
+  after_commit :cache_tokens, on: :create
   after_create :upload_image
 
   def self.types
@@ -44,6 +45,8 @@ class Product < ApplicationRecord
     end
   end
 
+  private
+
   def set_price
     if raw_price
       num_price = raw_price[/\d+\.?\d*/]
@@ -53,5 +56,9 @@ class Product < ApplicationRecord
 
   def normalize_brand
     self.brand &&= brand.upcase
+  end
+
+  def cache_tokens
+    update_column :search_tokens, self.class.find_by_sql("SELECT to_tsvector(name || ' ' || brand || ' ' || product_type) AS search_tokens FROM products WHERE id = #{id} LIMIT 1").first.search_tokens
   end
 end

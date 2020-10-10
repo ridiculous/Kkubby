@@ -11,7 +11,7 @@ class ProductSearchController < ApplicationController
 
   def load_products
     if params[:query].present?
-      Product.where("to_tsvector(name || ' ' || brand || ' ' || product_type) @@ plainto_tsquery(?)", params[:query].strip).order(:name).includes(:image_attachment => :blob)
+      Product.where("search_tokens @@ plainto_tsquery(?)", params[:query].strip).order(:name).includes(:image_attachment => :blob)
     else
       Product.where('1=0')
     end
