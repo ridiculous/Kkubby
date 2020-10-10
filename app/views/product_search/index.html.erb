@@ -7,7 +7,7 @@
       <%= submit_tag 'Search', name: "", class: "btn wide" %>
     </div>
   <% end %>
-  <% if @products.any? %>
+  <% if @products.present? %>
     <% if @products.size < 20 && @pagy.pages == 1 %>
       <p>Found <%= @products.size %> products</p>
     <% else %>
