@@ -123,6 +123,10 @@ document.addEventListener('turbolinks:load', function () {
 
   };
   let UserSelectFail = function (e) {
+    e.target.classList.remove('fade');
+    if (e.target.querySelector('.fade')) {
+      e.target.querySelector('.fade').classList.remove('fade');
+    }
     if (e.detail[0].alert) {
       let alertBox = document.querySelector(".box-type-alert");
       if (alertBox) {
@@ -147,6 +151,7 @@ document.addEventListener('turbolinks:load', function () {
     element.addEventListener('ajax:success', UserSelectSuccess);
     element.addEventListener('ajax:error', UserSelectFail);
     element.addEventListener('click', function (e) {
+      e.target.classList.add('fade');
       e.preventDefault();
       return false
     })
