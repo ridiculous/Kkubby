@@ -1,4 +1,5 @@
 <div class="page-content">
+  <h4 class="page-header">Login to your account. Not on Kkubby yet? <%= link_to 'Signup', signup_path %></h4>
   <div class="login-form form-content">
     <%= form_tag(process_login_path, method: :post) do %>
       <%= hidden_field_tag :back_to, params[:back_to] %>

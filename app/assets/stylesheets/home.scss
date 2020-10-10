@@ -11,6 +11,14 @@
   }
 }
 
+.page-header {
+  margin-top: 0;
+
+  a {
+    @extend .bold-link;
+  }
+}
+
 .profile-content {
   label {
     color: #6D4548;
