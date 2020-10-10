@@ -12,10 +12,10 @@ class ShelfProductsController < ApplicationController
   end
 
   def create
-    @shelf.products << product = Product.find(params[:id])
-    redirect_to home_path(anchor: product.name.parameterize), notice: "#{product.name} added to your #{@shelf.name}"
+    @shelf.products << @product = Product.find(params[:id])
+    flash[:notice] = "#{@product.name} added to your #{@shelf.name}"
   rescue ActiveRecord::RecordNotUnique
-    redirect_to product_search_path(shelf_id: params[:shelf_id], query: params[:query]), alert: "Product is already on your shelf"
+    render json: { alert: "Product #{@product.name} is already on your shelf" }, status: :unprocessable_entity
   end
 
   def update

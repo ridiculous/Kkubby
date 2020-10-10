@@ -14,6 +14,14 @@ import {Draggable} from './draggable'
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+window.visitPage = function(url) {
+  if (typeof Turbolinks === 'object') {
+    Turbolinks.visit(url)
+  } else {
+    window.location = url
+  }
+};
+
 document.addEventListener('turbolinks:load', function () {
   let newShelf = document.querySelector('.add-new-shelf')
     , shelfNames = document.querySelectorAll('.shelf-name > span')
@@ -54,11 +62,8 @@ document.addEventListener('turbolinks:load', function () {
 
   function visitProductPage(event) {
     let url = event.target.parentElement.getAttribute('data-href');
-    if (typeof Turbolinks === 'object') {
-      Turbolinks.visit(url)
-    } else {
-      window.location = url
-    }
+    if (!url) return false;
+    window.visitPage(url);
   }
 
   productImages.forEach(function (element) {
@@ -91,9 +96,9 @@ document.addEventListener('turbolinks:load', function () {
     clearTimeout(window.moveTimer);
   });
 
-  if (panda){
-    panda.addEventListener('click', function(e) {
-      if(profileModal.classList.contains('active')) {
+  if (panda) {
+    panda.addEventListener('click', function (e) {
+      if (profileModal.classList.contains('active')) {
         profileModal.classList.remove('active');
         document.body.classList.remove('touch-open-profile')
       } else {
@@ -106,11 +111,44 @@ document.addEventListener('turbolinks:load', function () {
   }
 
   if (userForm) {
-    userForm.addEventListener('ajax:complete', function() {
-      setTimeout(function(){
+    userForm.addEventListener('ajax:complete', function () {
+      setTimeout(function () {
         document.body.classList.remove('touch-open-profile');
         profileModal.classList.remove('active');
       }, 1000)
     })
   }
+
+  let UserSelectSuccess = function (e) {
+
+  };
+  let UserSelectFail = function (e) {
+    if (e.detail[0].alert) {
+      let alertBox = document.querySelector(".box-type-alert");
+      if (alertBox) {
+        alertBox.style.display = 'none';
+        setTimeout(function () {
+          alertBox.innerHTML = "<b>Oops.</b> " + e.detail[0].alert;
+          alertBox.style.display = 'block'
+        }, 200)
+      } else {
+        // <div class="box-type-alert medium-major"><b>Oops.</b> Product is already on your shelf</div>
+        let alertBox = document.createElement("div");
+        alertBox.classList.add("box-type-alert");
+        alertBox.classList.add("medium-major");
+        alertBox.innerHTML = "<b>Oops.</b> " + e.detail[0].alert;
+        document.body.insertBefore(alertBox, document.querySelector('#page-body'))
+      }
+    }
+    e.preventDefault();
+    return false;
+  };
+  document.querySelectorAll('.user-select-product').forEach(function (element) {
+    element.addEventListener('ajax:success', UserSelectSuccess);
+    element.addEventListener('ajax:error', UserSelectFail);
+    element.addEventListener('click', function (e) {
+      e.preventDefault();
+      return false
+    })
+  })
 });

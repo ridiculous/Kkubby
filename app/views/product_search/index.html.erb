@@ -21,10 +21,10 @@
       </tr>
       <% @products.each do |product| %>
         <tr>
-          <td><%= link_to product_search_thumbnail(product), user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' %></td>
+          <td><%= link_to product_search_thumbnail(product), user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post', remote: true, class: 'user-select-product' %></td>
           <td>
             <div class="box">
-              <%= link_to user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post' do %>
+              <%= link_to user_shelf_products_path(current_user, @shelf, id: product, query: params[:query]), method: 'post', remote: true, class: 'user-select-product' do %>
                 <p><strong><%= product.brand %></strong></p>
                 <%= product.name %>
                 <p class="small"><%= product.product_type %></p>
