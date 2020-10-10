@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_232451) do
+ActiveRecord::Schema.define(version: 2020_10_10_194826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +63,10 @@ ActiveRecord::Schema.define(version: 2020_08_11_232451) do
     t.string "product_url", limit: 500
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.tsvector "search_tokens"
     t.index ["brand", "name"], name: "index_products_on_brand_and_name", unique: true
     t.index ["catalog_id"], name: "index_products_on_catalog_id"
+    t.index ["search_tokens"], name: "index_products_on_search_tokens"
   end
 
   create_table "shelf_products", force: :cascade do |t|
