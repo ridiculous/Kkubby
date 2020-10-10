@@ -2,6 +2,7 @@
   <div class="login-form form-content">
     <%= form_tag(process_login_path, method: :post) do %>
       <%= hidden_field_tag :back_to, params[:back_to] %>
+      <%= hidden_field_tag :remember_me, '1' %>
       <div>
         <%= label_tag(:username, 'Username', class: 'medium-major') %>
         <div>
