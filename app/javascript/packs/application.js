@@ -27,7 +27,7 @@ document.addEventListener('turbolinks:load', function () {
     , shelfNames = document.querySelectorAll('.shelf-name > span')
     , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]')
     , productImages = document.querySelectorAll('.product-img')
-    , panda = document.querySelector('.top-bar .signed-in')
+    , panda = document.querySelector('.top-bar .user-signed-in')
     , profileModal = document.querySelector('.profile-modal')
     , userForm = document.querySelector('form.edit_user')
     , draggable = new Draggable;

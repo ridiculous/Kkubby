@@ -24,7 +24,7 @@
     <% end %>
     <div class="hamburger">
       <% if current_user %>
-        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, class: 'signed-in'), '#' %>
+        <%= link_to image_tag('white-panda.svg', height: 50, width: 50, class: 'signed-in'), '#', class: 'user-signed-in' %>
       <% else %>
         <%= link_to image_tag('white-panda.svg', height: 50, width: 50), login_path %>
       <% end %>
