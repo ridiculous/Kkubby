@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_title
+
   def new
     @user = User.new
   end
@@ -12,5 +14,11 @@ class UsersController < ApplicationController
       error_response(@user)
       render :new
     end
+  end
+
+  private
+
+  def set_title
+    @title = 'Kkubby - Signup'
   end
 end

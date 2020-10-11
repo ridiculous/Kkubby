@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_action :user_from_params, only: :show
 
   def index
+    @title = 'Welcome to Kkubby'
   end
 
   def show

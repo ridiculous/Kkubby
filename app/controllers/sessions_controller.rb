@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :set_title
+
   def new
   end
 
@@ -23,5 +25,9 @@ class SessionsController < ApplicationController
 
   def back_to
     params[:back_to].presence
+  end
+
+  def set_title
+    @title = "Kkubby - Login"
   end
 end
