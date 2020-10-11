@@ -26,3 +26,11 @@ state_path "#{shared_dir}/pids/puma.state"
 preload_app!
 prune_bundler
 activate_control_app "unix://#{shared_dir}/sockets/pumactl.sock"
+
+before_fork do
+  ActiveRecord::Base.connection_pool.disconnect! if defined?(ActiveRecord)
+end
+
+on_worker_boot do
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+end
