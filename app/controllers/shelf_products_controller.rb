@@ -7,6 +7,7 @@ class ShelfProductsController < ApplicationController
     @shelf_product = @shelf.shelf_products.where(product_id: params[:id]).first!
     @product = @shelf_product.product
     @catalog = Catalog.find(@product.catalog_id) if @product.catalog_id
+    @title += " - #{@shelf.name} - #{@product.name}"
   rescue ActiveRecord::RecordNotFound
     redirect_to home_path
   end

@@ -57,7 +57,10 @@ class ApplicationController < ActionController::Base
   def user_from_params
     if params[:username].present?
       @user = User.find_by(username: params[:username]) || redirect_to(login_path, alert: 'User not found')
+      @title = "#{@user.display_name}'s Kkubby"
+      @user
     elsif current_user
+      @title = "#{current_user.display_name}'s Kkubby"
       @user = current_user
     else
       redirect_to_login
