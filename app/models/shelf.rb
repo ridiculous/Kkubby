@@ -28,6 +28,8 @@ class Shelf < ApplicationRecord
     ids.map(&:to_i).each_with_index do |id, index|
       products[id].update_column(:order_index, index)
     end
+    # Clear cache
+    touch
   end
 
   def name_with_index
