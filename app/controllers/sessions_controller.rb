@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = (params[:username].present? && params[:password].present?) && User.where(username: params[:username].strip).first
+    user = (params[:username].present? && params[:password].present?) && User.where(username: params[:username].strip.downcase).first
     if user && user.authenticate(params[:password].strip)
       sign_in_user(user)
       redirect_to(back_to || home_path, notice: "Welcome back, #{user.display_name}")
