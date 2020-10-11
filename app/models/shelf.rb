@@ -1,5 +1,5 @@
 class Shelf < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, touch: true
   has_many :shelf_products, dependent: :destroy
   has_many :products, through: :shelf_products
   validates :user_id, :name, :order_index, presence: true

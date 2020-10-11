@@ -6,7 +6,7 @@
       <%= submit_tag 'Search', name: "", class: "btn wide" %>
     </div>
   <% end %>
-  <% if @users.any? %>
+  <% if @users.present? %>
     <p>Showing <%= @users.size %> out of <%= @pagy.count %> users</p>
     <table class="user-list">
       <tr>
