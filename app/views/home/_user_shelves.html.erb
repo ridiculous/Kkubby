@@ -1,4 +1,4 @@
-<%= cache @user do %>
+<%= cache [@user, mobile_device?] do %>
   <table class="shelves">
     <% @shelves.each do |shelf| %>
       <tr>
