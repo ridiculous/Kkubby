@@ -1,0 +1,31 @@
+<table class="shelves">
+  <% @shelves.each do |shelf| %>
+    <tr>
+      <td class="box shade">
+        <%= content_tag :div, class: "shelf-name", id: shelf.name.parameterize do %>
+          <span><%= shelf.name %></span>
+          <%= form_for([@user, shelf]) { |f| f.text_field :name_with_index, readonly: false } %>
+        <% end %>
+        <%= content_tag(:ul, class: "products", id: shelf.id) do %>
+          <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
+            <%= content_tag(:li, id: sp.id, data: { href: user_shelf_product_path(@user, shelf, sp.product) }) do %>
+              <%= product_thumbnail(sp.product, wishlist: sp.wishlist?) %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= link_to "+", product_search_path(shelf_id: shelf.id, query: shelf.name), class: 'add-product btn round' %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td class="add-new-shelf">
+      <div class="add-new-shelf-text"><p><a href="javascript:;" class="bold-link">Add New Shelf</a></p></div>
+      <div class="add-new-shelf-form form-content" style="display:none;">
+        <%= form_for [@user, Shelf.new] do |f| %>
+          <%= f.text_field :name, placeholder: "Enter a name", id: 'new_shelf_name' %>
+          <%= f.submit "Create Shelf", name: "", class: "btn wide" %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>
