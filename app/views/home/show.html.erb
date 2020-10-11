@@ -1,11 +1,9 @@
-<% cache @user do %>
-  <% if @shelves.present? %>
-    <% if can_edit? %>
-      <%= render partial: 'user_shelves' %>
-    <% else %>
-      <%= render partial: 'readonly_user_shelves' %>
-    <% end %>
+<% if @shelves.present? %>
+  <% if can_edit? %>
+    <%= render partial: 'user_shelves', cached: true %>
   <% else %>
-    <p>No shelves created yet. Want to add one now?</p>
+    <%= render partial: 'readonly_user_shelves', cached: true %>
   <% end %>
+<% else %>
+  <p>No shelves created yet. Want to add one now?</p>
 <% end %>
