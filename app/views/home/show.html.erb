@@ -12,7 +12,7 @@
             <%= content_tag(:ul, class: "products", id: shelf.id) do %>
               <% shelf.shelf_products.sort_by(&:order_index).each do |sp| %>
                 <%= content_tag(:li, id: sp.id, data: { href: user_shelf_product_path(@user, shelf, sp.product) }) do %>
-                  <%= product_thumbnail(sp.product, wishlist: sp.wishlist?, draggable: permission_granted) %>
+                  <%= product_thumbnail(sp.product, wishlist: sp.wishlist?) %>
                 <% end %>
               <% end %>
             <% end %>

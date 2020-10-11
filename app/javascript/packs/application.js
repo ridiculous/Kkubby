@@ -24,12 +24,13 @@ window.visitPage = function(url) {
 
 document.addEventListener('turbolinks:load', function () {
   let newShelf = document.querySelector('.add-new-shelf')
-    , shelfNames = document.querySelectorAll('.shelf-name > span')
-    , shelfNameInputs = document.querySelectorAll('.shelf-name input[type=text]')
+    , signedIn = document.querySelector('body.user-signed-in')
+    , shelfNames = signedIn && signedIn.querySelectorAll('.shelf-name > span')
+    , shelfNameInputs = signedIn && signedIn.querySelectorAll('.shelf-name input[type=text]')
     , productImages = document.querySelectorAll('.product-img')
-    , panda = document.querySelector('.top-bar .user-signed-in')
+    , panda = signedIn && signedIn.querySelector('.top-bar .hamburger a')
     , profileModal = document.querySelector('.profile-modal')
-    , userForm = document.querySelector('form.edit_user')
+    , userForm = signedIn && signedIn.querySelector('form.edit_user')
     , draggable = new Draggable;
 
   if (newShelf) {
@@ -67,7 +68,7 @@ document.addEventListener('turbolinks:load', function () {
   }
 
   productImages.forEach(function (element) {
-    if (element.classList.contains('draggable')) {
+    if (signedIn) {
       let handler = new draggable.TouchHandler();
       // Mobile
       element.addEventListener('touchstart', handler.touchStart, { passive: true });

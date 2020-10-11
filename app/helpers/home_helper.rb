@@ -11,10 +11,9 @@ module HomeHelper
   end
 
   # @param [Product] product
-  def product_thumbnail(product, wishlist: nil, draggable: nil)
+  def product_thumbnail(product, wishlist: nil)
     css = "product-img"
     css += " wishlist" if wishlist
-    css += " draggable" if draggable
     product_image(product, mobile_device? ? 125 : 250, css)
   end
 
