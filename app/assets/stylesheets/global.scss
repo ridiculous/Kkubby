@@ -17,7 +17,7 @@ body {
   background: linear-gradient(to right, $body-color, $body-color-light);
 }
 
-td, span, input, textarea {
+td, span, input, textarea, .like-input {
   font-family: $standard-font;
   font-size: 16px;
   line-height: 1.6;
@@ -58,6 +58,7 @@ h3 {
 }
 
 textarea,
+.like-input,
 input[type=text],
 input[type=email],
 input[type=password],
@@ -72,13 +73,10 @@ input[type=number] {
   outline: none;
 }
 
+.like-input,
 input[type=email],
+input[type=number],
 input[type=text] {
-  vertical-align: middle;
-}
-
-input[type=text],
-input[type=number] {
   vertical-align: middle;
 }
 
@@ -91,6 +89,7 @@ input[type=number] {
 }
 
 .form-content {
+  .like-input,
   input[type=text],
   input[type=password],
   input[type=email],

@@ -23,6 +23,7 @@
   label {
     color: #6D4548;
   }
+
   .btn {
     padding: 5px 0;
     background-color: #9a665b;
@@ -153,6 +154,10 @@
   width: 10px;
 }
 
+.like-input {
+  margin-top: 10px;
+}
+
 table.shelves {
   border-spacing: 20px 20px;
 
@@ -189,6 +194,7 @@ table.shelves {
         display: none; // initially hidden
       }
 
+      .like-input,
       input[type=text] {
         background: $body-color;
         border: none;
