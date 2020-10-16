@@ -25,7 +25,7 @@ window.visitPage = function(url) {
 document.addEventListener('turbolinks:load', function () {
   let newShelf = document.querySelector('.add-new-shelf')
     , signedIn = document.querySelector('body.user-signed-in')
-    , shelfNames = signedIn && signedIn.querySelectorAll('.shelf-name > span')
+    , shelfNames = signedIn && signedIn.querySelectorAll('.shelves .editable-shelf-name')
     , shelfNameInputs = signedIn && signedIn.querySelectorAll('.shelf-name input[type=text]')
     , productImages = document.querySelectorAll('.product-img')
     , panda = signedIn && signedIn.querySelector('.top-bar .hamburger a')
