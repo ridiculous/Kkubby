@@ -11,7 +11,8 @@ task build_that_shit: :environment do
     Scrapers::PeachLily,
     Scrapers::SkinCeuticals,
     Scrapers::Ulta,
-    Scrapers::Sephora
+    Scrapers::Sephora,
+    Scrapers::Target,
   ]
   while scraper = scrapers.pop
     scraper.new.call
