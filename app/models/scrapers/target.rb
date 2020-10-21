@@ -41,29 +41,38 @@ class Scrapers::Target
       sleep 10
       products = session.all('li.bTvKos.h-display-flex')
       break if products.blank?
+      session.scroll_to(products.first)
       products.each_with_index do |element, i|
-        if (i + 1) % 3 == 0
-          session.scroll_to(element)
-          sleep 1
-        end
+        session.scroll_to(element)
+        sleep 2
         yield element, uri
       end
       offset += 24
     end
   end
 
-  def create_product(element, type:, category: type, uri: nil)
+  def create_product(element, type:, category: type, uri: nil, retried: false)
     product = Product.new(catalog_id: @catalog.id,
                           product_type: type,
                           category: category.underscore.humanize.titlecase,
                           sourced_from: uri)
     name = element.find('a[data-test=product-title]')
-    product.image_url = element.all("source[media='(min-width: 993px)']").first[:srcset].split('?').first + '?hei=900&qlt=90&fmt=png'
+    product.image_url = element.all("[data-test=product-image] source").first[:srcset].split('?').first + '?hei=900&qlt=90&fmt=png'
     product.brand = element.find('a[data-test=itemDetail-brand]').text.strip
     product.name = name.text.strip.sub(/\A#{product.brand}\s*/, '')
     product.raw_price = element.find('span[data-test=product-price]').text.strip
     product.product_url = name[:href].to_s.split('#').first
     product.save || puts(product.errors.full_messages.join(', '))
+  rescue Capybara::Apparition::ObsoleteNode
+    # Raised when node changes while trying to access it
+    if retried
+      puts "*** Retried product. Giving up..."
+    else
+      puts "*** ERROR: ObsoleteNode. Sleeping and retrying..."
+      sleep 2
+      retried = true
+      retry
+    end
   rescue => e
     if @debug
       debugger
