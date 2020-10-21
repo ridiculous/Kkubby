@@ -31,7 +31,6 @@ class Product < ApplicationRecord
     return if image.attached?
     url = image_url.start_with?('http') ? image_url : "https:#{image_url}"
     name = image_url.split('/').last.split('?').first
-    name << ".png" unless name.match?(/\.(jpg|png)\z/i)
     image.attach(filename: name, io: URI.open(url.gsub(/\s/, '%20')))
   end
 
