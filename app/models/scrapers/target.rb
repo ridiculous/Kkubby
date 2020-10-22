@@ -35,9 +35,9 @@ class Scrapers::Target
     offset = 0
     loop do
       uri = "#{@url}/#{resource}?Nao=#{offset}&sortBy=newest"
-      puts "Collecting products from... #{uri}"
+      Rails.logger.debug "Collecting products from... #{uri}"
       session.visit(uri)
-      puts "Sleeping..."
+      Rails.logger.debug "Sleeping..."
       sleep 10
       products = session.all('li.bTvKos.h-display-flex')
       break if products.blank?
@@ -62,13 +62,17 @@ class Scrapers::Target
     product.name = name.text.strip.sub(/\A#{product.brand}\s*/, '')
     product.raw_price = element.find('span[data-test=product-price]').text.strip
     product.product_url = name[:href].to_s.split('#').first
-    product.save || puts(product.errors.full_messages.join(', '))
+    product.save || Rails.logger.debug(product.errors.full_messages.join(', '))
+  rescue Capybara::ElementNotFound => e
+    # Sometimes elements aren't found for things like adds that use same css classes for list items as regular products
+    Rails.logger.debug "*** Element not found for #{uri}. Message: #{e.message}. Skipping..."
+    debugger if @debug
   rescue Capybara::Apparition::ObsoleteNode
     # Raised when node changes while trying to access it
     if retried
-      puts "*** Retried product. Giving up..."
+      Rails.logger.debug "*** Retried product. Giving up..."
     else
-      puts "*** ERROR: ObsoleteNode. Sleeping and retrying..."
+      Rails.logger.debug "*** ERROR: ObsoleteNode. Sleeping and retrying..."
       sleep 2
       retried = true
       retry
