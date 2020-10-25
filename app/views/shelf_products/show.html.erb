@@ -3,13 +3,13 @@
     <td class="box shade">
       <div class="shelf-name">
         <span><%= @shelf.name %></span>
-        <%= form_for([@user, @shelf]) { |f| f.text_field :name_with_index, readonly: current_user.blank? } %>
+        <%= form_for([@user, @shelf]) { |f| f.text_field :name_with_index, readonly: !can_edit? } %>
       </div>
       <p class="compact"><%= @product.name %></p>
       <p class="compact"><strong><%= @product.brand %></strong></p>
       <%= product_enlarged(@product) %>
       <div class="fl">
-        <% if current_user %>
+        <% if can_edit? %>
           <%= link_to "Remove", user_shelf_product_path(@user, @shelf, id: @product), method: 'delete', class: 'btn' %>
           <% if @shelf_product.wishlist? %>
             <%= link_to "Remove from wishlist", user_shelf_product_path(@user, @shelf, id: @product, shelf_product: { wishlist: 0 }), method: 'put', class: 'btn' %>
@@ -18,7 +18,7 @@
           <% end %>
         <% end %>
         <%= link_to "Product website", @product.product_url, target: '_blank', class: 'btn' %>
-        <% if current_user %>
+        <% if can_edit? %>
           <div class="form-content">
             <%= form_for @shelf_product, url: user_shelf_product_path(@user, @shelf, id: @product), method: 'patch' do |f| %>
               <p>Notes</p>
