@@ -15,7 +15,7 @@ module Kkubby
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.version = '1.4.0'.freeze
+    config.version = '1.4.1'.freeze
     config.active_storage.variant_processor = :mini_magick
   end
 end
