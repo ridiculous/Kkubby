@@ -8,6 +8,8 @@ class Scrapers::PeachLily
 
   def call
     Mechanize.start do |agent|
+      agent.max_history = 1
+      agent.log = Rails.logger if @debug
       create_products(agent, type: 'Oil Cleansers')
       create_products(agent, type: 'Water Cleansers')
       create_products(agent, type: 'Toners')

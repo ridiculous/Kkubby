@@ -15,6 +15,7 @@ class Scrapers::Ulta
 
   def call(target_resource = nil)
     Mechanize.start do |agent|
+      agent.max_history = 1
       agent.log = Rails.logger if @debug
       RESOURCES.each do |resource, opts|
         if target_resource

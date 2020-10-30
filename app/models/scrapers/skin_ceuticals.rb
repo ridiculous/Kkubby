@@ -7,6 +7,7 @@ class Scrapers::SkinCeuticals
 
   def call
     Mechanize.start do |agent|
+      agent.max_history = 1
       agent.log = Rails.logger if @debug
       create_products(agent, key: 'skin-care/category/facial-cleansers', type: 'Cleanser')
       create_products(agent, key: 'skin-care/category/antioxidants', type: 'Serums')

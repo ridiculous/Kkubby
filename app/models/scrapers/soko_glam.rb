@@ -5,6 +5,8 @@ class Scrapers::SokoGlam
 
   def call
     Mechanize.start do |agent|
+      agent.max_history = 1
+      agent.log = Rails.logger if @debug
       create_products(agent, 'Oil Cleansers', 'oil-cleansers', 'Cleanser')
       create_products(agent, 'Water Cleansers', 'water-based-cleansers', 'Cleanser')
       create_products(agent, 'Cleansers', 'makeup-remover-wipes', 'Cleanser')

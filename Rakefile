@@ -16,6 +16,11 @@ task build_that_shit: :environment do
   ]
   while scraper = scrapers.shift
     scraper.new.call
+    GC.start
+    GC.start
+    GC.start
+    GC.start
+    GC.compact
   end
   puts :Done
 end
