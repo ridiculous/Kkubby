@@ -14,7 +14,7 @@ task build_that_shit: :environment do
     Scrapers::Sephora,
     Scrapers::Target,
   ]
-  while scraper = scrapers.pop
+  while scraper = scrapers.shift
     scraper.new.call
   end
   puts :Done

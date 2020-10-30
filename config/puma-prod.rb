@@ -1,6 +1,6 @@
 # config/puma.rb
 # currently have one core
-workers 2
+workers 1
 
 # Run GC before fork
 nakayoshi_fork

@@ -25,6 +25,7 @@ class Scrapers::SokoGlam
       create_products(agent, 'Sun Protection', 'sunscreen')
       create_products(agent, 'Sun Protection', 'spf-makeup', 'Makeup & SPF')
       create_products(agent, 'Hair & Beauty', 'hair-body', 'Hair & Beauty Care')
+      create_products(agent, 'Cosmetics', 'em-cosmetics', 'Hair & Beauty Care')
     end
   end
 
