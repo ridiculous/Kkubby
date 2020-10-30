@@ -14,7 +14,7 @@ import {Draggable} from './draggable'
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-window.visitPage = function(url) {
+window.visitPage = function (url) {
   if (typeof Turbolinks === 'object') {
     Turbolinks.visit(url)
   } else {
@@ -25,12 +25,13 @@ window.visitPage = function(url) {
 document.addEventListener('turbolinks:load', function () {
   let newShelf = document.querySelector('.add-new-shelf')
     , signedIn = document.querySelector('body.user-signed-in')
-    , shelfNames = signedIn && signedIn.querySelectorAll('.shelves .editable-shelf-name')
-    , shelfNameInputs = signedIn && signedIn.querySelectorAll('.shelf-name input[type=text]')
-    , productImages = document.querySelectorAll('.product-img')
-    , panda = signedIn && signedIn.querySelector('.top-bar .hamburger a')
+    , shelfNames = signedIn && document.querySelectorAll('.shelves .editable-shelf-name')
+    , shelfNameInputs = signedIn && document.querySelectorAll('.shelf-name input[type=text]')
+    , productImages = document.querySelectorAll('.shelves .product-img')
+    , panda = signedIn && document.querySelector('.top-bar .hamburger a')
     , profileModal = document.querySelector('.profile-modal')
-    , userForm = signedIn && signedIn.querySelector('form.edit_user')
+    , userForm = signedIn && document.querySelector('form.edit_user')
+    , productSearchResults = document.querySelectorAll('.user-select-product')
     , draggable = new Draggable;
 
   if (newShelf) {
@@ -43,22 +44,22 @@ document.addEventListener('turbolinks:load', function () {
   }
 
   if (shelfNames) {
-    shelfNames.forEach(function (element) {
-      element.addEventListener('click', function () {
+    for (let i = 0; i < shelfNames.length; i++) {
+      shelfNames[i].addEventListener('click', function () {
         this.style.display = 'none';
         this.nextElementSibling.style.display = 'block';
         this.nextElementSibling.querySelector('input[type=text]').focus();
       });
-    });
+    }
   }
 
   if (shelfNameInputs) {
-    shelfNameInputs.forEach(function (element) {
-      element.addEventListener('blur', function () {
+    for (let i = 0; i < shelfNameInputs.length; i++) {
+      shelfNameInputs[i].addEventListener('blur', function () {
         this.parentElement.style.display = 'none';
         this.parentElement.previousElementSibling.style.display = 'initial';
       });
-    });
+    }
   }
 
   function visitProductPage(event) {
@@ -67,7 +68,8 @@ document.addEventListener('turbolinks:load', function () {
     window.visitPage(url);
   }
 
-  productImages.forEach(function (element) {
+  for (let i = 0; i < productImages.length; i++) {
+    let element = productImages[i];
     if (signedIn) {
       let handler = new draggable.TouchHandler();
       // Mobile
@@ -91,7 +93,7 @@ document.addEventListener('turbolinks:load', function () {
     } else {
       element.addEventListener('click', visitProductPage);
     }
-  });
+  }
 
   document.addEventListener('scroll', function () {
     clearTimeout(window.moveTimer);
@@ -120,10 +122,10 @@ document.addEventListener('turbolinks:load', function () {
     })
   }
 
-  let UserSelectSuccess = function (e) {
-
+  let userSelectSuccess = function (e) {
+    // currently the server just redirects on success, but may hook in later
   };
-  let UserSelectFail = function (e) {
+  let userSelectFail = function (e) {
     e.target.classList.remove('fade');
     if (e.target.querySelector('.fade')) {
       e.target.querySelector('.fade').classList.remove('fade');
@@ -148,13 +150,14 @@ document.addEventListener('turbolinks:load', function () {
     e.preventDefault();
     return false;
   };
-  document.querySelectorAll('.user-select-product').forEach(function (element) {
-    element.addEventListener('ajax:success', UserSelectSuccess);
-    element.addEventListener('ajax:error', UserSelectFail);
+  for (let i = 0; i < productSearchResults.length; i++) {
+    let element = productSearchResults[i];
+    element.addEventListener('ajax:success', userSelectSuccess);
+    element.addEventListener('ajax:error', userSelectFail);
     element.addEventListener('click', function (e) {
       e.target.classList.add('fade');
       e.preventDefault();
       return false
     })
-  })
+  }
 });
