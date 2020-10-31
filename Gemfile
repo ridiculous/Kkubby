@@ -60,3 +60,5 @@ group :development do
 end
 
 gem "bugsnag", "~> 6.18"
+
+gem "skylight", "~> 4.3"
