@@ -58,3 +58,5 @@ group :development do
   gem 'pry'
   gem 'pry-rails'
 end
+
+gem "bugsnag", "~> 6.18"
