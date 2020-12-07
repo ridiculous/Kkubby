@@ -27,7 +27,11 @@ module HomeHelper
   end
 
   def mobile_device?
-    request.env["HTTP_USER_AGENT"].match? /Mobile|Android/
+    if request.env["HTTP_USER_AGENT"]
+      request.env["HTTP_USER_AGENT"].match? /Mobile|Android/
+    else
+      false
+    end
   end
 
   # @param [Product] product
