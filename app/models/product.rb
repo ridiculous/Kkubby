@@ -29,9 +29,13 @@ class Product < ApplicationRecord
 
   def upload_image
     return if image.attached?
-    url = image_url.start_with?('http') ? image_url : "https:#{image_url}"
-    name = image_url.split('/').last.split('?').first
-    image.attach(filename: name, io: URI.open(url.gsub(/\s/, '%20')))
+    url = image_url.dup
+    url = url.start_with?('http') ? url : "https:#{url}"
+    name = url.split('/').last.split('?').first
+    url.gsub!(/\s/, '%20')
+    url.gsub!('[', '%5B')
+    url.gsub!(']', '%5D')
+    image.attach(filename: name, io: URI.open(url))
   end
 
   def image_for_display(size: nil)

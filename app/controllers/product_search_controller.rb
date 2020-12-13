@@ -11,7 +11,8 @@ class ProductSearchController < ApplicationController
 
   def load_products
     if params[:query].present?
-      Product.where("search_tokens @@ plainto_tsquery(?)", params[:query].strip).order(:name).includes(:image_attachment => :blob)
+      # Have to manually join catalogs cause association was causing extra queries on save (for some unknown reason)
+      Product.joins('JOIN catalogs ON catalogs.id = products.catalog_id').where("catalogs.name ilike :q OR search_tokens @@ plainto_tsquery(:q)", q: params[:query].strip).order(:name).includes(:image_attachment => :blob)
     else
       Product.where('1=0')
     end
