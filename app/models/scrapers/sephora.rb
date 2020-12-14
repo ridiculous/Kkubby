@@ -1,6 +1,6 @@
 class Scrapers::Sephora
   RESOURCES = {
-    "shop/face-serum" => { type: 'Serums' },
+    "shop/face-serum" => { type: 'Serums', category: 'Moisturizer' },
     "shop/acne-treatment-blemish-remover" => { type: 'Blemish Removers', category: 'Acne' },
     "shop/night-cream" => { type: 'Night Creams', category: 'Cream' },
     "shop/cleansing-oil-face-oil" => { type: 'Facial Oils', category: 'Oil' },
@@ -8,7 +8,7 @@ class Scrapers::Sephora
     "shop/bb-cream-cc-cream" => { type: 'BB & CC Creams', category: 'Cream' },
     "shop/face-wash-facial-cleanser" => { type: 'Cleansers' },
     "shop/exfoliating-scrub-exfoliator" => { type: 'Exfoliators' },
-    "shop/makeup-remover-skincare" => { type: 'Makeup Removers', category: 'Makeup' },
+    "shop/makeup-remover-skincare" => { type: 'Makeup Removers', category: 'Cleanser' },
     "shop/face-wipes" => { type: 'Facial Wipes', category: 'Cleansers' },
     "shop/facial-toner-skin-toner" => { type: 'Facial Toners', category: 'Toner' },
     "shop/facial-treatment-masks" => { type: 'Face Masks', category: 'Mask' },
