@@ -10,7 +10,6 @@ class Scrapers::StyleKorean
     "cosmetics/skincare/cleanser/face-wash" => { type: 'Face Wash', category: 'Cleanser' },
     "cosmetics/skincare/moisturizer/emulsion" => { type: 'Emulsions', category: 'Moisturizer' },
     "cosmetics/skincare/moisturizer/essence-and-oil" => { type: 'Serums', category: 'Moisturizer' },
-    "shop/list.php?ca_id=10107010" => { type: 'Serums', category: 'Moisturizer' },
   }.freeze
 
   def initialize(debug: false)
