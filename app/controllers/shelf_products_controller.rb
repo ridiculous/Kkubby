@@ -2,6 +2,10 @@ class ShelfProductsController < ApplicationController
   before_action :user_from_params, only: :show
   before_action :authenticate_user, except: :show
 
+  def index
+    redirect_to home_path
+  end
+
   def show
     @shelf_product = shelf.shelf_products.where(product_id: params[:id]).first!
     @product = @shelf_product.product

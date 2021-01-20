@@ -1,6 +1,10 @@
 class ShelvesController < ApplicationController
   before_action :authenticate_user
 
+  def index
+    redirect_to home_path
+  end
+
   def create
     shelf = current_user.shelves.new(params.require(:shelf).permit(:name))
     if shelf.save
