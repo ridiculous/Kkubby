@@ -25,7 +25,7 @@ class ShelfProductsController < ApplicationController
   def update
     @shelf_product = shelf.shelf_products.where(product_id: params[:id]).first!
     @product = @shelf_product.product
-    if @shelf_product.update_attributes(params.require(:shelf_product).permit(:notes, :wishlist))
+    if @shelf_product.update(params.require(:shelf_product).permit(:notes, :wishlist))
       redirect_to home_path(anchor: @product.name.parameterize), notice: "#{@product.name} updated"
     else
       flash.now[:alert] = @product.errors.full_messages.first
