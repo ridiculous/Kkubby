@@ -14,6 +14,7 @@ class Shelf < ApplicationRecord
     'Masks',
     'Serums',
     'Moisturizers',
+    'SPF',
   ].freeze
 
   def self.create_defaults(user)

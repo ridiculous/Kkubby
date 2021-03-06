@@ -1,15 +1,16 @@
 <div class="page-content">
-  <p>Welcome!</p>
-  <p>KKubby is a virtual beauty cabinet that allows you to visually organize your K-Beauty routine and share with others.</p>
-  <h3>Your K-Beauty Routine</h3>
+  <h3>Welcome!</h3>
+  <p>KKubby is a virtual beauty cabinet that allows you to visually organize your skincare routine and share with
+    others.</p>
+  <h3>Your Skincare Routine</h3>
   <p>
     Organize your current products on our preset shelves (or customize them).
     Save products to your shelf, add notes, or mark as a wishlist item.
     Easily share your routine with friends using your Kkubby link.
   </p>
-  <h3>7-Step Routine</h3>
+  <h3><%= Shelf::DEFAULTS.size %>-Step Routine</h3>
   <p>
-    We start you off with 7 shelves, each representing a step in your routine:
+    We start you off with <%= Shelf::DEFAULTS.size %> shelves, each representing a step in your routine:
   </p>
   <ol>
     <% Shelf::DEFAULTS.each do |name| %>
@@ -18,7 +19,8 @@
   </ol>
   <p>Steps can be added, renamed, and rearranged to fit your routine.</p>
   <h3>Share with Friends</h3>
-  <p>Kkubbies are public by default, and accessible via your own URL, making it easy to share your routine with friends!</p>
+  <p>Kkubbies are public by default, and accessible via your own URL, making it easy to share your routine with
+    friends!</p>
   <h3>Create an Account</h3>
   <p>It's free to try it out. <%= link_to 'Create an account', signup_path %> to get started.</p>
 </div>
