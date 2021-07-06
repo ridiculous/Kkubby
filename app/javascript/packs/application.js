@@ -22,6 +22,11 @@ window.visitPage = function (url) {
   }
 };
 
+window.visitProductPage = function(event) {
+  let url = event.target.parentElement.getAttribute('data-href');
+  if (!url) return false;
+  window.visitPage(url);
+};
 
 document.addEventListener('turbolinks:load', function () {
 
@@ -62,12 +67,6 @@ document.addEventListener('turbolinks:load', function () {
         this.parentElement.previousElementSibling.style.display = 'initial';
       });
     }
-  }
-
-  function visitProductPage(event) {
-    let url = event.target.parentElement.getAttribute('data-href');
-    if (!url) return false;
-    window.visitPage(url);
   }
 
   for (let i = 0; i < productImages.length; i++) {

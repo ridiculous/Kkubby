@@ -141,13 +141,16 @@ export function Draggable() {
       clearTimeout(window.moveTimer);
       document.body.classList.remove('touch-start');
       if (!currentTarget) {
-        return log("No current target");
+        log("No current target");
+        window.visitProductPage(event);
+        return;
       }
       currentTarget.classList.remove('icon-shade');
       currentTarget.removeEventListener('touchmove', self.touchMove);
       currentTarget.style.transform = '';
       resetTracers();
-      updateNodePosition()
+      updateNodePosition();
+      currentTarget = null;
     };
 
     this.touchMove = function (event) {
