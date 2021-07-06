@@ -46,7 +46,8 @@
 }
 
 .touch-start {
-  overflow: hidden !important;
+  //forgot why i added this but it creates a flicker on mobile
+  //overflow: hidden !important;
 
   img {
     pointer-events: none;

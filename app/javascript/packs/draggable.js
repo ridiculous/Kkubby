@@ -131,7 +131,7 @@ export function Draggable() {
         currentTarget.style.zIndex = (window.zIndex++).toString();
         currentTarget.classList.add('icon-shade');
         document.body.classList.add('touch-start');
-        currentTarget.addEventListener('touchmove', self.touchMove, { passive: true });
+        currentTarget.addEventListener('touchmove', self.touchMove);
       }, 300);
     };
 

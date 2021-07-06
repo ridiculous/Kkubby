@@ -22,7 +22,9 @@ window.visitPage = function (url) {
   }
 };
 
+
 document.addEventListener('turbolinks:load', function () {
+
   let newShelf = document.querySelector('.add-new-shelf')
     , signedIn = document.querySelector('body.user-signed-in')
     , shelfNames = signedIn && document.querySelectorAll('.shelves .editable-shelf-name')
@@ -73,8 +75,8 @@ document.addEventListener('turbolinks:load', function () {
     if (signedIn) {
       let handler = new draggable.TouchHandler();
       // Mobile
-      element.addEventListener('touchstart', handler.touchStart, { passive: true });
-      element.addEventListener('touchend', handler.touchEnd, { passive: true });
+      element.addEventListener('touchstart', handler.touchStart);
+      element.addEventListener('touchend', handler.touchEnd);
       element.addEventListener('touchcancel', handler.touchCancel);
       // Desktop
       element.addEventListener('mousedown', handler.mouseDown);
