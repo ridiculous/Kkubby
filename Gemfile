@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
@@ -10,9 +10,9 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5'
+gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # We love tlinks, but don't need it right now since it's focused on small pages, lets avoid before the fold JS
 gem 'turbolinks', '~> 5'
@@ -25,9 +25,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-gem 'therubyracer'
+# gem 'therubyracer'
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.4.4', require: false
 
 # Scrapers
 gem 'capybara', '>= 2.15'
@@ -42,23 +42,22 @@ gem 'pagy'
 gem 'mina'
 gem 'image_processing'
 
+# Metrics and errors
+gem "bugsnag"
+gem "skylight"
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
-gem 'listen', '>= 3.0.5', '< 3.2'
 
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 4.1.0'
+  gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry'
   gem 'pry-rails'
 end
-
-gem "bugsnag", "~> 6.18"
-
-gem "skylight", "~> 4.3"
