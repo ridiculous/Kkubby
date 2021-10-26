@@ -28,7 +28,7 @@ set :node_version, 'stable'
 task :remote_environment do
   # For those using RVM, use this to load an RVM version@gemset.
   command 'source ~/.bash_profile'
-  invoke :'rvm:use', '2.7.0@default'
+  invoke :'rvm:use', '3.0.2@default'
   invoke :'nvm:load'
   command %[echo "-----> Loaded $RAILS_ENV environment"]
 end
