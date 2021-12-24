@@ -10,9 +10,9 @@
       <%= f.label :catalog_id %>
       <%= f.select :catalog_id, Catalog.all.map { |c| [c.name, c.id] }, {include_blank: true}, {class: 'like-input'} %>
       <%= f.label :product_type %>
-      <%= f.text_field :product_type, class: 'text-input' %>
+      <%= f.text_field :product_type, class: 'text-input', placeholder: "e.g. " + Product.pluck('DISTINCT(product_type)').shuffle.take(10).join(", ") %>
       <%= f.label :product_url %>
-      <%= f.text_field :product_url, class: 'text-input', placeholder: "Where you can find this product online" %>
+      <%= f.text_field :product_url, class: 'text-input', placeholder: "Where you can find this product (optional)" %>
       <%= f.label :image %>
       <%= f.file_field :image, class: 'text-input' %>
       <p><%= f.submit 'Save', name: "", class: "btn wide" %></p>
