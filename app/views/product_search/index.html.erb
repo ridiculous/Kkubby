@@ -1,5 +1,8 @@
 <div class="page-content">
-  <p>Add a product to <strong><%= @shelf.name %></strong> by searching for the name, brand, or type.</p>
+  <% if current_user.custom_uploads? %>
+    <p><%= link_to "Upload your own product", new_custom_upload_path(shelf_id: @shelf.id, name: params[:query]) %></p>
+  <% end %>
+  <p>Search for a product to add to your <strong><%= @shelf.name %></strong> shelf. You can search by catalog, name, brand, or product type.</p>
   <%= form_tag product_search_path(shelf_id: @shelf.id), method: 'get' do %>
     <%= hidden_field_tag :shelf_id, @shelf.id %>
     <div class="form-content">
@@ -37,9 +40,6 @@
     <%== pagy_nav(@pagy) %>
   <% elsif params[:query].present? %>
     <p>Nothing found. <span class="suggested-product"><%= suggested_product(params[:query]) %></span></p>
-    <% if current_user.custom_uploads? %>
-      <p><%= link_to "Upload your own product", new_custom_upload_path(shelf_id: @shelf.id, name: params[:query]) %></p>
-    <% end %>
   <% end %>
 </div>
 
