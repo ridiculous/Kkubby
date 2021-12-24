@@ -37,6 +37,9 @@
     <%== pagy_nav(@pagy) %>
   <% elsif params[:query].present? %>
     <p>Nothing found. <span class="suggested-product"><%= suggested_product(params[:query]) %></span></p>
+    <% if current_user.custom_uploads? %>
+      <p><%= link_to "Upload your own product", new_custom_upload_path(shelf_id: @shelf.id, name: params[:query]) %></p>
+    <% end %>
   <% end %>
 </div>
 

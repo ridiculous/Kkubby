@@ -1,0 +1,21 @@
+<div class="page-content">
+  <p>Product Upload</p>
+  <%= form_for custom_upload do |f| %>
+    <%= hidden_field_tag :shelf_id, params[:shelf_id].to_i %>
+    <div class="form-content">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'text-input' %>
+      <%= f.label :brand %>
+      <%= f.text_field :brand, class: 'text-input' %>
+      <%= f.label :catalog_id %>
+      <%= f.select :catalog_id, Catalog.all.map { |c| [c.name, c.id] }, {include_blank: true}, {class: 'like-input'} %>
+      <%= f.label :product_type %>
+      <%= f.text_field :product_type, class: 'text-input' %>
+      <%= f.label :product_url %>
+      <%= f.text_field :product_url, class: 'text-input', placeholder: "Where you can find this product online" %>
+      <%= f.label :image %>
+      <%= f.file_field :image, class: 'text-input' %>
+      <p><%= f.submit 'Search', name: "", class: "btn wide" %></p>
+    </div>
+  <% end %>
+</div>

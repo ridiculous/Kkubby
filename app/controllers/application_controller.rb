@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     redirect_to_login if !session || !current_user
   end
 
+  def verify_custom_uploads
+    redirect_to(login_path, alert: "You don't have access") unless current_user.custom_uploads?
+  end
+
   def current_user
     @current_user ||= defined?(@current_user) ? @current_user : begin
       User.find_by!(auth_token: cookies[:auth_token]) if cookies[:auth_token]

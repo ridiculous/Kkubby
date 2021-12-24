@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_211630) do
+ActiveRecord::Schema.define(version: 2021_12_24_004130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 2021_02_18_211630) do
     t.integer "product_count"
     t.datetime "last_updated_at"
     t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "custom_uploads", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "catalog_id", null: false
+    t.string "name"
+    t.string "brand"
+    t.string "product_type"
+    t.string "product_url", limit: 500
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -106,6 +117,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_211630) do
     t.datetime "last_active_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "custom_uploads", default: false
     t.index ["username"], name: "index_users_on_username"
   end
 

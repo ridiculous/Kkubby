@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   has_many :shelf_products, dependent: :destroy
   has_one_attached :image
   before_validation :normalize_brand
-  validates :brand, :image_url, presence: true
+  validates :brand, :catalog_id, presence: true
   validates :name, presence: true, uniqueness: { scope: :brand }
   before_create :set_price
   after_commit :cache_tokens, on: :create
@@ -29,6 +29,8 @@ class Product < ApplicationRecord
 
   def upload_image
     return if image.attached?
+    # In the event of custom upload, there would be no image url
+    return if image_url.blank?
     url = image_url.dup
     url = url.start_with?('http') ? url : "https:#{url}"
     name = url.split('/').last.split('?').first
