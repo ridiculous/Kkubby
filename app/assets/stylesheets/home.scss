@@ -114,6 +114,7 @@
     padding: 2px;
     line-height: 0;
     margin: 0;
+    // Disable the iOS preview of images/links when long-pressed
     img {
       -webkit-touch-callout: none;
     }
