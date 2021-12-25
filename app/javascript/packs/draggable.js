@@ -121,9 +121,9 @@ export function Draggable() {
     }
 
     this.touchStart = function (event) {
-      event.preventDefault();
       log(event.type);
       window.moveTimer = setTimeout(function () {
+        event.preventDefault();
         startX = event.targetTouches[0].clientX;
         startY = event.targetTouches[0].clientY;
         currentTarget = event.targetTouches[0].target;
@@ -142,7 +142,9 @@ export function Draggable() {
       document.body.classList.remove('touch-start');
       if (!currentTarget) {
         log("No current target");
-        window.visitProductPage(event);
+        if (!window.moving) {
+          window.visitProductPage(event);
+        }
         return;
       }
       currentTarget.classList.remove('icon-shade');

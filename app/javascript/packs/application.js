@@ -69,6 +69,16 @@ document.addEventListener('turbolinks:load', function () {
     }
   }
 
+  // Used for detecting when user is scrolling on mobile, and to disable the call to visitProductPage, so that they can
+  // touch an image while scrolling down w/o navigating to it
+  document.addEventListener("touchmove", function() {
+    window.moving = true;
+  });
+
+  document.addEventListener("touchend", function() {
+    window.moving = false;
+  });
+
   for (let i = 0; i < productImages.length; i++) {
     let element = productImages[i];
     if (signedIn) {
