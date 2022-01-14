@@ -8,8 +8,8 @@ class Product < ApplicationRecord
   validates :brand, :catalog_id, presence: true
   validates :name, presence: true, uniqueness: { scope: :brand }
   before_create :set_price
-  after_commit :cache_tokens, on: :create
   after_create :upload_image
+  after_commit :cache_tokens
 
   def self.types
     pluck('DISTINCT(product_type)') + pluck('DISTINCT(brand)')
