@@ -15,8 +15,7 @@ Rails app that helps you organize your beauty products using shelves. Search for
 1. Remember to add rails env production in bashrc
 
 ### Linux Server Configuration
-In order to use Apparition on a Linux server, you need to install the chrome binary and
-set certain `:browser_options`.
+This app comes with web scrapers to build and update the product catalogs. It uses the Apparition driver for Capybara. In order to install this on a Linux server, you need to install the chrome binary and set certain `:browser_options` when registering the driver.
 
 ##### Install Chrome
 ```
@@ -24,7 +23,7 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -f ./google-chrome-stable_current_amd64.deb
 ```
 
-#### Browser Options
+##### Browser Options
 ```
 Capybara.register_driver :apparition do |app|
   Capybara::Apparition::Driver.new(app, browser_options: { 'no-sandbox' => nil, 'disable-web-security' => nil, 'disable-features' => 'VizDisplayCompositor' })
