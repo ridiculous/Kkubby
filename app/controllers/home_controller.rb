@@ -2,7 +2,11 @@ class HomeController < ApplicationController
   before_action :user_from_params, only: :show
 
   def index
-    @title = 'Welcome to Kkubby'
+    if current_user
+      redirect_to user_home_path(current_user)
+    else
+      redirect_to about_path
+    end
   end
 
   def show

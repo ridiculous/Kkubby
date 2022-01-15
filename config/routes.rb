@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/@:username', to: 'home#show', as: 'user_home'
   get 'signup', to: 'users#new'
   get 'user_search', to: 'user_search#index', as: 'user_search'
+  get 'about', to: 'about#index'
   resources :users, only: :create
   resources :custom_uploads, only: [:index, :new, :create]
   root 'home#index'
