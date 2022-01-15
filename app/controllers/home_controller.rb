@@ -5,7 +5,8 @@ class HomeController < ApplicationController
     if current_user
       redirect_to user_home_path(current_user)
     else
-      redirect_to about_path
+      @title = "Welcome to Kkubby"
+      render "about/index"
     end
   end
 

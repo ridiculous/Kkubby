@@ -1,6 +1,6 @@
 class AboutController < ApplicationController
   def index
-    @title = 'Welcome to Kkubby'
+    @title = "About Kkubby"
     @user = current_user
   end
 end
