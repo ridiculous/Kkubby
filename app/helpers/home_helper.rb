@@ -38,7 +38,7 @@ module HomeHelper
   # @param [Integer] image_height
   # @param [String] css - classes to add to the image tag
   def product_image(product, image_height, css = nil)
-    image_tag(product.image_for_display(size: [image_height * 0.80, image_height, background: '#FFF']),
+    image_tag(product.stored_image(image_height),
               height: image_height, title: product.name, class: css, id: product.name.parameterize)
   end
 end

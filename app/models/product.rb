@@ -27,6 +27,10 @@ class Product < ApplicationRecord
     find_each &:upload_image
   end
 
+  def full_name
+    "#{brand} - #{name}"
+  end
+
   def upload_image
     return if image.attached?
     # In the event of custom upload, there would be no image url
@@ -38,6 +42,10 @@ class Product < ApplicationRecord
     url.gsub!('[', '%5B')
     url.gsub!(']', '%5D')
     image.attach(filename: name, io: URI.open(url))
+  end
+
+  def stored_image(height = 500)
+    image_for_display(size: [height * 0.80, height, background: '#FFF'])
   end
 
   def image_for_display(size: nil)

@@ -15,6 +15,10 @@
     <script src="//d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"></script>
     <script>Bugsnag.start({ apiKey: '927d8f5d3bbd63da38cc55b5bd2d85e2' })</script>
   <% end %>
+  <% if @product %>
+    <meta property="og:title" content="<%= @product.full_name %>" />
+    <meta property="og:image" content="<%= polymorphic_url(@product.stored_image) %>" />
+  <% end %>
 </head>
 <body class="<%= 'user-signed-in' if current_user %>">
 <div class="top-bar">
